@@ -1,0 +1,28 @@
+{
+  "name": "saudi-flora-map",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "npm run validate && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test test/*.test.mjs",
+    "test:browser": "playwright test",
+    "check:uds": "python3 tools/uds-compliance/uds_compliance.py . --json-out docs/uds-report.json",
+    "pretest:browser": "npm run build"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-sans-arabic": "5.3.0",
+    "read-excel-file": "9.3.20"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.65.1",
+    "vite": "8.3.8"
+  }
+}

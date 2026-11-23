@@ -1,0 +1,1107 @@
+{
+  "schema_version": "1.0.0",
+  "system": "Saudi Unified Platform Code",
+  "verification_date": "2026-09-07",
+  "not_published_marker": "NOT PUBLISHED BY OFFICIAL SOURCE",
+  "template_count": 19,
+  "templates": [
+    {
+      "template_id": "UDS-TPL-HAJJ",
+      "template": "قالب الحج 2026",
+      "official": true,
+      "use_case": "منصة/حملة لموسم الحج.",
+      "documented_sections": [
+        "Header",
+        "campaign hero",
+        "content sections",
+        "Footer",
+        "Ihsan floating element"
+      ],
+      "required_sections": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "optional_sections": [
+        "hero color/background/image alternatives",
+        "motion"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "campaign hero",
+        "content sections",
+        "Footer",
+        "Ihsan floating element"
+      ],
+      "required_components": [
+        "Navigation Header",
+        "Footer"
+      ],
+      "optional_components": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "Navigation Header",
+      "navigation": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hero": "خيارات لون/صورة/عنصر موسمي مع الخط السعودي.",
+      "main_content": "أقسام الحملة والخدمات/المعلومات.",
+      "cta": "Campaign CTA where shown.",
+      "footer": "Footer",
+      "responsive_rules": "حافظ على القراءة والوصول عبر الشاشات؛ التفاصيل الرقمية تتبع Foundations.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "التباين والبدائل والkeyboard العامة مطلوبة.",
+      "content_rules": "محتوى الحج والهوية الموسمية فقط.",
+      "rules": [
+        "UDS-TEMPLATE-CAMPAIGN-001"
+      ],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/hajj-template"
+      ],
+      "source_page_title": "قالب الحج 2026",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-FOUNDING-DAY",
+      "template": "قالب يوم التأسيس 2026 م",
+      "official": true,
+      "use_case": "حملة يوم التأسيس.",
+      "documented_sections": [
+        "Header",
+        "historical hero",
+        "images/illustrations",
+        "content",
+        "Footer",
+        "Ihsan floating element"
+      ],
+      "required_sections": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "optional_sections": [
+        "motion",
+        "visual alternatives"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "historical hero",
+        "images/illustrations",
+        "content",
+        "Footer",
+        "Ihsan floating element"
+      ],
+      "required_components": [
+        "Navigation Header",
+        "Footer"
+      ],
+      "optional_components": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "Navigation Header",
+      "navigation": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hero": "عمارة تاريخية وصور وهوية المناسبة.",
+      "main_content": "قصة/معلومات المناسبة.",
+      "cta": "Campaign CTA where shown.",
+      "footer": "Footer",
+      "responsive_rules": "تتكيف الصور/النص ولا يحجب العنصر العائم المحتوى.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "بدائل الصور وتقليل الحركة والتباين.",
+      "content_rules": "هوية ومحتوى يوم التأسيس.",
+      "rules": [
+        "UDS-TEMPLATE-CAMPAIGN-001"
+      ],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/founding-day"
+      ],
+      "source_page_title": "قالب يوم التأسيس 2026 م",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-NATIONAL-DAY",
+      "template": "قالب اليوم الوطني 95",
+      "official": true,
+      "use_case": "حملة اليوم الوطني.",
+      "documented_sections": [
+        "Header",
+        "campaign hero",
+        "leaders/illustrations/photos",
+        "content",
+        "Footer"
+      ],
+      "required_sections": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "optional_sections": [
+        "motion",
+        "dark-green or default footer"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "campaign hero",
+        "leaders/illustrations/photos",
+        "content",
+        "Footer"
+      ],
+      "required_components": [
+        "Navigation Header",
+        "Footer"
+      ],
+      "optional_components": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "Navigation Header",
+      "navigation": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hero": "بدائل القادة والرسوم والصور.",
+      "main_content": "أقسام المناسبة.",
+      "cta": "Campaign CTA where shown.",
+      "footer": "Footer",
+      "responsive_rules": "الوسائط والحركة متكيفة وقابلة للوصول.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "بدائل للصور وتقليل الحركة والتباين.",
+      "content_rules": "محتوى وهوية اليوم الوطني.",
+      "rules": [
+        "UDS-TEMPLATE-CAMPAIGN-001"
+      ],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/national-day"
+      ],
+      "source_page_title": "قالب اليوم الوطني 95",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-HOME",
+      "template": "قالب الصفحة الرئيسية",
+      "official": true,
+      "use_case": "الواجهة الرئيسية لمنصة حكومية.",
+      "documented_sections": [
+        "Header",
+        "Hero + primary CTA",
+        "services/features",
+        "news/related content",
+        "feedback",
+        "last updated",
+        "Footer"
+      ],
+      "required_sections": [
+        "Header",
+        "Hero",
+        "main content",
+        "Footer"
+      ],
+      "optional_sections": [
+        "Second Navigation Header",
+        "search autocomplete",
+        "feedback",
+        "campaign logo"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "Hero + primary CTA",
+        "services/features",
+        "news/related content",
+        "feedback",
+        "last updated",
+        "Footer"
+      ],
+      "required_components": [
+        "Navigation Header",
+        "Button/Link",
+        "Card",
+        "Footer"
+      ],
+      "optional_components": [
+        "Second Navigation Header",
+        "Search Box",
+        "Feedback/Rating"
+      ],
+      "layout": "Official container/grid/spacing; hero followed by service/content sections.",
+      "header_type": "Navigation Header",
+      "navigation": "Primary navigation; mobile drawer transformation.",
+      "hero": "High-quality responsive image or approved visual; legible text and clear CTA.",
+      "main_content": "Services/features/news arranged with official cards and headings.",
+      "cta": "One clear primary action; view-all near related content.",
+      "footer": "Footer",
+      "responsive_rules": "Stack long heading and CTA vertically; preserve image/text legibility.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Keyboard search/clear, alt text, headings, contrast, focus, touch targets.",
+      "content_rules": "Arabic-first concise headings, descriptive CTA, last-updated dates.",
+      "rules": [
+        "UDS-TEMPLATE-HOME-001",
+        "UDS-TEMPLATE-HOME-002",
+        "UDS-TEMPLATE-HOME-003",
+        "UDS-TEMPLATE-HOME-004"
+      ],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/home-page"
+      ],
+      "source_page_title": "قالب الصفحة الرئيسية",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-CONTACT",
+      "template": "قالب صفحة التواصل",
+      "official": true,
+      "use_case": "قنوات ونموذج التواصل.",
+      "documented_sections": [
+        "Header",
+        "page heading",
+        "contact channels/form",
+        "form states",
+        "feedback",
+        "Footer"
+      ],
+      "required_sections": [
+        "Header",
+        "contact content",
+        "Footer"
+      ],
+      "optional_sections": [
+        "contact form",
+        "feedback"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "page heading",
+        "contact channels/form",
+        "form states",
+        "feedback",
+        "Footer"
+      ],
+      "required_components": [
+        "Navigation Header",
+        "Footer"
+      ],
+      "optional_components": [
+        "Input",
+        "Textarea",
+        "Button",
+        "Notification"
+      ],
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "Navigation Header",
+      "navigation": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "قنوات الاتصال أو نموذج مع حالات واضحة.",
+      "cta": "إرسال الطلب عند وجود نموذج.",
+      "footer": "Footer",
+      "responsive_rules": "حقول وقنوات مرنة على الجوال.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Labels/errors/status/keyboard for form.",
+      "content_rules": "بيانات الاتصال وتعليمات واضحة.",
+      "rules": [],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/contact-us-page"
+      ],
+      "source_page_title": "قالب صفحة التواصل",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-FORM",
+      "template": "قالب صفحة النموذج",
+      "official": true,
+      "use_case": "إدخال بيانات أو إكمال خدمة متعددة الخطوات.",
+      "documented_sections": [
+        "Header",
+        "introduction",
+        "step progress",
+        "fields",
+        "validation",
+        "actions",
+        "Footer"
+      ],
+      "required_sections": [
+        "Header",
+        "form",
+        "actions",
+        "Footer"
+      ],
+      "optional_sections": [
+        "multi-step progress",
+        "feedback"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "introduction",
+        "step progress",
+        "fields",
+        "validation",
+        "actions",
+        "Footer"
+      ],
+      "required_components": [
+        "Form inputs",
+        "Button"
+      ],
+      "optional_components": [
+        "Steps",
+        "Radial Stepper",
+        "Notification",
+        "File Uploader"
+      ],
+      "layout": "خطوة وعنوان وتعليمات ثم مجموعة حقول وإجراءات.",
+      "header_type": "Navigation Header",
+      "navigation": "Breadcrumb when hierarchical.",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "Fields grouped by task step.",
+      "cta": "Primary submit/next with secondary previous/cancel as applicable.",
+      "footer": "Footer",
+      "responsive_rules": "Numbered Steps on large screens; Radial Stepper on mobile.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Labels, fieldsets, errors, focus, keyboard, status.",
+      "content_rules": "State required information and concise instructions before fields.",
+      "rules": [
+        "UDS-FORM-001",
+        "UDS-FORM-002",
+        "UDS-FORM-003",
+        "UDS-FORM-004",
+        "UDS-FORM-005"
+      ],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/form-page"
+      ],
+      "source_page_title": "قالب صفحة النموذج",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-HELP",
+      "template": "قالب مركز المساعدة",
+      "official": true,
+      "use_case": "مساعدة المستخدم والوصول إلى الدعم.",
+      "documented_sections": [
+        "Header",
+        "page heading",
+        "search/help cards",
+        "contact channels",
+        "feedback",
+        "Footer"
+      ],
+      "required_sections": [
+        "Header",
+        "help content",
+        "Footer"
+      ],
+      "optional_sections": [
+        "Search Box",
+        "feedback",
+        "contact channels"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "page heading",
+        "search/help cards",
+        "contact channels",
+        "feedback",
+        "Footer"
+      ],
+      "required_components": [
+        "Navigation Header",
+        "Footer"
+      ],
+      "optional_components": [
+        "Search Box",
+        "Card",
+        "Accordion"
+      ],
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "Navigation Header",
+      "navigation": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "بطاقات/أقسام مساعدة ومسارات دعم.",
+      "cta": "انتقال واضح إلى الحل أو قناة التواصل.",
+      "footer": "Footer",
+      "responsive_rules": "رص البطاقات والتنقل في الجوال.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "روابط وبحث وبطاقات دلالية قابلة للkeyboard.",
+      "content_rules": "لغة مباشرة تصف المشكلة والحل.",
+      "rules": [],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/help-page"
+      ],
+      "source_page_title": "قالب مركز المساعدة",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-FEEDBACK",
+      "template": "قالب التعليقات",
+      "official": true,
+      "use_case": "جمع رأي المستخدم في فائدة الصفحة.",
+      "documented_sections": [
+        "question",
+        "yes/no choice",
+        "reason choices/input",
+        "submit",
+        "confirmation",
+        "mobile state"
+      ],
+      "required_sections": [
+        "question",
+        "response control",
+        "confirmation"
+      ],
+      "optional_sections": [
+        "reason follow-up"
+      ],
+      "component_hierarchy": [
+        "question",
+        "yes/no choice",
+        "reason choices/input",
+        "submit",
+        "confirmation",
+        "mobile state"
+      ],
+      "required_components": [
+        "Radio or equivalent choice",
+        "Button",
+        "Notification"
+      ],
+      "optional_components": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "navigation": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "هل كانت هذه الصفحة مفيدة؟ ثم سبب عند الحاجة.",
+      "cta": "إرسال الملاحظات.",
+      "footer": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive_rules": "Mobile layout shown by template.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Choice group labels, keyboard, status confirmation.",
+      "content_rules": "سؤال موجز وأسباب واضحة.",
+      "rules": [
+        "UDS-TEMPLATE-FEEDBACK-001"
+      ],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/feedback-section"
+      ],
+      "source_page_title": "قالب التعليقات",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-SERVICE",
+      "template": "صفحة الخدمة",
+      "official": true,
+      "use_case": "شرح خدمة حكومية وتمكين المستخدم من تنفيذها.",
+      "documented_sections": [
+        "Header",
+        "Breadcrumb",
+        "service summary",
+        "requirements/steps/content",
+        "primary action",
+        "feedback",
+        "Footer"
+      ],
+      "required_sections": [
+        "Header",
+        "service content",
+        "primary action",
+        "Footer"
+      ],
+      "optional_sections": [
+        "Breadcrumb",
+        "feedback"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "Breadcrumb",
+        "service summary",
+        "requirements/steps/content",
+        "primary action",
+        "feedback",
+        "Footer"
+      ],
+      "required_components": [
+        "Navigation Header",
+        "Button/Link",
+        "Footer"
+      ],
+      "optional_components": [
+        "Breadcrumbs",
+        "Steps",
+        "Accordion",
+        "Feedback"
+      ],
+      "layout": "مقدمة الخدمة ثم المتطلبات/الخطوات والإجراء.",
+      "header_type": "Navigation Header",
+      "navigation": "Primary navigation and Breadcrumb when hierarchical.",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "تعريف الخدمة والمتطلبات والخطوات والمعلومات.",
+      "cta": "بدء/طلب الخدمة.",
+      "footer": "Footer",
+      "responsive_rules": "حافظ على إتمام المهمة على الجوال.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "عناوين واضحة، keyboard، focus، contrast، touch.",
+      "content_rules": "محتوى مباشر يركز على المهمة.",
+      "rules": [],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/service-page"
+      ],
+      "source_page_title": "صفحة الخدمة",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-FAQ",
+      "template": "صفحة الأسئلة الشائعة",
+      "official": true,
+      "use_case": "إجابة أسئلة متكررة قابلة للبحث والتصنيف.",
+      "documented_sections": [
+        "Header",
+        "heading",
+        "optional search",
+        "optional classifications",
+        "Accordion answers",
+        "optional pagination",
+        "optional answer rating",
+        "Footer"
+      ],
+      "required_sections": [
+        "Header",
+        "questions/answers",
+        "Footer"
+      ],
+      "optional_sections": [
+        "Search when >20",
+        "classifications when >20",
+        "pagination after 10",
+        "answer rating"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "heading",
+        "optional search",
+        "optional classifications",
+        "Accordion answers",
+        "optional pagination",
+        "optional answer rating",
+        "Footer"
+      ],
+      "required_components": [
+        "Accordion"
+      ],
+      "optional_components": [
+        "Search Box",
+        "Tags/filters",
+        "Pagination",
+        "Rating"
+      ],
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "Navigation Header",
+      "navigation": "Two languages direct switch; more than two dropdown.",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "أسئلة وأجوبة مصنفة.",
+      "cta": "Remove/reset filters and rating submit where applicable.",
+      "footer": "Footer",
+      "responsive_rules": "Mobile maximum five category controls; otherwise dropdown.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Accordion/search/filter/pagination/rating semantics.",
+      "content_rules": "أسئلة مباشرة وإجابات موجزة؛ highlight search query.",
+      "rules": [
+        "UDS-TEMPLATE-FAQ-001",
+        "UDS-TEMPLATE-FAQ-002",
+        "UDS-TEMPLATE-FAQ-003",
+        "UDS-TEMPLATE-FAQ-004"
+      ],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/faqs-page"
+      ],
+      "source_page_title": "صفحة الأسئلة الشائعة",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-SITEMAP",
+      "template": "صفحة خريطة الموقع",
+      "official": true,
+      "use_case": "عرض بنية روابط المنصة.",
+      "documented_sections": [
+        "Header",
+        "page heading",
+        "grouped internal/external links",
+        "Footer"
+      ],
+      "required_sections": [
+        "Header",
+        "link hierarchy",
+        "Footer"
+      ],
+      "optional_sections": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "component_hierarchy": [
+        "Header",
+        "page heading",
+        "grouped internal/external links",
+        "Footer"
+      ],
+      "required_components": [
+        "List",
+        "Link",
+        "Footer"
+      ],
+      "optional_components": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "Navigation Header",
+      "navigation": "Hierarchical groups of destinations.",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "روابط داخلية وخارجية منظمة.",
+      "cta": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "footer": "Footer",
+      "responsive_rules": "قوائم متكيفة دون قص.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "nav/list semantics and descriptive links.",
+      "content_rules": "عناوين مجموعات وروابط وجهة واضحة.",
+      "rules": [],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/sitemap-page"
+      ],
+      "source_page_title": "صفحة خريطة الموقع",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-404",
+      "template": "صفحة الخطأ",
+      "official": true,
+      "use_case": "استعادة المستخدم من مسار غير موجود.",
+      "documented_sections": [
+        "Header",
+        "clear error message",
+        "recovery action",
+        "Footer"
+      ],
+      "required_sections": [
+        "error message",
+        "recovery action"
+      ],
+      "optional_sections": [
+        "Header",
+        "Footer"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "clear error message",
+        "recovery action",
+        "Footer"
+      ],
+      "required_components": [
+        "Button or Link"
+      ],
+      "optional_components": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "Navigation Header",
+      "navigation": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "شرح واضح لعدم العثور على الصفحة.",
+      "cta": "العودة/الانتقال إلى مسار مفيد.",
+      "footer": "Footer",
+      "responsive_rules": "رسالة وإجراء ظاهران على الجوال.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Heading/message/action keyboard and focus.",
+      "content_rules": "لا تستخدم رمز خطأ بلا شرح.",
+      "rules": [
+        "UDS-TEMPLATE-404-001"
+      ],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/page-not-found"
+      ],
+      "source_page_title": "صفحة الخطأ",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-SEARCH",
+      "template": "صفحة البحث",
+      "official": true,
+      "use_case": "البحث والفرز والتصفية داخل المحتوى.",
+      "documented_sections": [
+        "Header",
+        "Search Box",
+        "language control",
+        "filters",
+        "applied filters",
+        "sort",
+        "results",
+        "pagination",
+        "Footer"
+      ],
+      "required_sections": [
+        "Search Box",
+        "results"
+      ],
+      "optional_sections": [
+        "language switch",
+        "filters",
+        "sort",
+        "pagination"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "Search Box",
+        "language control",
+        "filters",
+        "applied filters",
+        "sort",
+        "results",
+        "pagination",
+        "Footer"
+      ],
+      "required_components": [
+        "Search Box"
+      ],
+      "optional_components": [
+        "Filtration",
+        "Tags",
+        "Card/List",
+        "Pagination",
+        "Dropdown"
+      ],
+      "layout": "بحث في الأعلى ثم أدوات ثم نتائج/ترقيم.",
+      "header_type": "Navigation Header",
+      "navigation": "Language control and result links.",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "نتائج قابلة للنقر مع تمييز نوع الرابط الخارجي/الملف.",
+      "cta": "Clear/reset/remove filters and result link.",
+      "footer": "Footer",
+      "responsive_rules": "Filters collapse to a mobile-appropriate control; chips flow RTL.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Search/filters/results status/pagination semantics.",
+      "content_rules": "Query/result labels واضحة؛ external/file destinations identified.",
+      "rules": [
+        "UDS-TEMPLATE-SEARCH-001",
+        "UDS-TEMPLATE-SEARCH-002"
+      ],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/search-page"
+      ],
+      "source_page_title": "صفحة البحث",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-E-PARTICIPATION",
+      "template": "صفحة المشاركة الإلكترونية",
+      "official": true,
+      "use_case": "عرض قنوات وبيانات المشاركة الإلكترونية.",
+      "documented_sections": [
+        "Header",
+        "participation cards",
+        "open data",
+        "performance statistics",
+        "charts",
+        "Footer"
+      ],
+      "required_sections": [
+        "Header",
+        "participation content",
+        "Footer"
+      ],
+      "optional_sections": [
+        "open data",
+        "statistics/charts"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "participation cards",
+        "open data",
+        "performance statistics",
+        "charts",
+        "Footer"
+      ],
+      "required_components": [
+        "Navigation Header",
+        "Footer"
+      ],
+      "optional_components": [
+        "Card",
+        "Metric",
+        "Charts",
+        "Table"
+      ],
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "Navigation Header",
+      "navigation": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "قنوات مشاركة وبيانات وإحصاءات.",
+      "cta": "CTA واضح على البطاقة عندما يكون مطلوبًا.",
+      "footer": "Footer",
+      "responsive_rules": "بطاقات ورسوم وبيانات متكيفة.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Chart alternatives, descriptive links, keyboard cards.",
+      "content_rules": "عرّف البيانات والأداء والمشاركة بوضوح.",
+      "rules": [],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/e-participation-page"
+      ],
+      "source_page_title": "صفحة المشاركة الإلكترونية",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-ABOUT",
+      "template": "حول الكيان",
+      "official": true,
+      "use_case": "معلومات مؤسسية عن الجهة.",
+      "documented_sections": [
+        "Header",
+        "organization",
+        "strategy",
+        "policies/laws",
+        "budget/expenditure",
+        "procurement",
+        "participation",
+        "partners",
+        "sustainability",
+        "careers",
+        "news/events",
+        "contact",
+        "Footer"
+      ],
+      "required_sections": [
+        "Header",
+        "entity overview",
+        "Footer"
+      ],
+      "optional_sections": [
+        "بقية الأقسام بحسب الجهة"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "organization",
+        "strategy",
+        "policies/laws",
+        "budget/expenditure",
+        "procurement",
+        "participation",
+        "partners",
+        "sustainability",
+        "careers",
+        "news/events",
+        "contact",
+        "Footer"
+      ],
+      "required_components": [
+        "Navigation Header",
+        "Footer"
+      ],
+      "optional_components": [
+        "Card",
+        "List",
+        "Table",
+        "Accordion",
+        "Charts"
+      ],
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "Navigation Header",
+      "navigation": "TOC/Breadcrumb when content depth warrants.",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "محتوى مؤسسي متعدد الأقسام.",
+      "cta": "روابط إلى السياسات والوظائف والأخبار والتواصل.",
+      "footer": "Footer",
+      "responsive_rules": "أقسام طويلة قابلة للمسح وإعادة التدفق.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Heading hierarchy, TOC/list/table semantics, alt text.",
+      "content_rules": "معلومات رسمية واضحة ومحدثة.",
+      "rules": [],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/about-page"
+      ],
+      "source_page_title": "حول الكيان",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-CONTENT",
+      "template": "صفحة المحتوى",
+      "official": true,
+      "use_case": "نشر محتوى حكومي طويل أو مرجعي.",
+      "documented_sections": [
+        "Header",
+        "Breadcrumb",
+        "title/introduction",
+        "language control",
+        "Table of Content",
+        "headings/lists/media",
+        "feedback",
+        "Footer"
+      ],
+      "required_sections": [
+        "title",
+        "main content"
+      ],
+      "optional_sections": [
+        "Header",
+        "Breadcrumb",
+        "language control",
+        "TOC",
+        "feedback",
+        "Footer"
+      ],
+      "component_hierarchy": [
+        "Header",
+        "Breadcrumb",
+        "title/introduction",
+        "language control",
+        "Table of Content",
+        "headings/lists/media",
+        "feedback",
+        "Footer"
+      ],
+      "required_components": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "optional_components": [
+        "Breadcrumbs",
+        "Table of Content",
+        "List",
+        "Quote",
+        "Code Snippet",
+        "Feedback"
+      ],
+      "layout": "Paragraph measure up to 720px token; hierarchy and whitespace.",
+      "header_type": "Navigation Header",
+      "navigation": "Breadcrumb/TOC according to depth.",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "Headings, paragraphs, lists, and media.",
+      "cta": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "footer": "Footer",
+      "responsive_rules": "TOC/media/content reflow without clipping.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Heading hierarchy, alt text, keyboard TOC, contrast.",
+      "content_rules": "Arabic-first, clear headings, descriptive links.",
+      "rules": [
+        "UDS-TEMPLATE-CONTENT-001"
+      ],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/content-page"
+      ],
+      "source_page_title": "صفحة المحتوى",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-COOKIES",
+      "template": "لافتة ملفات تعريف الارتباط",
+      "official": true,
+      "use_case": "إبلاغ المستخدم وإدارة اختيارات ملفات الارتباط.",
+      "documented_sections": [
+        "content",
+        "actions",
+        "error handling",
+        "cookie management"
+      ],
+      "required_sections": [
+        "message",
+        "actions"
+      ],
+      "optional_sections": [
+        "preferences management",
+        "error state"
+      ],
+      "component_hierarchy": [
+        "content",
+        "actions",
+        "error handling",
+        "cookie management"
+      ],
+      "required_components": [
+        "Button/Link"
+      ],
+      "optional_components": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "navigation": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "شرح وإجراءات إدارة ملفات الارتباط.",
+      "cta": "قبول/رفض/إدارة بحسب سياسة الجهة؛ التفاصيل القانونية غير منشورة.",
+      "footer": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive_rules": "لا تحجب المحتوى أو الإجراءات على الجوال.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Keyboard, focus, clear labels, error status.",
+      "content_rules": "موجز وواضح؛ المتطلبات القانونية التفصيلية تحتاج مصدر الجهة.",
+      "rules": [],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/cookies-banner"
+      ],
+      "source_page_title": "لافتة ملفات تعريف الارتباط",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-CHATBOT",
+      "template": "روبوت الدردشة",
+      "official": true,
+      "use_case": "مساعدة حوارية داخل المنصة.",
+      "documented_sections": [
+        "intro/welcome",
+        "features",
+        "conversation area",
+        "position/launcher",
+        "close"
+      ],
+      "required_sections": [
+        "welcome/context",
+        "conversation",
+        "open/close control"
+      ],
+      "optional_sections": [
+        "feature suggestions"
+      ],
+      "component_hierarchy": [
+        "intro/welcome",
+        "features",
+        "conversation area",
+        "position/launcher",
+        "close"
+      ],
+      "required_components": [
+        "Floating Button or launcher",
+        "dialog/panel",
+        "Input",
+        "Button"
+      ],
+      "optional_components": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "navigation": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "محادثة وإرشاد المستخدم.",
+      "cta": "إرسال/اختيار اقتراح وإغلاق.",
+      "footer": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive_rules": "موضع لا يحجب المحتوى والتحكمات.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Accessible names, keyboard, focus management, status updates.",
+      "content_rules": "رسائل واضحة وسياق ترحيبي.",
+      "rules": [
+        "UDS-TEMPLATE-CHATBOT-001"
+      ],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/chatbot"
+      ],
+      "source_page_title": "روبوت الدردشة",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "template_id": "UDS-TPL-RATING",
+      "template": "قسم التقييم",
+      "official": true,
+      "use_case": "جمع تقييم الصفحة أو المحتوى.",
+      "documented_sections": [
+        "rating prompt",
+        "rating control",
+        "submit",
+        "confirmation",
+        "mobile state"
+      ],
+      "required_sections": [
+        "prompt",
+        "rating",
+        "confirmation"
+      ],
+      "optional_sections": [
+        "submit when not immediate"
+      ],
+      "component_hierarchy": [
+        "rating prompt",
+        "rating control",
+        "submit",
+        "confirmation",
+        "mobile state"
+      ],
+      "required_components": [
+        "Rating",
+        "Button or immediate action",
+        "Notification"
+      ],
+      "optional_components": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "layout": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "header_type": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "navigation": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hero": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "main_content": "اختيار درجة وتأكيد النتيجة.",
+      "cta": "إرسال إذا كان المكون لا يحفظ فورًا.",
+      "footer": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive_rules": "هدف لمس وترتيب مناسب للجوال.",
+      "rtl": "Arabic interface follows RTL; template-specific RTL details are not separately published.",
+      "accessibility": "Radiogroup labels, arrow keyboard, announced confirmation.",
+      "content_rules": "سؤال واضح وتسمية رقمية للدرجة.",
+      "rules": [],
+      "sources": [
+        "https://design.dga.gov.sa/guidelines/templates/rating-section"
+      ],
+      "source_page_title": "قسم التقييم",
+      "verification_date": "2026-09-07"
+    }
+  ]
+}

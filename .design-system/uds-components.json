@@ -1,0 +1,2842 @@
+{
+  "schema_version": "1.0.0",
+  "system": "Saudi Unified Platform Code",
+  "verification_date": "2026-09-07",
+  "not_published_marker": "NOT PUBLISHED BY OFFICIAL SOURCE",
+  "component_count": 50,
+  "components": [
+    {
+      "component": "button",
+      "name": "الأزرار",
+      "official": true,
+      "group": "actions",
+      "purpose": "تنفيذ فعل واضح داخل الواجهة.",
+      "usage": "استخدمه للإجراء؛ مستويات التأكيد high/medium/low، وأنواع قياسي وتحذيري وقائمة وأيقوني وإغلاق.",
+      "when_to_use": "استخدمه للإجراء؛ مستويات التأكيد high/medium/low، وأنواع قياسي وتحذيري وقائمة وأيقوني وإغلاق.",
+      "when_not_to_use": "لا تستخدمه للتنقل ولا تنشئ عدة إجراءات high متنافسة.",
+      "anatomy": [
+        "container",
+        "label",
+        "leading icon",
+        "trailing icon"
+      ],
+      "variants": [
+        "standard",
+        "destructive",
+        "menu",
+        "icon",
+        "close"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "selected",
+        "focus",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "عنصر button دلالي، تباين 4.5:1، هدف 44×44، واسم وصول للأيقوني.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "aria-label for icon-only"
+      ],
+      "content": "تسمية تصف نتيجة الفعل.",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدمه للتنقل ولا تنشئ عدة إجراءات high متنافسة.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-BUTTON-001",
+        "UDS-COMP-BUTTON-002",
+        "UDS-COMP-BUTTON-003"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/actions/buttons",
+      "source_page_title": "الأزرار",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "floating-button",
+      "name": "الزر العائم",
+      "official": true,
+      "group": "actions",
+      "purpose": "إبراز إجراء دائري عالي الأولوية.",
+      "usage": "للإجراء العائم المتكرر عندما لا يحجب المحتوى.",
+      "when_to_use": "للإجراء العائم المتكرر عندما لا يحجب المحتوى.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "container",
+        "icon",
+        "optional label"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "focus",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "يجب ألا يحجب المحتوى في المساحات الضيقة.",
+      "accessibility": "اسم وصول وصفي وهدف تفاعلي كبير.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "aria-label"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [],
+      "source": "https://design.dga.gov.sa/guidelines/components/actions/floating-Button",
+      "source_page_title": "الزر العائم",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "dropdown",
+      "name": "القائمة المنسدلة",
+      "official": true,
+      "group": "actions",
+      "purpose": "اختيار خيار من قائمة مؤقتة.",
+      "usage": "عندما تحتاج قائمة خيارات قابلة للفتح والطي.",
+      "when_to_use": "عندما تحتاج قائمة خيارات قابلة للفتح والطي.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "label",
+        "trigger",
+        "list",
+        "options"
+      ],
+      "variants": [
+        "outlined",
+        "filled light",
+        "filled dark"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "selected",
+        "disabled",
+        "error"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "عرّف المشغل والقائمة والخيارات والحالة المختارة.",
+      "keyboard": [
+        "Tab",
+        "Arrow keys",
+        "Enter",
+        "Space",
+        "Escape"
+      ],
+      "aria": [
+        "aria-haspopup=listbox",
+        "aria-expanded",
+        "role=listbox",
+        "role=option",
+        "aria-selected"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [],
+      "source": "https://design.dga.gov.sa/guidelines/components/actions/dropdown",
+      "source_page_title": "القائمة المنسدلة",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "link",
+      "name": "الرابط",
+      "official": true,
+      "group": "actions",
+      "purpose": "الانتقال إلى صفحة أو موضع أو مورد.",
+      "usage": "استخدم a مع href عندما تكون النتيجة انتقالًا.",
+      "when_to_use": "استخدم a مع href عندما تكون النتيجة انتقالًا.",
+      "when_not_to_use": "لا تستخدمه لفعل محلي.",
+      "anatomy": [
+        "text",
+        "optional icon"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "focus",
+        "visited",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "اعكس الأيقونة فقط إذا حملت معنى اتجاهيًا.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "نص وصفي، underline افتراضي، تباين 4.5:1، وتحذير فتح نافذة جديدة.",
+      "keyboard": [
+        "Tab",
+        "Enter"
+      ],
+      "aria": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "content": "النص يصف الوجهة.",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدمه لفعل محلي.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-LINK-001",
+        "UDS-COMP-LINK-002"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/actions/link",
+      "source_page_title": "الرابط",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "chip",
+      "name": "العلامات التفاعلية",
+      "official": true,
+      "group": "actions",
+      "purpose": "تصنيف أو اختيار أو مرشح أو إجراء صغير.",
+      "usage": "لعنصر موجز قابل للاختيار أو الإزالة.",
+      "when_to_use": "لعنصر موجز قابل للاختيار أو الإزالة.",
+      "when_not_to_use": "لا تستخدم نصًا طويلًا أو عددًا يسبب ضوضاء.",
+      "anatomy": [
+        "container",
+        "text",
+        "leading icon",
+        "trailing icon"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "selected",
+        "focus",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "رتب النص وأيقونة الإزالة وفق RTL.",
+      "responsive": "تلتف مجموعة الشرائح دون قص.",
+      "accessibility": "عامل القابل للإزالة كزر باسم وصول واضح.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "aria-label for removal"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدم نصًا طويلًا أو عددًا يسبب ضوضاء.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-CHIP-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/actions/chip",
+      "source_page_title": "العلامات التفاعلية",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "accordion",
+      "name": "أكورديون",
+      "official": true,
+      "group": "content-display",
+      "purpose": "كشف وطي أقسام محتوى.",
+      "usage": "لأقسام مرتبطة لا يلزم عرضها كلها في وقت واحد.",
+      "when_to_use": "لأقسام مرتبطة لا يلزم عرضها كلها في وقت واحد.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "header trigger",
+        "title",
+        "expand icon",
+        "panel"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "collapsed",
+        "expanded",
+        "hover",
+        "focus",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "زر رأس يعلن حالة التوسع ويرتبط باللوحة.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "aria-expanded",
+        "aria-controls"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-ACCORDION-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/content-display/accordion",
+      "source_page_title": "أكورديون",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "card",
+      "name": "البطاقة",
+      "official": true,
+      "group": "content-display",
+      "purpose": "تجميع محتوى أو إجراء مترابط.",
+      "usage": "لعرض صورة/عنوان/وصف/وسوم/تقييم/إجراءات كوحدة.",
+      "when_to_use": "لعرض صورة/عنوان/وصف/وسوم/تقييم/إجراءات كوحدة.",
+      "when_not_to_use": "لا تجعل div كاملًا قابلًا للنقر بلا دلالة.",
+      "anatomy": [
+        "container",
+        "image",
+        "featured icon",
+        "title",
+        "description",
+        "avatar",
+        "tags",
+        "rating",
+        "actions"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "تُرص عناصر البطاقة عند ضيق العرض وفق القوالب.",
+      "accessibility": "فقرة الوصول الرسمية متعارضة ومنسوخة من Accordion؛ استخدم دلالة الروابط/الأزرار العامة.",
+      "keyboard": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "aria": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "content": "البطاقة القابلة للفعل لها CTA واضح؛ بطاقة العرض قد لا تحتاجه.",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تجعل div كاملًا قابلًا للنقر بلا دلالة.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-CARD-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/content-display/card",
+      "source_page_title": "البطاقة",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "carousel",
+      "name": "عنصر التمرير",
+      "official": true,
+      "group": "content-display",
+      "purpose": "عرض سلسلة عناصر داخل مساحة واحدة.",
+      "usage": "لعناصر متتابعة مع أزرار ونقاط موضع.",
+      "when_to_use": "لعناصر متتابعة مع أزرار ونقاط موضع.",
+      "when_not_to_use": "لا تستخدم تشغيلًا تلقائيًا بلا تحكم أو لإخفاء محتوى أساسي.",
+      "anatomy": [
+        "viewport",
+        "items",
+        "previous",
+        "next",
+        "dots",
+        "current item"
+      ],
+      "variants": [
+        "manual",
+        "automatic"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "focus",
+        "selected"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "اعكس السابق/التالي وفق الاتجاه.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "سمّ التحكمات وأعلن تغير الشريحة ولا تفقد التركيز.",
+      "keyboard": [
+        "Tab",
+        "Arrow keys"
+      ],
+      "aria": [
+        "role=listbox",
+        "role=option",
+        "aria-roledescription",
+        "aria-live for automatic changes"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدم تشغيلًا تلقائيًا بلا تحكم أو لإخفاء محتوى أساسي.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-CAROUSEL-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/content-display/carousel",
+      "source_page_title": "عنصر التمرير",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "list",
+      "name": "قائمة التعداد",
+      "official": true,
+      "group": "content-display",
+      "purpose": "عرض عناصر مرتبة أو غير مرتبة.",
+      "usage": "استخدم ol للتسلسل وul للتجميع.",
+      "when_to_use": "استخدم ol للتسلسل وul للتجميع.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "list container",
+        "list item",
+        "marker",
+        "content"
+      ],
+      "variants": [
+        "ordered",
+        "unordered"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "تظهر العلامات والمحاذاة في الطرف المنطقي.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "استخدم ol/ul/li الدلالية.",
+      "keyboard": [
+        "Tab for interactive descendants"
+      ],
+      "aria": [
+        "aria-current=page when used in navigation"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-LIST-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/content-display/list",
+      "source_page_title": "قائمة التعداد",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "code-snippet",
+      "name": "مستعرض الكود",
+      "official": true,
+      "group": "content-display",
+      "purpose": "عرض شفرة قابلة للقراءة والنسخ.",
+      "usage": "لعرض مقتطفات مع لغة ونسخ وأرقام أسطر/توسيع عند الحاجة.",
+      "when_to_use": "لعرض مقتطفات مع لغة ونسخ وأرقام أسطر/توسيع عند الحاجة.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "code area",
+        "language tabs",
+        "copy",
+        "line numbers",
+        "show more"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "focus",
+        "success",
+        "error"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "ERROR",
+      "success": "SUCCESS",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "اعرض الشفرة LTR داخل سياق RTL.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "حافظ على التنسيق وأعلن نجاح النسخ وأخف أرقام الأسطر الزخرفية.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "aria-live=polite for copy status",
+        "aria-hidden for decorative line numbers"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-CODE-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/content-display/code-snippet",
+      "source_page_title": "مستعرض الكود",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "quote",
+      "name": "الاقتباس",
+      "official": true,
+      "group": "content-display",
+      "purpose": "عرض اقتباس منسوب.",
+      "usage": "لنص مقتبس مع اسم/صفة/صورة المؤلف عند توفرها.",
+      "when_to_use": "لنص مقتبس مع اسم/صفة/صورة المؤلف عند توفرها.",
+      "when_not_to_use": "لا تستخدمه كنمط زخرفي لنص غير مقتبس.",
+      "anatomy": [
+        "quote title",
+        "text",
+        "author name",
+        "author title",
+        "image",
+        "quote marks"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "استخدم dir=rtl للاقتباس العربي.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "استخدم blockquote وأخف علامات الاقتباس الزخرفية.",
+      "keyboard": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "aria": [
+        "aria-hidden for decorative marks"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدمه كنمط زخرفي لنص غير مقتبس.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-QUOTE-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/content-display/quote",
+      "source_page_title": "الاقتباس",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "divider",
+      "name": "الخط الفاصل",
+      "official": true,
+      "group": "content-display",
+      "purpose": "فصل بصري أو بنيوي.",
+      "usage": "عندما يزيد وضوح مجموعات المحتوى.",
+      "when_to_use": "عندما يزيد وضوح مجموعات المحتوى.",
+      "when_not_to_use": "لا تفرط في استخدامه ولا تستبدل hierarchy والمسافات به.",
+      "anatomy": [
+        "line or spacing boundary"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "يمكن حذفه عند الضيق إذا بقيت البنية واضحة.",
+      "accessibility": "role=separator للبنيوي وإخفاء الزخرفي.",
+      "keyboard": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "aria": [
+        "role=separator or aria-hidden"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تفرط في استخدامه ولا تستبدل hierarchy والمسافات به.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-DIVIDER-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/content-display/divider",
+      "source_page_title": "الخط الفاصل",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "digital-stamp",
+      "name": "الختم الرقمي",
+      "official": true,
+      "group": "content-display",
+      "purpose": "إظهار أصالة وثقة منصة رسمية.",
+      "usage": "لنطاق مؤهل يستخدم HTTPS ومستوفٍ شروط التسجيل/الترخيص.",
+      "when_to_use": "لنطاق مؤهل يستخدم HTTPS ومستوفٍ شروط التسجيل/الترخيص.",
+      "when_not_to_use": "لا تعرضه ادعاءً بلا استيفاء الشروط.",
+      "anatomy": [
+        "status",
+        "domain/details",
+        "icons",
+        "verification link"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "verified"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "حالة معلنة وأسماء للأيقونات ذات المعنى ورابط لوحة مفاتيح.",
+      "keyboard": [
+        "Tab",
+        "Enter"
+      ],
+      "aria": [
+        "role=status",
+        "aria-label",
+        "aria-hidden for decorative icons"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تعرضه ادعاءً بلا استيفاء الشروط.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-STAMP-001",
+        "UDS-PLATFORM-007"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/content-display/digital-stamp",
+      "source_page_title": "الختم الرقمي",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "avatar",
+      "name": "الصورة الرمزية",
+      "official": true,
+      "group": "data-display",
+      "purpose": "تمثيل شخص أو كيان بصريًا.",
+      "usage": "للصورة أو الأحرف الأولى أو الأيقونة.",
+      "when_to_use": "للصورة أو الأحرف الأولى أو الأيقونة.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "image or initials/icon",
+        "container"
+      ],
+      "variants": [
+        "circle",
+        "rectangle"
+      ],
+      "sizes": [
+        24,
+        32,
+        40,
+        48,
+        64,
+        80,
+        120
+      ],
+      "states": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "alt للاسم/الغرض، أو alt فارغ للزخرفي.",
+      "keyboard": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "aria": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-AVATAR-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/data-display/avatar",
+      "source_page_title": "الصورة الرمزية",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "metric",
+      "name": "بطاقة المؤشرات",
+      "official": true,
+      "group": "data-display",
+      "purpose": "عرض قيمة مؤشر وسياقها واتجاهها.",
+      "usage": "لـKPI مع label وقيمة وtrend/chart/action اختياري.",
+      "when_to_use": "لـKPI مع label وقيمة وtrend/chart/action اختياري.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "label",
+        "value",
+        "trend",
+        "chart",
+        "settings",
+        "CTA"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "loading",
+        "error"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "LOADING",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "أعلن التغير المهم بلطف وسمّ الإجراءات والأيقونات.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "aria-live=polite",
+        "aria-label"
+      ],
+      "content": "القيمة تحتاج label وسياق/وحدة مناسبة.",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-METRIC-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/data-display/metric",
+      "source_page_title": "بطاقة المؤشرات",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "table",
+      "name": "الجدول",
+      "official": true,
+      "group": "data-display",
+      "purpose": "عرض بيانات صفوف وأعمدة للمقارنة.",
+      "usage": "للبيانات الجدولية ذات رؤوس واضحة.",
+      "when_to_use": "للبيانات الجدولية ذات رؤوس واضحة.",
+      "when_not_to_use": "لا تستخدم جدولًا لتخطيط الصفحة.",
+      "anatomy": [
+        "table",
+        "caption",
+        "column headers",
+        "row headers",
+        "body",
+        "cells",
+        "optional selection/actions"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "selected",
+        "loading",
+        "error"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "LOADING",
+      "rtl": "محاذاة وترتيب الأعمدة وفق RTL.",
+      "responsive": "overflow متاح دون قص؛ نمط التحويل إلى بطاقات غير منشور.",
+      "accessibility": "HTML table مع th/scope؛ ARIA فقط عند عدم كفاية الدلالة الأصلية.",
+      "keyboard": [
+        "Tab for interactive cells"
+      ],
+      "aria": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدم جدولًا لتخطيط الصفحة.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-TABLE-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/data-display/table",
+      "source_page_title": "الجدول",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "content-switcher",
+      "name": "مُبدّل المحتوى",
+      "official": true,
+      "group": "data-display",
+      "purpose": "التبديل بين مشاهد مرتبطة.",
+      "usage": "لخيارين إلى أربعة؛ استخدم Tabs لأكثر من أربعة.",
+      "when_to_use": "لخيارين إلى أربعة؛ استخدم Tabs لأكثر من أربعة.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "option list",
+        "selected indicator",
+        "panels"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "selected",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "اتجاه المجموعة والأسهم وفق RTL.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "استخدم tab semantics وعلاقات اللوحات.",
+      "keyboard": [
+        "Tab",
+        "Arrow keys"
+      ],
+      "aria": [
+        "role=tablist",
+        "role=tab",
+        "role=tabpanel",
+        "aria-selected",
+        "aria-controls"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-SWITCHER-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/data-display/content-switcher",
+      "source_page_title": "مُبدّل المحتوى",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "charts",
+      "name": "الرسوم البيانية",
+      "official": true,
+      "group": "data-display",
+      "purpose": "تصوير علاقات واتجاهات البيانات.",
+      "usage": "للـpie/line/bar عندما يكون الرسم أوضح من النص وحده.",
+      "when_to_use": "للـpie/line/bar عندما يكون الرسم أوضح من النص وحده.",
+      "when_not_to_use": "لا تستخدم الرسم حين تكون قيمة/قائمة أبسط.",
+      "anatomy": [
+        "title",
+        "axes",
+        "labels",
+        "plot",
+        "legend",
+        "data points"
+      ],
+      "variants": [
+        "pie",
+        "line",
+        "bar"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "selected",
+        "loading",
+        "error"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "LOADING",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "يعيد الرسم التدفق على المقاسات المختلفة.",
+      "accessibility": "ملخص نصي وعناوين؛ لا لون وحده؛ نقاط تفاعلية بلوحة المفاتيح.",
+      "keyboard": [
+        "Tab",
+        "Arrow keys for interactive points"
+      ],
+      "aria": [
+        "role=img for static chart",
+        "aria-label or labelledby"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدم الرسم حين تكون قيمة/قائمة أبسط.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-CHART-001",
+        "UDS-A11Y-022"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/data-display/charts",
+      "source_page_title": "الرسوم البيانية",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "structured-list",
+      "name": "القائمة المنظَّمة",
+      "official": true,
+      "group": "data-display",
+      "purpose": "عرض بيانات منظمة أخف من جدول معقد.",
+      "usage": "لصفوف/أعمدة وفواصل واختيار صف اختياري.",
+      "when_to_use": "لصفوف/أعمدة وفواصل واختيار صف اختياري.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "header",
+        "rows",
+        "cells",
+        "optional checkbox",
+        "dividers",
+        "container"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "focus",
+        "selected"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "اتجاه الأعمدة والمحاذاة RTL.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "استخدم list/listitem أو table roles بحسب البنية الفعلية.",
+      "keyboard": [
+        "Tab",
+        "Space for row selection"
+      ],
+      "aria": [
+        "role=list/listitem or table/row/columnheader/rowheader"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [],
+      "source": "https://design.dga.gov.sa/guidelines/components/data-display/structured-list",
+      "source_page_title": "القائمة المنظَّمة",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "notification",
+      "name": "الإشعارات",
+      "official": true,
+      "group": "feedback",
+      "purpose": "إبلاغ المستخدم بحالة أو نتيجة.",
+      "usage": "inline أو toast؛ معلومات/نجاح/تحذير/خطأ/محايد؛ قابل للإجراء عند الحاجة.",
+      "when_to_use": "inline أو toast؛ معلومات/نجاح/تحذير/خطأ/محايد؛ قابل للإجراء عند الحاجة.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "icon",
+        "title",
+        "message",
+        "action",
+        "dismiss"
+      ],
+      "variants": [
+        "inline",
+        "toast",
+        "actionable",
+        "with background",
+        "without background"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "info",
+        "success",
+        "warning",
+        "error",
+        "neutral"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "ERROR",
+      "success": "SUCCESS",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "alert للحرج الفوري وstatus/polite لغير الحرج؛ وقت قراءة كافٍ.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "role=alert",
+        "role=status",
+        "aria-live=polite"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-NOTIFICATION-001",
+        "UDS-A11Y-011",
+        "UDS-A11Y-012"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/feedback/notification",
+      "source_page_title": "الإشعارات",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "modal",
+      "name": "النوافذ المنبثقة",
+      "official": true,
+      "group": "feedback",
+      "purpose": "قرار أو مهمة مركزة تحجب الخلفية.",
+      "usage": "عندما يلزم إيقاف السياق حتى قرار/إجراء.",
+      "when_to_use": "عندما يلزم إيقاف السياق حتى قرار/إجراء.",
+      "when_not_to_use": "لا تستخدمه لمعلومة غير معيقة يمكن عرضها inline.",
+      "anatomy": [
+        "overlay",
+        "dialog",
+        "title",
+        "description",
+        "content",
+        "actions",
+        "close"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "closed",
+        "open",
+        "loading",
+        "error"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "LOADING",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "داخل viewport وقابل للتمرير في الجوال.",
+      "accessibility": "اسم حوار، focus trap، إخفاء الخلفية، وإعادة التركيز.",
+      "keyboard": [
+        "Tab",
+        "Shift+Tab",
+        "Escape"
+      ],
+      "aria": [
+        "role=dialog",
+        "aria-modal=true",
+        "aria-labelledby"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدمه لمعلومة غير معيقة يمكن عرضها inline.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-A11Y-014",
+        "UDS-A11Y-015"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/feedback/modal",
+      "source_page_title": "النوافذ المنبثقة",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "tooltip",
+      "name": "التلميح",
+      "official": true,
+      "group": "feedback",
+      "purpose": "شرح موجز لمشغّل.",
+      "usage": "لمساعدة قصيرة تظهر hover وfocus.",
+      "when_to_use": "لمساعدة قصيرة تظهر hover وfocus.",
+      "when_not_to_use": "لا تجعل معلومة أساسية متاحة في tooltip فقط.",
+      "anatomy": [
+        "trigger",
+        "bubble",
+        "arrow"
+      ],
+      "variants": [
+        "top",
+        "bottom",
+        "left",
+        "right",
+        "light",
+        "dark"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "hidden",
+        "hover",
+        "focus"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "ابقه داخل viewport.",
+      "accessibility": "يظهر على focus ويختفي blur/Escape ولا ينقل التركيز إن لم يكن تفاعليًا.",
+      "keyboard": [
+        "Tab",
+        "Escape"
+      ],
+      "aria": [
+        "role=tooltip",
+        "aria-describedby"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تجعل معلومة أساسية متاحة في tooltip فقط.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-TOOLTIP-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/feedback/tooltip",
+      "source_page_title": "التلميح",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "rating",
+      "name": "التقييم",
+      "official": true,
+      "group": "feedback",
+      "purpose": "اختيار أو عرض درجة نجوم.",
+      "usage": "لجمع تقييم رقمي أو عرضه.",
+      "when_to_use": "لجمع تقييم رقمي أو عرضه.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "star group",
+        "stars",
+        "optional label/value"
+      ],
+      "variants": [
+        "editable",
+        "read-only",
+        "half rating"
+      ],
+      "sizes": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "states": [
+        "default",
+        "pressed",
+        "selected",
+        "half",
+        "disabled"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "مجموعة radio بتسميات رقمية وحالة محددة.",
+      "keyboard": [
+        "Tab",
+        "Arrow keys"
+      ],
+      "aria": [
+        "role=radiogroup",
+        "role=radio",
+        "aria-checked"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-RATING-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/feedback/rating",
+      "source_page_title": "التقييم",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "checkbox",
+      "name": "مربع الاختيار",
+      "official": true,
+      "group": "forms-and-inputs",
+      "purpose": "اختيار ثنائي أو صفر/عدة من مجموعة.",
+      "usage": "للخيارات المستقلة أو المتعددة.",
+      "when_to_use": "للخيارات المستقلة أو المتعددة.",
+      "when_not_to_use": "لا تستخدمه لواحد فقط من خيارات متنافية.",
+      "anatomy": [
+        "input",
+        "label",
+        "help",
+        "alert"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "unchecked",
+        "checked",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "DISABLED",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "native input مرتبط بـlabel؛ الحالة معلنة تلقائيًا.",
+      "keyboard": [
+        "Tab",
+        "Space"
+      ],
+      "aria": [
+        "aria-label or aria-labelledby only when necessary"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدمه لواحد فقط من خيارات متنافية.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-CHECKBOX-001",
+        "UDS-A11Y-021"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/forms-and-inputs/checkbox",
+      "source_page_title": "مربع الاختيار",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "datepicker",
+      "name": "محدد التاريخ",
+      "official": true,
+      "group": "forms-and-inputs",
+      "purpose": "إدخال أو اختيار تاريخ.",
+      "usage": "للمواعيد والحجوزات والميلاد مع إدخال لوحة مفاتيح وتقويم.",
+      "when_to_use": "للمواعيد والحجوزات والميلاد مع إدخال لوحة مفاتيح وتقويم.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "month/year",
+        "date input",
+        "calendar grid",
+        "today",
+        "selected date",
+        "navigation buttons",
+        "actions"
+      ],
+      "variants": [
+        "single month",
+        "dual month"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "closed",
+        "open",
+        "selected",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "اعكس أزرار الشهر السابق/التالي.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "حوار مسمى؛ focus للتاريخ المختار/اليوم؛ أعلن الشهر والسنة.",
+      "keyboard": [
+        "Tab",
+        "Arrow keys",
+        "Enter",
+        "Escape"
+      ],
+      "aria": [
+        "role=dialog",
+        "aria-labelledby",
+        "aria-describedby",
+        "aria-live"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-DATE-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/forms-and-inputs/datepicker",
+      "source_page_title": "محدد التاريخ",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "input",
+      "name": "المدخلات",
+      "official": true,
+      "group": "forms-and-inputs",
+      "purpose": "إدخال بيانات أحادية السطر.",
+      "usage": "للنص أو البريد أو الهاتف أو كلمة المرور أو بحث وفق type الصحيح.",
+      "when_to_use": "للنص أو البريد أو الهاتف أو كلمة المرور أو بحث وفق type الصحيح.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "label",
+        "editable area",
+        "icon",
+        "feedback icon",
+        "help",
+        "prefix",
+        "suffix"
+      ],
+      "variants": [
+        "standard",
+        "with icon",
+        "prefix/suffix",
+        "read-only",
+        "filled default",
+        "filled light",
+        "filled dark"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "filled",
+        "read-only",
+        "disabled",
+        "error",
+        "success"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "DISABLED",
+      "error": "ERROR",
+      "success": "SUCCESS",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "type صحيح وlabel مرتبط وhelp/error موصولان.",
+      "keyboard": [
+        "Tab",
+        "Shift+Tab"
+      ],
+      "aria": [
+        "aria-describedby",
+        "aria-invalid",
+        "aria-label only when visual label is unavailable"
+      ],
+      "content": "لا تستخدم placeholder بدل label.",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-INPUT-001",
+        "UDS-A11Y-008",
+        "UDS-A11Y-009",
+        "UDS-A11Y-010"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/forms-and-inputs/input",
+      "source_page_title": "المدخلات",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "file-uploader",
+      "name": "رفع الملفات",
+      "official": true,
+      "group": "forms-and-inputs",
+      "purpose": "اختيار ورفع ملف أو ملفات.",
+      "usage": "للسحب/الإفلات أو الاستعراض مع معاينة وحالة وحذف.",
+      "when_to_use": "للسحب/الإفلات أو الاستعراض مع معاينة وحالة وحذف.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "dropzone",
+        "title",
+        "help/accepted types",
+        "browse button",
+        "status icon",
+        "filename",
+        "file help",
+        "delete"
+      ],
+      "variants": [
+        "single",
+        "multiple"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "drag",
+        "loading",
+        "success",
+        "error",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "DISABLED",
+      "error": "ERROR",
+      "success": "SUCCESS",
+      "loading": "LOADING",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "يوفر مسار لوحة مفاتيح مكافئ للسحب والإفلات ويعلن الحالة.",
+      "keyboard": [
+        "Tab",
+        "Shift+Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "aria-label for upload area",
+        "live status"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-UPLOAD-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/forms-and-inputs/file-uploader",
+      "source_page_title": "رفع الملفات",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "radio",
+      "name": "زر الاختيار",
+      "official": true,
+      "group": "forms-and-inputs",
+      "purpose": "اختيار واحد من مجموعة.",
+      "usage": "لواحد فقط من خيارات متنافية.",
+      "when_to_use": "لواحد فقط من خيارات متنافية.",
+      "when_not_to_use": "لا تستخدمه للاختيار المتعدد.",
+      "anatomy": [
+        "radio input",
+        "label",
+        "help",
+        "alert"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "unchecked",
+        "checked",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "DISABLED",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "fieldset/legend وlabels وname مشترك.",
+      "keyboard": [
+        "Tab",
+        "Arrow keys",
+        "Space"
+      ],
+      "aria": [
+        "aria-label only when necessary"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدمه للاختيار المتعدد.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-RADIO-001",
+        "UDS-A11Y-021"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/forms-and-inputs/radio",
+      "source_page_title": "زر الاختيار",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "slider",
+      "name": "شريط التمرير",
+      "official": true,
+      "group": "forms-and-inputs",
+      "purpose": "اختيار قيمة أو نطاق بالسحب.",
+      "usage": "للصوت/السطوع/السعر أو نطاق ذي feedback فوري.",
+      "when_to_use": "للصوت/السطوع/السعر أو نطاق ذي feedback فوري.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "label",
+        "help",
+        "track",
+        "thumb",
+        "range thumbs",
+        "value",
+        "min/max"
+      ],
+      "variants": [
+        "single value",
+        "range"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active",
+        "disabled",
+        "error"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "سلوك زيادة القيمة/اتجاه المسار غير منشور تفصيليًا.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "اعرض min/max/current واسمًا واضحًا ومؤشر focus.",
+      "keyboard": [
+        "Tab",
+        "Arrow keys",
+        "Home",
+        "End",
+        "Page Up",
+        "Page Down"
+      ],
+      "aria": [
+        "role=slider",
+        "aria-valuemin",
+        "aria-valuemax",
+        "aria-valuenow",
+        "aria-label"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-A11Y-020"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/forms-and-inputs/slider",
+      "source_page_title": "شريط التمرير",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "steps",
+      "name": "الخطوات",
+      "official": true,
+      "group": "forms-and-inputs",
+      "purpose": "إظهار تقدم عملية متعددة الخطوات.",
+      "usage": "للنماذج والعمليات المتسلسلة.",
+      "when_to_use": "للنماذج والعمليات المتسلسلة.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "step base/number",
+        "name",
+        "description",
+        "connector",
+        "first/middle/final"
+      ],
+      "variants": [
+        "horizontal",
+        "vertical"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "completed",
+        "current",
+        "upcoming",
+        "default",
+        "hover",
+        "focus"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "الخطوات الأفقية تتقدم من اليمين إلى اليسار.",
+      "responsive": "قالب النموذج يستخدم radial stepper على الجوال.",
+      "accessibility": "ol للتسلسل وaria-current للخطوة الحالية ونص حالة.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space when interactive"
+      ],
+      "aria": [
+        "aria-label=Progress",
+        "aria-current=step"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-STEPS-001",
+        "UDS-FORM-004",
+        "UDS-FORM-005"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/forms-and-inputs/steps",
+      "source_page_title": "الخطوات",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "switch",
+      "name": "زر التبديل",
+      "official": true,
+      "group": "forms-and-inputs",
+      "purpose": "تغيير فوري بين حالتين.",
+      "usage": "لإعداد on/off يحدث أثره فورًا.",
+      "when_to_use": "لإعداد on/off يحدث أثره فورًا.",
+      "when_not_to_use": "لا تستخدمه لاختيار ينتظر زر حفظ دون توضيح.",
+      "anatomy": [
+        "control",
+        "label",
+        "help",
+        "alert"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "off",
+        "on",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "DISABLED",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "اسم واضح وحالة checked تتحدث فورًا.",
+      "keyboard": [
+        "Tab",
+        "Space"
+      ],
+      "aria": [
+        "role=switch",
+        "aria-checked",
+        "aria-label or label"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدمه لاختيار ينتظر زر حفظ دون توضيح.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-A11Y-019"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/forms-and-inputs/switch",
+      "source_page_title": "زر التبديل",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "textarea",
+      "name": "منطقة النص",
+      "official": true,
+      "group": "forms-and-inputs",
+      "purpose": "إدخال نص متعدد الأسطر.",
+      "usage": "للتعليقات أو الأوصاف أو الرسائل الطويلة.",
+      "when_to_use": "للتعليقات أو الأوصاف أو الرسائل الطويلة.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "label",
+        "editable area",
+        "help",
+        "error",
+        "scrollbar",
+        "resize handle"
+      ],
+      "variants": [
+        "standard resizable",
+        "no-scroll resizable",
+        "non-resizable",
+        "filled default",
+        "filled light",
+        "filled dark"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "focus",
+        "filled",
+        "read-only",
+        "disabled",
+        "error",
+        "success"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "DISABLED",
+      "error": "ERROR",
+      "success": "SUCCESS",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "label وaria-describedby ودخول focus عبر Tab.",
+      "keyboard": [
+        "Tab"
+      ],
+      "aria": [
+        "aria-describedby",
+        "aria-invalid when invalid"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-TEXTAREA-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/forms-and-inputs/textarea",
+      "source_page_title": "منطقة النص",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "number-input",
+      "name": "مدخلات الأرقام",
+      "official": true,
+      "group": "forms-and-inputs",
+      "purpose": "إدخال وتعديل قيمة رقمية.",
+      "usage": "لرقم يدوي مع زيادة/نقص وحدود عند الحاجة.",
+      "when_to_use": "لرقم يدوي مع زيادة/نقص وحدود عند الحاجة.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "label",
+        "input",
+        "increment",
+        "decrement",
+        "placeholder",
+        "help"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "focus",
+        "error",
+        "disabled"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "DISABLED",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "أعلن min/max/current والقيمة غير الصالحة.",
+      "keyboard": [
+        "Tab",
+        "Arrow keys",
+        "Enter when confirmation is needed"
+      ],
+      "aria": [
+        "role=spinbutton",
+        "aria-valuemin",
+        "aria-valuemax",
+        "aria-valuenow",
+        "aria-invalid"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-NUMBER-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/forms-and-inputs/number-input",
+      "source_page_title": "مدخلات الأرقام",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "loading",
+      "name": "جاري التحميل",
+      "official": true,
+      "group": "loading-and-status",
+      "purpose": "إظهار عملية غير محددة المدة.",
+      "usage": "عندما يجب الانتظار ولا تتوفر نسبة تقدم.",
+      "when_to_use": "عندما يجب الانتظار ولا تتوفر نسبة تقدم.",
+      "when_not_to_use": "لا تستخدمه لتقدم معروف يمكن عرضه بنسبة.",
+      "anatomy": [
+        "circular indicator",
+        "optional status text"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "loading"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "LOADING",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "status عادة وalert فقط للعاجل؛ لا focus؛ وفر نصًا وتقليل حركة.",
+      "keyboard": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "aria": [
+        "role=status",
+        "role=alert when critical",
+        "aria-live"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تستخدمه لتقدم معروف يمكن عرضه بنسبة.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-LOADING-001",
+        "UDS-A11Y-013",
+        "UDS-A11Y-024"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/loading-and-status/loading",
+      "source_page_title": "جاري التحميل",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "progress-bar",
+      "name": "شريط التقدم",
+      "official": true,
+      "group": "loading-and-status",
+      "purpose": "عرض تقدم معروف لمهمة.",
+      "usage": "للرفع أو المعالجة أو إرسال نموذج عندما تتوفر قيمة حالية.",
+      "when_to_use": "للرفع أو المعالجة أو إرسال نموذج عندما تتوفر قيمة حالية.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "container",
+        "fill",
+        "label",
+        "percentage",
+        "help",
+        "success/error label",
+        "status icon"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "loading",
+        "success",
+        "error"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "ERROR",
+      "success": "SUCCESS",
+      "loading": "LOADING",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "يعرض بصورة صحيحة على المقاسات المختلفة.",
+      "accessibility": "progressbar مع min/max/now وlabel وتحديثات live مناسبة.",
+      "keyboard": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "aria": [
+        "role=progressbar",
+        "aria-valuemin",
+        "aria-valuemax",
+        "aria-valuenow",
+        "aria-label",
+        "aria-live"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-A11Y-018"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/loading-and-status/progress-bar",
+      "source_page_title": "شريط التقدم",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "radial-stepper",
+      "name": "شريط التقدم الدائري",
+      "official": true,
+      "group": "loading-and-status",
+      "purpose": "إظهار تقدم دائري في عملية خطوات.",
+      "usage": "خصوصًا لعملية متعددة الخطوات على الجوال.",
+      "when_to_use": "خصوصًا لعملية متعددة الخطوات على الجوال.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "ring",
+        "current/total",
+        "title",
+        "description",
+        "next label",
+        "previous label"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "current",
+        "completed",
+        "error"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "ERROR",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "مخصص لعرض تقدم مضغوط على الجوال.",
+      "accessibility": "progressbar بقيم وعلاقات عنوان/وصف.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space when steps are interactive"
+      ],
+      "aria": [
+        "role=progressbar",
+        "aria-valuemin",
+        "aria-valuemax",
+        "aria-valuenow",
+        "aria-labelledby",
+        "aria-describedby"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-FORM-005"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/loading-and-status/radial-stepper",
+      "source_page_title": "شريط التقدم الدائري",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "skeleton",
+      "name": "الهياكل",
+      "official": true,
+      "group": "loading-and-status",
+      "purpose": "Placeholder يشبه تخطيط المحتوى أثناء الجلب.",
+      "usage": "للصفحات والقوائم والصور التي تحتاج وقت تحميل.",
+      "when_to_use": "للصفحات والقوائم والصور التي تحتاج وقت تحميل.",
+      "when_not_to_use": "لا تتركه بعد اكتمال التحميل.",
+      "anatomy": [
+        "square",
+        "rectangle",
+        "line",
+        "circle",
+        "shimmer"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "loading"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "LOADING",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "يحاكي التخطيط الفعلي في كل عرض.",
+      "accessibility": "أعلن التحميل ثم أزل skeleton من شجرة الوصول بعد ظهور المحتوى.",
+      "keyboard": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "aria": [
+        "role=status",
+        "role=alert when critical",
+        "aria-live=polite",
+        "aria-hidden after completion"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "لا تتركه بعد اكتمال التحميل.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-A11Y-023",
+        "UDS-A11Y-024"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/loading-and-status/skeleton",
+      "source_page_title": "الهياكل",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "breadcrumbs",
+      "name": "مسار التصفح",
+      "official": true,
+      "group": "navigational",
+      "purpose": "توضيح موضع الصفحة في الهرمية.",
+      "usage": "للصفحات الهرمية وتمكين الرجوع للمستويات الأعلى.",
+      "when_to_use": "للصفحات الهرمية وتمكين الرجوع للمستويات الأعلى.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "root",
+        "separator",
+        "middle",
+        "overflow",
+        "current page"
+      ],
+      "variants": [
+        "full",
+        "abbreviated",
+        "mobile back-only"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "current"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "اعكس سهم الرجوع.",
+      "responsive": "Large–5XL كامل حتى الضيق؛ medium مختصر؛ small/XS السابق وسهم فقط.",
+      "accessibility": "nav + list، اسم المنطقة، والصفحة الحالية معلنة.",
+      "keyboard": [
+        "Tab",
+        "Enter"
+      ],
+      "aria": [
+        "aria-label=Breadcrumb",
+        "aria-current=page"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-BREADCRUMB-001",
+        "UDS-COMP-BREADCRUMB-002"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/navigational/breadcrumbs",
+      "source_page_title": "مسار التصفح",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "menu",
+      "name": "القائمة",
+      "official": true,
+      "group": "navigational",
+      "purpose": "عرض خيارات على سطح مؤقت.",
+      "usage": "لعناصر يمكن تجميعها بعناوين وفواصل.",
+      "when_to_use": "لعناصر يمكن تجميعها بعناوين وفواصل.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "group title",
+        "item",
+        "leading icon",
+        "trailing control/tag",
+        "divider",
+        "container"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "closed",
+        "open",
+        "hover",
+        "focus",
+        "selected",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "تفاصيل النمط الكامل غير منشورة؛ يجب أن يبقى focus ظاهرًا.",
+      "keyboard": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "aria": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [],
+      "source": "https://design.dga.gov.sa/guidelines/components/navigational/menu",
+      "source_page_title": "القائمة",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "pagination",
+      "name": "ترقيم الصفحات",
+      "official": true,
+      "group": "navigational",
+      "purpose": "تقسيم مجموعة كبيرة إلى صفحات.",
+      "usage": "للتنقل التسلسلي أو المباشر بين صفحات نتائج.",
+      "when_to_use": "للتنقل التسلسلي أو المباشر بين صفحات نتائج.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "previous",
+        "page items",
+        "active page",
+        "next"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "current",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "اعكس السابق/التالي والأيقونات.",
+      "responsive": "اختصر الأرقام دون إخفاء الحالية.",
+      "accessibility": "nav مسمى والصفحة الحالية معلنة والروابط قابلة للـTab.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "optional Arrow keys"
+      ],
+      "aria": [
+        "aria-label=Pagination",
+        "aria-current=page"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-PAGINATION-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/navigational/pagination",
+      "source_page_title": "ترقيم الصفحات",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "tabs",
+      "name": "قائمة علامات التبويب",
+      "official": true,
+      "group": "navigational",
+      "purpose": "التنقل بين فئات معلومات مترابطة.",
+      "usage": "لمنع الانتقال بين صفحات منفصلة عندما تكون المشاهد مرتبطة.",
+      "when_to_use": "لمنع الانتقال بين صفحات منفصلة عندما تكون المشاهد مرتبطة.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "container",
+        "tab title",
+        "icon",
+        "selection indicator",
+        "more",
+        "divider",
+        "panels"
+      ],
+      "variants": [
+        "horizontal",
+        "vertical"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "focus",
+        "disabled",
+        "selected"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "اتجاه الترتيب والأسهم RTL.",
+      "responsive": "زر المزيد لمعالجة overflow وفق المكون.",
+      "accessibility": "tablist/tab/tabpanel مع roving focus وتباين للحالية.",
+      "keyboard": [
+        "Tab",
+        "Arrow keys"
+      ],
+      "aria": [
+        "role=tablist",
+        "role=tab",
+        "role=tabpanel",
+        "aria-selected",
+        "aria-controls",
+        "tabindex"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-A11Y-016"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/navigational/tabs",
+      "source_page_title": "قائمة علامات التبويب",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "slide-out",
+      "name": "القائمة الجانبية المنسدلة",
+      "official": true,
+      "group": "navigational",
+      "purpose": "لوحة جانبية لمحتوى أو خيارات إضافية.",
+      "usage": "لوصول سريع إلى مجموعات من دون تشويش الواجهة الأساسية.",
+      "when_to_use": "لوصول سريع إلى مجموعات من دون تشويش الواجهة الأساسية.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "top title/description",
+        "grouped sections",
+        "dividers",
+        "scrollbar",
+        "frame",
+        "actions",
+        "close"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "closed",
+        "open",
+        "focus"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "تظهر من الجانب المنطقي المناسب.",
+      "responsive": "ملائمة لتطبيقات الويب والجوال.",
+      "accessibility": "تسمية الإغلاق وكل العناصر التفاعلية keyboard مع focus ظاهر.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "role=menu",
+        "role=menuitem",
+        "aria-label for close"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [],
+      "source": "https://design.dga.gov.sa/guidelines/components/navigational/slide-out",
+      "source_page_title": "القائمة الجانبية المنسدلة",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "search-box",
+      "name": "حقل البحث",
+      "official": true,
+      "group": "search-and-filters",
+      "purpose": "إدخال استعلام والعثور على نتائج.",
+      "usage": "للبحث النصي مع clear أو voice اختياري.",
+      "when_to_use": "للبحث النصي مع clear أو voice اختياري.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "input",
+        "placeholder",
+        "search icon",
+        "clear",
+        "voice icon"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "focus",
+        "read-only",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "منطقة بحث وlabel واضح؛ placeholder لا يستبدل label.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Escape"
+      ],
+      "aria": [
+        "role=search",
+        "aria-label or aria-labelledby"
+      ],
+      "content": "placeholder يقدم مثالًا ويختفي عند الكتابة.",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-SEARCH-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/search-and-filters/search-box",
+      "source_page_title": "حقل البحث",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "tags",
+      "name": "العلامات",
+      "official": true,
+      "group": "search-and-filters",
+      "purpose": "نقل معلومة أو حالة أو إجراء موجز.",
+      "usage": "للوسوم القياسية أو حالة عنصر/عملية.",
+      "when_to_use": "للوسوم القياسية أو حالة عنصر/عملية.",
+      "when_not_to_use": "لا تخلط حالات غير مرتبطة.",
+      "anatomy": [
+        "container",
+        "text",
+        "leading/trailing icon",
+        "status indicator"
+      ],
+      "variants": [
+        "standard",
+        "status",
+        "selected",
+        "neutral",
+        "inverse",
+        "subtle",
+        "transparent"
+      ],
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "تتدفق مجموعات العلامات RTL.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "أعلن الدور والحالة والفعل؛ التفاعلي زر keyboard؛ contrast كافٍ.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "aria-label",
+        "aria-live for removal"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "اجمع الحالات ذات الصلة واستخدم كلمات تصف العنصر/الحالة.",
+      "dont": "لا تخلط حالات غير مرتبطة.",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-TAGS-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/search-and-filters/tags",
+      "source_page_title": "العلامات",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "filtration",
+      "name": "التصفية",
+      "official": true,
+      "group": "search-and-filters",
+      "purpose": "تضييق النتائج بمعايير محددة.",
+      "usage": "للفئات والسمات مع حالة واضحة وreset.",
+      "when_to_use": "للفئات والسمات مع حالة واضحة وreset.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "filter trigger",
+        "active count",
+        "panel",
+        "applied removable filters",
+        "multi-select search",
+        "show more",
+        "reset"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "closed",
+        "open",
+        "selected",
+        "loading",
+        "results-updated"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "active": "ACTIVE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "LOADING",
+      "rtl": "اعرض المرشحات المطبقة RTL.",
+      "responsive": "استخدم لوحة ملائمة للجوال دون حجب التحكمات.",
+      "accessibility": "اختر role حسب نوع الخيارات وأعلن تحديث النتائج.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space",
+        "Escape"
+      ],
+      "aria": [
+        "role=listbox or menu",
+        "role=option/checkbox/radio",
+        "aria-expanded",
+        "aria-live=polite"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-FILTER-001",
+        "UDS-COMP-FILTER-002"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/search-and-filters/filtration",
+      "source_page_title": "التصفية",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "navigation-header",
+      "name": "شريط التنقل العلوي",
+      "official": true,
+      "group": "ui-shell",
+      "purpose": "هوية وروابط وإجراءات أساسية أعلى الصفحة.",
+      "usage": "كهيكل تنقل رئيسي متكرر.",
+      "when_to_use": "كهيكل تنقل رئيسي متكرر.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "brand logo",
+        "navigation links",
+        "actions",
+        "optional icon/help/badge"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "focus",
+        "active",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "ترتيب العناصر RTL.",
+      "responsive": "يتحول إلى قائمة/درج في الجوال؛ تفاصيل API غير منشورة.",
+      "accessibility": "header/nav landmarks وروابط/أزرار دلالية وcurrent/focus واضح.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "aria-label for navigation",
+        "aria-current"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [],
+      "source": "https://design.dga.gov.sa/guidelines/components/ui-shell/navigation-header",
+      "source_page_title": "شريط التنقل العلوي",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "navigation-drawer",
+      "name": "قائمة التنقل الجانبية",
+      "official": true,
+      "group": "ui-shell",
+      "purpose": "لوحة جانبية لروابط وأقسام فرعية.",
+      "usage": "للتنقل الجانبي أو تحول قائمة الجوال.",
+      "when_to_use": "للتنقل الجانبي أو تحول قائمة الجوال.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "items",
+        "submenus",
+        "expand/collapse arrows"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "closed",
+        "open",
+        "current",
+        "hover",
+        "focus",
+        "expanded",
+        "disabled"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "DISABLED",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "تظهر من الجانب المنطقي.",
+      "responsive": "مناسبة لتحول التنقل على الشاشات الصغيرة.",
+      "accessibility": "navigation وexpanded؛ إدارة focus عند فتح/إغلاق القائمة الفرعية.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Arrow keys"
+      ],
+      "aria": [
+        "role=navigation",
+        "aria-expanded"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-DRAWER-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/ui-shell/navigation-drawer",
+      "source_page_title": "قائمة التنقل الجانبية",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "table-of-content",
+      "name": "جدول المحتويات",
+      "official": true,
+      "group": "ui-shell",
+      "purpose": "مخطط قابل للتنقل لمحتوى طويل.",
+      "usage": "للانتقال السريع بين الأقسام والعناوين المتداخلة.",
+      "when_to_use": "للانتقال السريع بين الأقسام والعناوين المتداخلة.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "title",
+        "current indicator",
+        "hierarchy markers",
+        "section links",
+        "nested links"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "focus",
+        "current"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "ACTIVE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "المسافة البادئة من الطرف المنطقي.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "navigation مسمى، current، focus، ورابط تخطي للمحتوى.",
+      "keyboard": [
+        "Tab",
+        "Enter"
+      ],
+      "aria": [
+        "role=navigation",
+        "aria-label",
+        "aria-current"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-TOC-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/ui-shell/table-of-content",
+      "source_page_title": "جدول المحتويات",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "second-nav-header",
+      "name": "شريط التنقل الثانوي",
+      "official": true,
+      "group": "ui-shell",
+      "purpose": "معلومات سياقية وإجراءات سريعة فوق التنقل الأساسي.",
+      "usage": "للطقس والتاريخ والوقت والموقع وإجراءات إضافية عند الحاجة.",
+      "when_to_use": "للطقس والتاريخ والوقت والموقع وإجراءات إضافية عند الحاجة.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "weather/status",
+        "date",
+        "time",
+        "location",
+        "quick actions"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "focus",
+        "updated"
+      ],
+      "hover": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "success": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "ترتيب المعلومات RTL.",
+      "responsive": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "accessibility": "اسم للمنطقة وتسميات وصفية للقيم والأيقونات.",
+      "keyboard": [
+        "Tab",
+        "Enter",
+        "Space"
+      ],
+      "aria": [
+        "aria-label",
+        "aria-describedby",
+        "aria-hidden for decorative icons"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [],
+      "source": "https://design.dga.gov.sa/guidelines/components/ui-shell/second-nav-header",
+      "source_page_title": "شريط التنقل الثانوي",
+      "verification_date": "2026-09-07"
+    },
+    {
+      "component": "footer",
+      "name": "التذييل",
+      "official": true,
+      "group": "ui-shell",
+      "purpose": "روابط ومعلومات اتصال واجتماعية وقانونية في نهاية الصفحة.",
+      "usage": "لإنهاء shell وتوفير معلومات/روابط مهمة.",
+      "when_to_use": "لإنهاء shell وتوفير معلومات/روابط مهمة.",
+      "when_not_to_use": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "anatomy": [
+        "group labels",
+        "links",
+        "social icons",
+        "accessibility tools",
+        "legal/copyright",
+        "optional subscription"
+      ],
+      "variants": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "sizes": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "error",
+        "success"
+      ],
+      "hover": "HOVER",
+      "focus": "FOCUS",
+      "active": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "disabled": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "error": "ERROR",
+      "success": "SUCCESS",
+      "loading": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rtl": "مجموعات وتدفق RTL.",
+      "responsive": "تتحول المجموعات إلى رص مناسب؛ تفاصيل التحول غير منشورة.",
+      "accessibility": "footer/contentinfo، عناوين مجموعات، links keyboard، وأسماء للأيقونات.",
+      "keyboard": [
+        "Tab",
+        "Enter"
+      ],
+      "aria": [
+        "role=contentinfo",
+        "aria-label for icon links"
+      ],
+      "content": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "design_tokens": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "do": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "dont": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "code_example": "NOT PUBLISHED BY OFFICIAL SOURCE",
+      "rules": [
+        "UDS-COMP-FOOTER-001"
+      ],
+      "source": "https://design.dga.gov.sa/guidelines/components/ui-shell/footer",
+      "source_page_title": "التذييل",
+      "verification_date": "2026-09-07"
+    }
+  ]
+}

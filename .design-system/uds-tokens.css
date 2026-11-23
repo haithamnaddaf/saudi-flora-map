@@ -1,0 +1,120 @@
+/*
+ * Audited project aliases for values published by Saudi Unified Platform Code.
+ * Alias names are repository-level INFERRED names, not a claim about the React
+ * package's stable public API. Values verified 2026-09-07.
+ * Sources:
+ * https://design.dga.gov.sa/guidelines/foundations/color-system
+ * https://design.dga.gov.sa/guidelines/foundations/typography
+ * https://design.dga.gov.sa/guidelines/foundations/layout-and-spacing
+ * https://design.dga.gov.sa/guidelines/foundations/elevation
+ */
+
+:root {
+  color-scheme: light;
+
+  --uds-color-primary-25: #f7fdf9;
+  --uds-color-primary-50: #f3fcf6;
+  --uds-color-primary-100: #dff6e7;
+  --uds-color-primary-200: #b8eacb;
+  --uds-color-primary-300: #88d8ad;
+  --uds-color-primary-400: #54c08a;
+  --uds-color-primary-500: #25935f;
+  --uds-color-primary-600: #1b8354;
+  --uds-color-primary-700: #166a45;
+  --uds-color-primary-800: #14573a;
+  --uds-color-primary-900: #104631;
+  --uds-color-primary-950: #092a1e;
+
+  --uds-color-gold-500: #f5bd02;
+  --uds-color-gold-600: #dba102;
+  --uds-color-lavendar-500: #80519f;
+  --uds-color-neutral-25: #fcfcfd;
+  --uds-color-neutral-50: #f9fafb;
+  --uds-color-neutral-100: #f3f4f6;
+  --uds-color-neutral-200: #e5e7eb;
+  --uds-color-neutral-300: #d2d6db;
+  --uds-color-neutral-400: #9da4ae;
+  --uds-color-neutral-500: #6c727e;
+  --uds-color-neutral-600: #4d5761;
+  --uds-color-neutral-700: #384250;
+  --uds-color-neutral-800: #1f2a37;
+  --uds-color-neutral-900: #111927;
+  --uds-color-neutral-950: #0c111b;
+  --uds-color-info-50: #eff8ff;
+  --uds-color-info-600: #156fee;
+  --uds-color-success-50: #ecfdf3;
+  --uds-color-success-600: #069454;
+  --uds-color-warning-50: #fffaeb;
+  --uds-color-warning-600: #dc6803;
+  --uds-color-error-50: #fef3f2;
+  --uds-color-error-600: #d92c20;
+  --uds-color-white: #ffffff;
+
+  --uds-font-family: "IBM Plex Sans Arabic", "IBM Plex Sans", Arial, sans-serif;
+  --uds-font-code: "Roboto Mono", monospace;
+  --uds-text-2xs-size: 10px;
+  --uds-text-2xs-line: 14px;
+  --uds-text-xs-size: 12px;
+  --uds-text-xs-line: 18px;
+  --uds-text-sm-size: 14px;
+  --uds-text-sm-line: 20px;
+  --uds-text-md-size: 16px;
+  --uds-text-md-line: 24px;
+  --uds-text-lg-size: 18px;
+  --uds-text-lg-line: 28px;
+  --uds-text-xl-size: 20px;
+  --uds-text-xl-line: 30px;
+  --uds-display-xs-size: 24px;
+  --uds-display-xs-line: 32px;
+  --uds-display-sm-size: 30px;
+  --uds-display-sm-line: 38px;
+  --uds-display-md-size: 36px;
+  --uds-display-md-line: 44px;
+  --uds-display-lg-size: 48px;
+  --uds-display-lg-line: 60px;
+  --uds-display-xl-size: 60px;
+  --uds-display-xl-line: 72px;
+  --uds-display-2xl-size: 72px;
+  --uds-display-2xl-line: 90px;
+
+  --uds-space-none: 0;
+  --uds-space-xxs: 2px;
+  --uds-space-xs: 4px;
+  --uds-space-sm: 6px;
+  --uds-space-md: 8px;
+  --uds-space-lg: 12px;
+  --uds-space-xl: 16px;
+  --uds-space-2xl: 20px;
+  --uds-space-3xl: 24px;
+  --uds-space-4xl: 32px;
+  --uds-space-5xl: 40px;
+  --uds-space-6xl: 48px;
+  --uds-space-7xl: 64px;
+  --uds-space-8xl: 80px;
+  --uds-space-9xl: 96px;
+  --uds-space-10xl: 128px;
+  --uds-space-11xl: 160px;
+
+  --uds-radius-none: 0;
+  --uds-radius-xxs: 2px;
+  --uds-radius-xs: 4px;
+  --uds-radius-sm: 6px;
+  --uds-radius-md: 8px;
+  --uds-radius-lg: 10px;
+  --uds-radius-xl: 12px;
+  --uds-radius-2xl: 16px;
+  --uds-radius-3xl: 20px;
+  --uds-radius-4xl: 24px;
+  --uds-radius-full: 9999px;
+
+  --uds-container-max: 1280px;
+  --uds-paragraph-max: 720px;
+  --uds-touch-target: 44px;
+  --uds-shadow-xs: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  --uds-shadow-sm: 0 1px 2px 0 rgba(16, 24, 40, 0.06), 0 1px 3px 0 rgba(16, 24, 40, 0.10);
+  --uds-shadow-md: 0 2px 4px -2px rgba(16, 24, 40, 0.06), 0 4px 8px -2px rgba(16, 24, 40, 0.10);
+  --uds-shadow-lg: 0 4px 6px -2px rgba(16, 24, 40, 0.03), 0 12px 16px -4px rgba(16, 24, 40, 0.08);
+  --uds-shadow-xl: 0 8px 8px -4px rgba(16, 24, 40, 0.03), 0 20px 24px -4px rgba(16, 24, 40, 0.08);
+  --uds-shadow-2xl: 0 24px 48px -12px rgba(16, 24, 40, 0.18);
+  --uds-shadow-3xl: 0 32px 64px -12px rgba(16, 24, 40, 0.14);
+}

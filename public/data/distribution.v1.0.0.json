@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "released": "2026-11-23",
+  "country": "SA",
+  "plants": [
+    {
+      "id": "juniperus-procera",
+      "name": "العرعر",
+      "scientificName": "Juniperus procera",
+      "family": "السروية",
+      "habitat": "المرتفعات الجبلية",
+      "description": "شجرة مخروطية دائمة الخضرة تنمو على مرتفعات السروات. تتبع الشواهد غابات العرعر من الطائف إلى عسير.",
+      "image": "juniperus-procera.webp",
+      "alt": "أغصان العرعر الخضراء في السودة بمنطقة عسير",
+      "photoPlace": "السودة، عسير"
+    },
+    {
+      "id": "avicennia-marina",
+      "name": "القرم",
+      "scientificName": "Avicennia marina",
+      "family": "الأقنثية",
+      "habitat": "سواحل المد والجزر",
+      "description": "شجرة ساحلية تتحمل الملوحة وتكوّن غابات عند خط المد والجزر. توثّق الدراسات تجمعاتها على شواطئ البحر الأحمر وجزره.",
+      "image": "avicennia-marina.webp",
+      "alt": "ثمار القرم وأوراقه في نبق بمصر، صورة تعريفية للنوع",
+      "photoPlace": "نبق، مصر"
+    }
+  ],
+  "records": [
+    {
+      "plantId": "juniperus-procera",
+      "regionId": "SA-14",
+      "place": "السودة",
+      "sourceTitle": "ارتفاعات السروات وصحة أشجار العرعر · Scientific Reports، ٢٠٢٥",
+      "sourceUrl": "https://doi.org/10.1038/s41598-025-13677-x",
+      "locator": "الجدول ١، الموقع L10",
+      "evidence": "سجّل المسح الميداني أشجار العرعر في موقعين بالسودة.",
+      "status": "verified"
+    },
+    {
+      "plantId": "juniperus-procera",
+      "regionId": "SA-14",
+      "place": "تنومة",
+      "sourceTitle": "ارتفاعات السروات وصحة أشجار العرعر · Scientific Reports، ٢٠٢٥",
+      "sourceUrl": "https://doi.org/10.1038/s41598-025-13677-x",
+      "locator": "الجدول ١، الموقع L12",
+      "evidence": "شملت معاينة العرعر موقعين في تنومة.",
+      "status": "verified"
+    },
+    {
+      "plantId": "juniperus-procera",
+      "regionId": "SA-11",
+      "place": "المندق",
+      "sourceTitle": "ارتفاعات السروات وصحة أشجار العرعر · Scientific Reports، ٢٠٢٥",
+      "sourceUrl": "https://doi.org/10.1038/s41598-025-13677-x",
+      "locator": "الجدول ١، الموقع L5",
+      "evidence": "ورد المندق ضمن مواقع دراسة أشجار العرعر في الباحة.",
+      "status": "verified"
+    },
+    {
+      "plantId": "juniperus-procera",
+      "regionId": "SA-02",
+      "place": "الشفا",
+      "sourceTitle": "ارتفاعات السروات وصحة أشجار العرعر · Scientific Reports، ٢٠٢٥",
+      "sourceUrl": "https://doi.org/10.1038/s41598-025-13677-x",
+      "locator": "الجدول ١، الموقعان L1 وL2",
+      "evidence": "سُجّلت مجموعتان من أشجار العرعر في الشفا بمحافظة الطائف.",
+      "status": "verified"
+    },
+    {
+      "plantId": "avicennia-marina",
+      "regionId": "SA-09",
+      "place": "أرخبيل فرسان",
+      "sourceTitle": "القرم في أرخبيل فرسان · Forests، ٢٠٢٠",
+      "sourceUrl": "https://doi.org/10.3390/f11121287",
+      "locator": "قسم جمع العينات والجدول ٢",
+      "evidence": "جمع الباحثون أوراق القرم من تسعة تجمعات في الأرخبيل.",
+      "status": "verified"
+    },
+    {
+      "plantId": "avicennia-marina",
+      "regionId": "SA-02",
+      "place": "ثول",
+      "sourceTitle": "تربة غابات القرم في ثول · Biogeosciences، ٢٠٢٥",
+      "sourceUrl": "https://doi.org/10.5194/bg-22-117-2025",
+      "locator": "القسم ٢، مواقع أخذ العينات؛ الشكل ١",
+      "evidence": "أُخذت عينات التربة من تجمعين متجاورين من القرم على ساحل ثول.",
+      "status": "verified"
+    }
+  ]
+}
