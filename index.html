@@ -1,75 +1,38 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#104631"><meta name="description" content="أطلس تفاعلي لتوزّع النباتات في مناطق المملكة العربية السعودية وشواهد وجودها الميدانية.">
-  <title>أطلس النباتات السعودية | Saudi Flora Map</title><link rel="icon" href="./favicon.svg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#104631">
+  <meta name="description" content="مواضع النبات في المملكة العربية السعودية والمصادر التي ذكرتها، بحسب معرّف النبات الأصلي.">
+  <title>خريطة النبات ومصادره</title>
+  <link rel="icon" href="./favicon.svg">
   <script type="module" src="./src/app.js"></script>
 </head>
 <body>
-<a class="skip" href="#atlas">انتقل إلى الخريطة</a>
-<header class="site-header" data-uds-component="navigation-header">
-  <div class="wrap header-inner"><a class="brand" href="./"><img src="./favicon.svg" alt="" width="44" height="44"><span>أطلس النبات<small lang="en" dir="ltr">Saudi Flora Map</small></span></a>
-    <nav aria-label="التنقل الرئيسي"><a href="#atlas">الخريطة</a><a href="#evidence">سجل الشواهد</a></nav>
-    <button id="import-open" class="header-action" type="button" disabled><span aria-hidden="true">⇧</span> استيراد بيانات</button>
-  </div>
-</header>
-<main id="main" class="wrap">
-  <div class="intro"><div><h1>أطلس النباتات السعودية</h1><p>استكشف توزّع النباتات في مناطق المملكة، وتتبّع الشواهد الميدانية لكل موقع.</p></div>
-    <div class="coverage" aria-label="نطاق الأطلس"><span>المناطق الإدارية <strong>١٣</strong></span><span>النباتات المدرجة <strong id="species-count">—</strong></span></div>
-  </div>
-  <p id="app-status" role="status">جارٍ تحميل الأطلس…</p>
-  <section id="unbound" hidden><h2>لم يُعثر على نبات مرتبط بهذا المعنى</h2><p>تحقق من معرّفي المدخل والمعنى، أو افتح الأطلس لاستعراض النباتات.</p><a href="./">استعراض الأطلس</a></section>
-  <div id="explorer" hidden>
-    <div class="atlas-grid">
-      <section class="panel map-panel" id="atlas" aria-labelledby="map-title">
-        <div class="panel-head"><div><h2 id="map-title">خريطة التوزّع</h2><p id="map-summary"></p></div><span class="map-scale">حدود ٢٠١٧</span></div>
-        <figure class="map-figure">
-          <svg id="sa-map" viewBox="70 -10 690 515" role="group" aria-labelledby="map-title" aria-describedby="map-summary map-key" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" class="grid-line" fill="none"/></pattern>
-            </defs>
-            <rect x="70" y="-10" width="690" height="515" pointer-events="none" fill="url(#grid)" aria-hidden="true"/>
-            <g class="geo-note" aria-hidden="true"><text x="186" y="302" transform="rotate(53 186 302)">البحر الأحمر</text><text x="644" y="159" transform="rotate(47 644 159)">الخليج العربي</text></g>
-            <g id="regions"></g>
-          </svg>
-          <div class="north" aria-hidden="true"><span>N</span><svg viewBox="0 0 24 35"><path d="M12 1 21 28 12 22Z" fill="currentColor"/><path d="M12 1 3 28 12 22Z" fill="none" stroke="currentColor"/></svg></div>
-          <figcaption id="map-key" class="legend"><span><i class="swatch present"></i>وجود موثّق</span><span><i class="swatch"></i>بلا شاهد في الإصدار</span></figcaption>
-        </figure>
-        <div class="filters" data-uds-component="filtration"><div class="field"><label for="region">المنطقة الإدارية</label><select id="region"></select></div><div class="field"><label for="place">الموقع الميداني</label><select id="place"></select></div><button id="reset" class="quiet" type="button" disabled>مسح التحديد</button></div>
-      </section>
-      <aside id="plant-card" class="panel plant-card" aria-labelledby="plant-name" data-uds-component="card">
-        <div class="card-bar"><span>بطاقة النبات</span><button id="choose" class="quiet" type="button">تغيير النبات <span aria-hidden="true">⌄</span></button></div>
-        <div class="specimen"><img id="photo" alt="" width="640" height="360"><span class="plate-id" id="plate-id"></span></div>
-        <div class="plant-body"><h2 id="plant-name"></h2><p id="latin" lang="la" dir="ltr"></p><p id="description"></p>
-          <dl class="facts"><div><dt>الفصيلة</dt><dd id="family"></dd></div><div><dt>الموطن</dt><dd id="habitat"></dd></div></dl>
-        </div>
-      </aside>
+  <a class="skip" href="#plant-map">انتقل إلى الخريطة</a>
+  <main class="preview-shell">
+    <div class="preview-toolbar" aria-label="أدوات معاينة الخريطة">
+      <span class="preview-label"><img src="./favicon.svg" alt="" width="32" height="32">معاينة الخريطة</span>
+      <div class="preview-actions"><button id="choose" type="button">اختيار نبات</button><a href="./manage.html">تحديث البيانات</a></div>
     </div>
-    <section id="evidence" aria-labelledby="evidence-title">
-      <div class="evidence-head"><div><h2 id="evidence-title">سجل الشواهد</h2><p id="evidence-summary" role="status"></p></div><a href="#atlas">العودة إلى الخريطة</a></div>
-      <ul id="records" data-uds-component="list"></ul>
-    </section>
-  </div>
-  <noscript><p>فعّل جافاسكربت لعرض الخريطة التفاعلية.</p></noscript>
-</main>
-<footer data-uds-component="footer"><div class="wrap foot"><span>أطلس النبات <span class="foot-version" id="version"></span></span><span><a href="./images/CREDITS.txt">حقوق الصور (نص)</a><a href="./data/BOUNDARIES.txt">الحدود © مساهمو OpenStreetMap وgeoBoundaries (نص)</a></span></div></footer>
-
-<dialog id="picker" aria-labelledby="picker-title" role="dialog" aria-modal="true" data-uds-component="modal">
-  <div class="dialog-head"><h2 id="picker-title">اختيار النبات</h2><button class="quiet close" type="button" aria-label="إغلاق اختيار النبات">إغلاق</button></div>
-  <form id="search" role="search" aria-label="البحث في النباتات" data-uds-component="search-box"><label for="query">الاسم العربي أو العلمي</label><div class="search-row"><input id="query" type="search" autocomplete="off" placeholder="مثال: العرعر"><button class="secondary" type="submit">بحث</button></div></form>
-  <p id="search-count" role="status"></p><ul id="matches"></ul>
-</dialog>
-
-<dialog id="importer" aria-labelledby="import-title" role="dialog" aria-modal="true" data-uds-component="modal">
-  <div class="dialog-head"><h2 id="import-title">استيراد شواهد ميدانية</h2><button class="quiet close" type="button" aria-label="إغلاق الاستيراد">إغلاق</button></div>
-  <p>أضف شواهدك إلى ورقة <bdi>Records</bdi> في النموذج. تُفحص الملفات على جهازك وتُحفظ الصفوف المقبولة في مسودة تنتظر مراجعة المصدر.</p>
-  <a class="template-link" href="./templates/distribution.xlsx" download>تنزيل نموذج الإدخال (Excel)</a>
-  <div id="dropzone" class="dropzone" data-uds-component="file-uploader"><label for="workbook">اختر ملف Excel أو اسحبه إلى هنا</label>
-    <p id="file-help">ملف واحد بصيغة <bdi>.xlsx</bdi> بحد أقصى ٢ م.ب و٥٠٠ صف بيانات. استخدم معرّفات النباتات والمناطق في دليل النموذج.</p>
-    <input id="workbook" type="file" accept=".xlsx" aria-describedby="file-help import-status">
-  </div>
-  <p id="import-status" role="status"></p><ul id="import-report"></ul>
-  <button type="button" id="export" class="primary" disabled>تنزيل مسودة البيانات (JSON)</button>
-</dialog>
-</body></html>
+    <saudi-flora-map id="plant-map" local-preview></saudi-flora-map>
+    <p id="examples" class="examples">جرّب الخريطة:
+      <button type="button" data-uuid="f009a176-94e3-4387-b682-0f416bf31afd">الأراكة</button>
+      <button type="button" data-uuid="c1c50e15-45ff-42ba-8973-3d4a74aa0724">العرعر</button>
+      <button type="button" data-uuid="bcd2ef39-7f1c-457d-8aa2-ce422c96f17d">مانجروف أبيض</button>
+    </p>
+    <noscript><p>فعّل JavaScript لعرض خريطة النبات ومصادرها.</p></noscript>
+  </main>
+  <dialog id="picker" role="dialog" aria-labelledby="picker-title" aria-modal="true" data-uds-component="modal">
+    <div class="dialog-head"><h1 id="picker-title">اختيار النبات للمعاينة</h1><button id="close-picker" type="button">إغلاق</button></div>
+    <form id="search" role="search" aria-label="البحث في النباتات" data-uds-component="search-box">
+      <label for="query">اسم النبات العربي أو العلمي، أو UUID</label>
+      <div class="search-row"><input id="query" type="search" autocomplete="off" aria-describedby="search-help search-count"><button type="submit">بحث</button></div>
+      <p id="search-help">اختر المدخل الصحيح باستخدام اسمه العلمي؛ تشابه الأسماء لا يربط مناطق نبات بآخر.</p>
+    </form>
+    <p id="search-count" role="status"></p>
+    <ul id="matches" data-uds-component="list"></ul>
+  </dialog>
+</body>
+</html>

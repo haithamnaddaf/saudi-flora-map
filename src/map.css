@@ -1,0 +1,119 @@
+/* The host includes these styles inside its shadow root, after UDS aliases. */
+.flora-regions-map {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  overflow: visible;
+  font-family: var(--uds-font-family);
+  color: var(--uds-color-primary-950);
+  background: radial-gradient(ellipse at center, var(--uds-color-primary-25), var(--uds-color-white));
+  border-radius: var(--uds-radius-3xl);
+  isolation: isolate;
+}
+
+.flora-map-region {
+  fill: var(--uds-color-primary-50);
+  stroke: var(--uds-color-primary-700);
+  stroke-width: var(--uds-space-xxs);
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  paint-order: fill stroke;
+  /* Motion timing is a project decision, not an official UDS token. */
+  transition: fill 180ms ease, opacity 180ms ease;
+}
+
+.flora-map-region.is-documented {
+  fill: var(--uds-color-primary-700);
+  stroke: var(--uds-color-primary-50);
+  cursor: pointer;
+}
+
+.flora-map-region.is-documented:is(.is-hovered, .is-focused, .is-selected) {
+  fill: var(--uds-color-primary-900);
+}
+
+.flora-map-region:focus {
+  outline: none;
+}
+
+.flora-map-outline {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.flora-map-outline.is-visible {
+  opacity: 1;
+}
+
+.flora-map-outline path {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.flora-map-outline-halo {
+  stroke: var(--uds-color-white);
+  stroke-width: var(--uds-space-md);
+}
+
+.flora-map-outline-stroke {
+  stroke: var(--uds-color-primary-950);
+  stroke-width: var(--uds-space-xs);
+}
+
+.flora-map-labels {
+  pointer-events: none;
+}
+
+.flora-map-label {
+  fill: var(--uds-color-primary-950);
+  font-size: var(--flora-map-label-size, var(--uds-text-xs-size));
+  font-weight: 600;
+  direction: rtl;
+  user-select: none;
+}
+
+.flora-map-label.is-documented {
+  fill: var(--uds-color-white);
+}
+
+.flora-regions-map.is-compact .flora-map-labels {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flora-map-region,
+  .flora-map-outline {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .flora-map-region {
+    fill: Canvas;
+    stroke: CanvasText;
+  }
+
+  .flora-map-region.is-documented {
+    fill: Highlight;
+    stroke: CanvasText;
+  }
+
+  .flora-map-label {
+    fill: CanvasText;
+  }
+
+  .flora-map-label.is-documented {
+    fill: HighlightText;
+  }
+
+  .flora-map-outline-halo {
+    stroke: Canvas;
+  }
+
+  .flora-map-outline-stroke {
+    stroke: CanvasText;
+  }
+}

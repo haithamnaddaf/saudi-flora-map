@@ -5,7 +5,11 @@
   "scanned_files": [
     ".design-system/uds-tokens.css",
     "index.html",
-    "src/style.css"
+    "manage.html",
+    "src/manage.css",
+    "src/map.css",
+    "src/style.css",
+    "src/widget.css"
   ],
   "summary": {
     "PASS": 25,

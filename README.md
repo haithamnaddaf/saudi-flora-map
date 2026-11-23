@@ -1,73 +1,130 @@
-# Saudi Flora Map | أطلس النباتات السعودية
+# خريطة انتشار نباتات سوار
 
-An independent Arabic RTL botanical atlas of Saudi Arabia. Select a species, tap a region or choose a locality, and open the field evidence behind the highlight. The prototype includes 13 administrative regions, two species and six verified locality records. Green regions have at least one documented occurrence in this release. Other regions have no record in the current sample.
+مكوّن مستقل يعرض خريطة مناطق المملكة ومصادر انتشار **النبات المعروض حاليًا**. يستقبل UUID الأصلي للنبات، ويغيّر التظليل والمراجع عند تغيّره. تمرير المؤشر أو التركيز أو الضغط على منطقة يفتح بطاقة بالمكان الذي ذكره المصدر، ومرجعه ورابطه أو إحالته الببليوغرافية.
 
-![Arabic atlas showing juniper evidence in Makkah, Al-Bahah and Asir](docs/preview.webp)
+العمل على فرع `feature/uuid-map-sources`، انطلاقًا من `feature/saudi-flora-map` عند commit `a61666668efba34ae91a7766660e9533ba9cba67`. هذا مستودع مستقل؛ لم يُعدّل كود سوار ولم يُنشر دمج إنتاجي فيه.
 
-## Run locally
+## ما تغيّر
 
-Use Node.js 22.12 or newer and npm. The application and its assets live on `feature/saudi-flora-map`. The initial `main` branch is an empty baseline.
+- استبدال واجهة الأطلس الكبيرة بمكوّن خريطة ومصادر، مع صفحة معاينة خفيفة وصفحة إدارة مستقلة.
+- الربط بمعرّفات البحث الأصلية، بدل معرّفات العرض التجريبية. لا يُستخدم تشابه الأسماء العربية لربط النباتات.
+- بطاقة مصدر تفاعلية فيها مواضع المنطقة ومراجعها وروابط الرصد المتاحة. تظهر الملخصات بوصفها ملخصات، ولا تُعرض أرقام الاستخراج على أنها صفحات كتب.
+- مكوّن Web Component بتنسيق معزول داخل Shadow DOM، بلا iframe أو إطار واجهات جديد.
+- انتقالات قصيرة للتحديد والبطاقة، مع احترام إعداد تقليل الحركة. أُزيلت الشبكة وعلامات مراكز المناطق التي قد تُفهم على أنها إحداثيات رصد.
+- استيراد Excel للإضافة والتعديل والحذف الصريح، ومعاينة الفروق، وحفظ تعديلات المتصفح وتصديرها إلى إصدار بيانات جديد.
+
+## التشغيل
+
+يلزم Node.js 22.12 أو أحدث، وnpm. يلزم Python 3 لتشغيل اختبارات محوّل البيانات وفاحص UDS؛ تشغيل الواجهة وبناؤها لا يحتاجانه.
 
 ```sh
-git clone --branch feature/saudi-flora-map https://github.com/haithamnaddaf/saudi-flora-map.git
+git clone --branch feature/uuid-map-sources https://github.com/haithamnaddaf/saudi-flora-map.git
 cd saudi-flora-map
 npm ci
 npm run dev -- --port 4177 --strictPort
 ```
 
-Open [the local atlas](http://127.0.0.1:4177/). To try it, choose عسير, narrow to تنومة and open the Scientific Reports reference. Use تغيير النبات to search for القرم or Avicennia marina. Use استيراد بيانات to download the Excel template and stage a draft. All runtime assets, including Arabic fonts, are served from the app origin.
+- المعاينة: `http://127.0.0.1:4177/`
+- مثال الأراكة: `http://127.0.0.1:4177/?uuid=f009a176-94e3-4387-b682-0f416bf31afd`
+- الخريطة وحدها في صفحة: أضف `&embed=1` إلى رابط النبات؛ هذا لا يتطلب iframe.
+- إدارة Excel: `http://127.0.0.1:4177/manage.html`
 
-## Architecture
+المعاينة لا تختار نباتًا تلقائيًا عند فقد المعرّف. يفتح زر البحث دليل النباتات عند الحاجة فقط. صفحة الإدارة مستقلة عن تجربة قارئ المعجم.
 
-| Layer | Responsibility |
-| --- | --- |
-| `public/data/regions.v1.json` | Projected, simplified ADM1 polygons with stable ISO 3166-2 codes. The pinned 2017 geoBoundaries source and ODbL terms are recorded in `BOUNDARIES.txt`. The geometry can be regenerated with `scripts/prepare-boundaries.py`. |
-| `public/data/distribution.v1.0.0.json` | Versioned species cards, scientific names, locality records, evidence summaries, source URLs, locators and review status. |
-| `src/catalog.js` | Shared dataset validation, filter queries, Excel row validation and exact external-ID resolution. |
-| `src/map.js`, `src/app.js` | Native SVG and HTML interaction with equivalent region and place selectors, Arabic search and responsive callouts. Vite builds the static site into `dist/`. |
-| `src/importer.js` | Loads the Excel reader on demand. File validation, preview and JSON export run in the browser. |
-| `public/data/bindings.v1.json` | Independent crosswalk from opaque external ID pairs to local species IDs. |
+## الربط ببطاقة النبات
 
-### Embed contract v1
-
-A host embeds the app URL in an iframe and passes percent-encoded, case-sensitive `entryId` and `senseId` query parameters. `embed=1` presents the map, card and evidence without the standalone header. A mapped pair locks the species in embed mode. A partial, repeated, or unknown pair opens an explicit unmapped state. With both identifiers omitted, the atlas opens in browsing mode.
+بعد `npm run build`، انشر محتويات `dist/` مع الحفاظ على مجلدي `assets/` و`data/`. مثال استضافة تحت `/flora/`:
 
 ```html
-<iframe
-  title="التوزع الجغرافي للنبات في السعودية"
-  src="http://127.0.0.1:4177/?embed=1&amp;entryId=demo-juniper&amp;senseId=botanical"
-  width="100%" height="800" loading="lazy" referrerpolicy="no-referrer">
-</iframe>
+<script type="module" src="/flora/assets/flora-map.js"></script>
+<saudi-flora-map
+  id="plant-map"
+  uuid="f009a176-94e3-4387-b682-0f416bf31afd">
+</saudi-flora-map>
 ```
 
-The checked-in bindings are demonstration IDs. The integration owner adds real pairs to the crosswalk when available. Changing the iframe URL changes the context. This contract requires no shared cookies, parent-window scripting, API keys, Siwar source code or database connection. A future host needs its own approved frame policy and application origin.
+عند عرض نتيجة نبات جديدة، يستخدم المضيف معرّفها الأصلي:
 
-## Data and Excel workflow
+```js
+await customElements.whenDefined('saudi-flora-map')
+document.querySelector('#plant-map').setPlant(currentPlantUuid)
+// أو: document.querySelector('#plant-map').uuid = currentPlantUuid
+```
 
-1. Download the workbook through the import dialog. In the **Records** sheet, keep the seven header names. Each row supplies `plantId`, `regionId`, `place`, `sourceTitle`, `sourceUrl`, `locator` and `evidence`. Use literal text and an HTTPS source. The Arabic guide sheet lists the recognized IDs.
-2. Choose or drop one `.xlsx` of up to 2 MiB and 500 data rows. The preview reports row numbers for invalid fields, unknown IDs, missing evidence, unsafe URLs or duplicate evidence. A failed batch exports no records.
-3. Download the valid versioned draft. Its existing release records are preserved and every added row has status `pending`. Imports are session-local. Reloading or closing the dialog clears the working preview. Save the downloaded JSON to retain it.
-4. A curator follows the cited source and locator, checks the taxon, locality and administrative assignment, and marks accepted evidence `verified` in a new dataset version. Validate a candidate with `npm run validate -- path/to/candidate.json`. Keep the previous release, set the new filename, version and date, and update `RELEASE` in `src/catalog.js` when adopting it on the feature branch.
+معرّف المعنى `sense-id` اختياري؛ إذا أُرسل فيجب أن يطابق بيانات النبات. لا يوجد اختيار احتياطي باسم مشابه، ولا تحويل تلقائي من معرّفات `demo-*` القديمة. راجع [عقد الدمج وتفاصيل النشر](docs/integration.md).
 
-### Evidence scope
+## البيانات وما تعنيه الخريطة
 
-| Species | Localities in the prototype | Primary source |
-| --- | --- | --- |
-| العرعر · *Juniperus procera* | Al-Shafa, Al-Mandaq, Al-Soudah and Tanumah | [Al-Yasi, Scientific Reports (2025), Table 1](https://doi.org/10.1038/s41598-025-13677-x) |
-| القرم · *Avicennia marina* | Farasan Archipelago | [Forests (2020), field sampling and Table 2](https://doi.org/10.3390/f11121287) |
-| القرم · *Avicennia marina* | Thuwal | [Biogeosciences (2025), §2.1 and Figure 1](https://doi.org/10.5194/bg-22-117-2025) |
+إصدار البيانات `2.0.0`، مبني من حزمة البحث المقدمة. [تقرير بناء البيانات](docs/data-build-report.json) يسجل البصمات والقواعد والأعداد:
 
-Dots flag regional evidence next to the region name. Their positions are cartographic label placements. Each record describes the locality supported by its source. Photo locations and attribution are provided separately in [image credits](public/images/CREDITS.txt). Derived map geometry carries the [boundary attribution and ODbL terms](public/data/BOUNDARIES.txt).
+| البند | العدد |
+| --- | ---: |
+| معرّفات النباتات الأصلية المحفوظة | 1482 |
+| مداخل لها أدلة اجتازت قواعد العرض في الحزمة | 847 |
+| مداخل لها مناطق إدارية قابلة للتظليل | 780 |
+| مداخل لها أدلة لكن دون إسناد إداري محسوم | 67 |
+| مداخل محجوبة أو لا تملك أدلة قابلة للعرض | 635 |
+| علاقات الدليل بعد إزالة التكرار، متضمنة 6 من النموذج السابق | 8303 |
+| مصادر متميزة في السجلات المعروضة | 71 |
 
-## Verify
+هذه أعداد ناتجة عن قواعد حزمة البحث وليست شهادة تصنيف نباتي مستقلة. التظليل يعني وجود دليل على مواضع داخل المنطقة؛ لا يعني انتشار النبات في كامل مساحتها، أو أنه نبات أصيل فيها. عدم التظليل لا يثبت غيابه.
+
+المواضع مثل «نجد»، حين لا تُحسم علاقتها بمنطقة إدارية في الحزمة، تبقى مع مصادرها ضمن «مواضع غير محددة إداريًا» ولا تتحول تلقائيًا إلى الرياض أو القصيم. المداخل المحجوبة تحتفظ بمعرّفاتها وحالتها، بلا نقل أدلة اسم آخر إليها.
+
+مثال قابل للفحص: الأراكة `f009a176-94e3-4387-b682-0f416bf31afd` لها 8 مناطق في الإصدار الحالي. من مصادر مكة [صفحة الأراك في المركز الوطني لتنمية الغطاء النباتي](https://ncvc.gov.sa/ar/digitalKnowledge/PlantDiversity/Pages/Salvadora-Persica-L.aspx). تبقى أوراق النموذج السابق موثقة عند تطابق الاسم العلمي الكامل مع مدخل واحد مؤهل للعرض:
+
+- العرعر: [Scientific Reports، 2025، الجدول 1](https://doi.org/10.1038/s41598-025-13677-x).
+- المانجروف في فرسان: [Forests، 2020](https://doi.org/10.3390/f11121287).
+- المانجروف في ثول: [Biogeosciences، 2025، §2.1](https://doi.org/10.5194/bg-22-117-2025).
+
+يدعم النموذج توثيق كتاب أو معجم أو موسوعة بالمؤلف والسنة والصفحة/القسم حتى عند غياب رابط. وجود هذا الدعم لا يعني أن صفحات الكتب أُضيفت تلقائيًا إلى بيانات البحث الحالية.
+
+## تحديث البيانات من Excel
+
+1. افتح صفحة الإدارة ونزّل [نموذج الإصدار الثاني](public/templates/distribution-v2.xlsx). فيه ورقة Records ودليل عربي وقائمة UUID الأصلية ورموز المناطق الثلاث عشرة.
+2. أضف أو عدّل العلاقات باستخدام `uuid` و`scientificName` و`recordId`. استخدم `upsert` للإضافة/التعديل، و`delete` للحذف الصريح. الحد 5 MiB و500 صف لكل دفعة.
+3. ارفع المصنف وراجع الفروق وأخطاء الصفوف. `verified` فقط يظهر على الخريطة؛ `pending` يُحفظ للمراجعة. تغيير الاسم العلمي أو UUID لا يمرر أدلة الهوية السابقة تلقائيًا.
+4. طبّق التعديل لمعاينته في هذا المتصفح، أو نزّل JSON بالتغييرات. التطبيق المحلي لا يحدّث جميع المستخدمين.
+5. لإعداد إصدار بيانات مشترك، شغّل على ملف التغييرات:
+
+```sh
+npm run release:updates -- \
+  --patch /path/changes.json \
+  --version 2.0.1 \
+  --output /path/release-data
+```
+
+الأمر يتحقق من الإصدار والهوية، وينتج مجلد بيانات كاملًا مع `release-manifest.json` والبصمات، دون تعديل المصدر أو النشر. ينقل فريق النشر الإصدار الكامل بعد مراجعته. لا يتطلب ذلك إعادة البحث أو التحليل النباتي. راجع [دليل Excel والإصدار المشترك](docs/excel-workflow.md).
+
+## البنية والأداء
+
+| الملف أو الوحدة | المسؤولية |
+| --- | --- |
+| `src/widget.js` | واجهة UUID، عزل التنسيق، الحالات، بطاقة المصادر، دورة حياة المكوّن. |
+| `src/map.js` | رسم المناطق مرة واحدة وتحديث التحديد والتظليل. |
+| `src/data-client.js` | التحقق من البيانات، تحميل UUID المطلوب، مشاركة الطلبات والتخزين المؤقت. |
+| `public/data/plants/{uuid}.json` | ملف صغير لكل مدخل، مع حالته ومراجعه. |
+| `public/data/catalog.v2.json` | دليل البحث والإدارة؛ لا يحتاجه عرض نبات محدد بمعرّفه. |
+| `public/data/regions.v1.json` | المضلعات الإدارية المشتركة. [مصدر الحدود والترخيص](public/data/BOUNDARIES.txt) منفصل عن أدلة النبات. |
+| `src/updates.js` و`src/manage.js` | فحص Excel، المعاينة، التعديلات المحلية وتصديرها. |
+| `scripts/apply-updates.mjs` | تجهيز إصدار بيانات جديد من patch مُراجع. |
+
+لا تُنشر حزمة البحث الخام البالغة نحو 67.6 MB في `dist`. عرض UUID يجلب ملف ذلك النبات والحدود المشتركة فقط، ولا يحمل بقية ملفات النباتات. تغيير سريع للمعرّف لا يسمح لاستجابة سابقة متأخرة برسم نبات آخر. إزالة المكوّن تزيل مستمعيه ومراقبه. الأصول والخطوط تُخدم مع المشروع؛ لا يوجد اعتماد على خدمة خرائط مدفوعة.
+
+ملفات `distribution.v1.0.0.json` و`bindings.v1.json` و`src/catalog.js` و`src/importer.js` بقيت كمرجع للنموذج السابق، ولا تقود واجهة الإصدار الثاني. الصورة `docs/preview.webp` تخص النموذج السابق وليست إثباتًا بصريًا للإصدار الجديد.
+
+القالب الجاهز مشمول في المستودع. إعادة توليده يدويًا عبر `scripts/create-template.mjs` تحتاج مكتبة `@oai/artifact-tool` المتاحة في بيئة إنشاء القالب، وليست من اعتماديات التطبيق. إعادة بناء بيانات البحث الأصلية عبر `scripts/build-research.py` تحتاج ملف البحث الممرر إلى `--input`. هذان إجراءان اختياريان؛ لا يستدعيهما تشغيل الواجهة أو بناؤها، والاختبارات تستخدم بيانات اصطناعية لمحوّل البحث.
+
+## التحقق وحدود التسليم
 
 ```sh
 npm test
-npm run validate
-npm run build
+npm run test:dom
 npm run check:uds
 npx playwright install chromium
 npm run test:browser
 ```
 
-With Google Chrome already installed, use `BROWSER_CHANNEL=chrome npm run test:browser`. Browser tests build the production site, start a loopback server on port 4181, and verify touch, keyboard, search, import/export, errors, accessible rendering and cross-origin embedding. Python 3.9+ runs the UDS checker. See [design decisions](docs/design.md), [verification notes](docs/verification.md) and the [static checker report](docs/uds-report.json).
+الاختبارات الوحدوية، فحص كامل بيانات الإصدار، وبناء الإنتاج اختُبرت. اختبارات DOM تشغّل ملف المكوّن الناتج نفسه في jsdom؛ لا تقيس الشكل أو التفاعل الحقيقي للمتصفح. مجموعة Playwright محدثة وتضم 29 اختبارًا، لكنها **لم تُنفّذ في بيئة التسليم** لأن Chromium مُنع من إنشاء socket، والمتصفح الخارجي لم يصل إلى الخادم المحلي.
+
+يلزم تشغيل اختبارات المتصفح ومراجعة الجوال ولوحة المفاتيح وقارئ الشاشة والتكبير قبل اعتماد النشر. لا توجد شهادة اكتمال بصري أو دمج إنتاجي مع سوار. النتائج التفصيلية والاستثناءات موثقة في [تقرير التحقق](docs/verification.md) و[خطة المكوّن](docs/uuid-map-plan.md) و[تقرير UDS](docs/uds-report.json).

@@ -1,158 +1,423 @@
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 import { readFile } from 'node:fs/promises'
-import { createServer } from 'node:http'
-import { once } from 'node:events'
 import { fileURLToPath } from 'node:url'
-const workbook = fileURLToPath(new URL('../../public/templates/distribution.xlsx',import.meta.url))
+import { STORAGE_KEY, UPDATE_EVENT } from '../../src/updates.js'
 
-test('map, region, locality, sources and controls agree',async ({page}) => {
-  await page.goto('/')
-  await expect(page.locator('.province')).toHaveCount(13)
-  await expect(page.locator('.province.documented')).toHaveCount(3)
-  await expect(page.locator('#photo')).toHaveJSProperty('complete',true)
-  await page.locator('#place').selectOption('الشفا')
-  await expect(page.locator('#region')).toHaveValue('SA-02')
-  const asir = page.locator('[data-region="SA-14"]')
-  await asir.focus(); await page.keyboard.press('Enter')
-  await expect(page.locator('#region')).toHaveValue('SA-14')
-  await expect(page.locator('#records li')).toHaveCount(2)
-  await page.locator('#place').selectOption('تنومة')
-  await expect(page.locator('#records li')).toHaveCount(1)
-  await expect(page.locator('#records a')).toHaveAttribute('href','https://doi.org/10.1038/s41598-025-13677-x')
-  await page.locator('#region').selectOption('SA-01')
-  await expect(page.locator('#records li')).toHaveCount(0)
-  await expect(page.locator('#place')).toBeDisabled()
-  await expect(page.locator('#evidence-summary')).toContainText('لا يتضمن')
-  await page.locator('#reset').click()
-  await expect(page.locator('#records li')).toHaveCount(4)
-})
+const ORIGIN = 'http://127.0.0.1:4181'
+const ARAK_UUID = 'f009a176-94e3-4387-b682-0f416bf31afd'
+const ATHL_UUID = '6574cd14-d824-4862-8a29-2ae880461085'
+const TALH_UUID = 'c120f1d4-0878-4d01-9757-07422c6b9459'
+const JUNIPER_UUID = 'c1c50e15-45ff-42ba-8973-3d4a74aa0724'
+const NCVC_ARAK = 'https://ncvc.gov.sa/ar/digitalKnowledge/PlantDiversity/Pages/Salvadora-Persica-L.aspx'
+const ARAK_REGIONS = ['SA-01', 'SA-02', 'SA-03', 'SA-04', 'SA-07', 'SA-09', 'SA-11', 'SA-14']
+const arak = JSON.parse(await readFile(new URL(`../../public/data/plants/${ARAK_UUID}.json`, import.meta.url), 'utf8'))
+const juniper = JSON.parse(await readFile(new URL(`../../public/data/plants/${JUNIPER_UUID}.json`, import.meta.url), 'utf8'))
+const template = fileURLToPath(new URL('../../public/templates/distribution-v2.xlsx', import.meta.url))
 
-test('Arabic and scientific-name search interoperate with keyboard and modal focus',async ({page}) => {
-  await page.goto('/'); await page.locator('#choose').click()
-  await expect(page.locator('#query')).toBeFocused()
-  await page.locator('#query').fill('zzzz'); await expect(page.locator('#matches li')).toHaveCount(0)
-  await page.keyboard.press('Escape'); await expect(page.locator('#query')).toHaveValue('')
-  await page.locator('#query').fill('القَرْم'); await expect(page.locator('#matches li')).toHaveCount(1)
-  await page.locator('#query').fill('AVICENNIA'); await page.keyboard.press('Enter')
-  await expect(page.locator('#matches button')).toBeFocused(); await page.keyboard.press('Enter')
-  await expect(page.locator('#choose')).toBeFocused()
-  await expect(page.locator('#latin')).toHaveText('Avicennia marina')
-  await expect(page.locator('.province.documented')).toHaveCount(2)
-  await expect(page.locator('#records li')).toHaveCount(2)
-})
+// A deterministic, minimal XLSX fixture: delete one existing Asir relation and
+// add an explicitly pending test relation. It adds no published botanical claim.
+const updateWorkbook = Buffer.from('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', 'base64')
 
-test('isolated embed resolves a pair and provides an explicit unmatched state',async ({page}) => {
-  await page.goto('/?embed=1&entryId=demo-mangrove&senseId=botanical')
-  await expect(page.locator('#latin')).toHaveText('Avicennia marina')
-  await expect(page.locator('.site-header')).toBeHidden()
-  await expect(page.locator('#choose')).toBeHidden()
-  await page.goto('/?entryId=demo-mangrove&senseId=bad')
-  await expect(page.locator('#unbound')).toBeVisible()
-  await expect(page.locator('#explorer')).toBeHidden()
-  await page.locator('#unbound a').click()
-  await expect(page.locator('#plant-name')).toHaveText('العرعر')
-})
+function documented(widget) { return widget.locator('svg path[role="button"]') }
+function sourceCard(widget) { return widget.locator('.source-card') }
+function shortcut(widget, name) { return widget.getByRole('button', { name: 'عرض مصادر ' + name, exact: true }) }
 
-test('Excel validation and export operate locally and preserve published records',async ({page}) => {
-  await page.goto('/'); await page.locator('#import-open').click()
-  await page.locator('#workbook').setInputFiles({name:'bad.xlsx',mimeType:'application/octet-stream',buffer:Buffer.from('broken')})
-  await expect(page.locator('#workbook')).toHaveAttribute('aria-invalid','true')
-  await expect(page.locator('#export')).toBeDisabled()
-  await page.locator('#workbook').setInputFiles(workbook)
-  await expect(page.locator('#export')).toBeEnabled()
-  await expect(page.locator('#import-report')).toContainText('بانتظار المراجعة')
-  const getting = page.waitForEvent('download')
-  await page.locator('#export').click()
-  const download = await getting
-  expect(download.suggestedFilename()).toBe('distribution.v1.0.1-draft.1.json')
-  const draft = JSON.parse(await readFile(await download.path()))
-  expect(draft.records.at(-1).status).toBe('pending')
-  await page.keyboard.press('Escape')
-  await expect(page.locator('#import-open')).toBeFocused()
-  await expect(page.locator('#records li')).toHaveCount(4)
-})
+async function ready(widget, name) {
+  await expect(widget.getByRole('heading', { name, exact: true, level: 2 })).toBeVisible()
+  await expect(widget.locator('.flora-widget')).toHaveAttribute('aria-busy', 'false')
+}
 
-test('dataset loading failures expose a working retry',async ({page}) => {
-  const pattern = '**/distribution.v1.0.0.json'
-  await page.route(pattern,route => route.fulfill({status:503,body:'unavailable'}))
-  await page.goto('/')
-  await expect(page.getByRole('button',{name:'إعادة تحميل الأطلس'})).toBeVisible()
-  await page.unroute(pattern)
-  await page.getByRole('button',{name:'إعادة تحميل الأطلس'}).click()
-  await expect(page.locator('#plant-name')).toBeVisible()
-})
+async function mountHost(page, maps = [{ id: 'host-map', uuid: ARAK_UUID }]) {
+  const elements = maps.map(({ id, uuid, local = false }) => `<saudi-flora-map id="${id}"${uuid ? ` uuid="${uuid}"` : ''}${local ? ' local-preview' : ''}></saudi-flora-map>`).join('')
+  await page.route('**/__widget-host__.html', route => route.fulfill({
+    contentType: 'text/html',
+    body: `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>مضيف اختبار الخريطة</title><style>body{margin:0;font-family:Arial,sans-serif}main{max-width:1000px;margin:auto;padding:16px}#host-button{color:rgb(90,30,110);min-height:44px;padding:8px}h2{font-size:72px;color:rgb(90,30,110)}</style><script type="module" src="/assets/flora-map.js"></script></head><body><main><h1>صفحة المضيف</h1><button id="host-button">زر المضيف</button>${elements}</main></body></html>`,
+  }))
+  await page.goto(ORIGIN + '/__widget-host__.html')
+  await page.evaluate(() => customElements.whenDefined('saudi-flora-map'))
+  return maps.map(({ id }) => page.locator('#' + id))
+}
 
-for (const width of [320,390,768,1024,1440]) {
-  test('RTL reflow and controls at ' + width + 'px',async ({page},info) => {
-    await page.setViewportSize({width,height:width === 768 ? 480 : 900})
-    await page.goto('/')
-    await expect(page.locator('#plant-name')).toBeVisible()
-    await page.evaluate(() => document.fonts.ready)
-    expect(await page.locator('html').getAttribute('dir')).toBe('rtl')
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
-    for (const s of ['#choose','#region','#place','#import-open']) {
-      const box = await page.locator(s).boundingBox()
-      expect(box.height).toBeGreaterThanOrEqual(44); expect(box.width).toBeGreaterThanOrEqual(44)
+async function hoverRegion(page, widget, id) {
+  const target = widget.locator(`path[data-region="${id}"]`)
+  await target.scrollIntoViewIfNeeded()
+  const point = await target.evaluate(path => {
+    const box = path.getBBox()
+    const transform = path.getScreenCTM()
+    for (let row = 1; row < 12; row++) {
+      for (let column = 1; column < 12; column++) {
+        const candidate = new DOMPoint(box.x + box.width * column / 12, box.y + box.height * row / 12)
+        if (path.isPointInFill(candidate)) {
+          const screen = candidate.matrixTransform(transform)
+          return { x: screen.x, y: screen.y }
+        }
+      }
     }
-    const hits = page.locator('.province rect')
-    await expect(hits.first()).toHaveAttribute('width',/.+/)
-    for (const target of await hits.all()) {
-      const box = await target.boundingBox()
-      expect(box.width).toBeGreaterThan(43.9); expect(box.height).toBeGreaterThan(43.9)
-    }
-    if ([390,1440].includes(width)) await page.screenshot({path:info.outputPath('atlas.png'),fullPage:true})
-    await page.locator('#region').selectOption('SA-11')
-    await expect(page.locator('#evidence-summary')).toContainText('الباحة')
+    throw Error('No interior hit target found for ' + path.dataset.region)
+  })
+  await page.mouse.move(point.x, point.y)
+  return target
+}
+
+function deletionPatch() {
+  return {
+    schemaVersion: 2, baseVersion: arak.version, updatedAt: '2026-11-23T00:00:00.000Z',
+    changes: [{ uuid: ARAK_UUID, scientificName: arak.scientificName, recordId: 'E-TEXT-51936118c3516a67',
+      action: 'delete', provenance: { file: 'browser-review.xlsx', sheet: 'Records', row: 2 } }],
+  }
+}
+
+test('a real UUID displays eight Arak regions and the matching NCVC citation', async ({ page }) => {
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, arak.name)
+  expect(await documented(widget).evaluateAll(nodes => nodes.map(node => node.dataset.region).sort())).toEqual(ARAK_REGIONS)
+  await expect(widget.locator('.scientific')).toHaveText(arak.scientificName)
+  await shortcut(widget, 'مكة المكرمة').click()
+  const card = sourceCard(widget)
+  await expect(card.getByRole('heading', { name: 'مكة المكرمة', exact: true })).toBeVisible()
+  await expect(card.getByText('المركز الوطني لتنمية الغطاء النباتي — الأراك', { exact: true })).toBeVisible()
+  const reference = card.locator(`a[href="${NCVC_ARAK}"]`)
+  await expect(reference).toBeVisible()
+  await expect(reference).toHaveAttribute('target', '_blank')
+  await expect(reference).toHaveAttribute('rel', /noopener/)
+  await expect(card).toContainText('منطقة مكة المكرمة')
+})
+
+test('the published module embeds without an iframe, catalog, raw research payload, or host style leakage', async ({ page }) => {
+  const requests = []
+  page.on('request', request => requests.push(new URL(request.url()).pathname))
+  const [widget] = await mountHost(page)
+  await ready(widget, arak.name)
+  await expect(page.locator('iframe')).toHaveCount(0)
+  expect(requests).toContain('/assets/flora-map.js')
+  expect(requests.filter(path => path.endsWith('.json')).sort()).toEqual([
+    `/data/plants/${ARAK_UUID}.json`, '/data/regions.v1.json',
+  ].sort())
+  expect(requests.some(path => /catalog|siwar_plant_distribution|distribution\.v1/.test(path))).toBe(false)
+  await expect(page.locator('#host-button')).toHaveCSS('color', 'rgb(90, 30, 110)')
+  await expect(widget.getByRole('heading', { name: arak.name, exact: true })).not.toHaveCSS('color', 'rgb(90, 30, 110)')
+})
+
+test('no UUID leaves an explicit empty map and never selects a sample automatically', async ({ page }) => {
+  const plantRequests = []
+  page.on('request', request => { if (request.url().includes('/data/plants/')) plantRequests.push(request.url()) })
+  await page.goto('/')
+  const widget = page.locator('#plant-map')
+  await expect(widget.locator('.empty-state')).toContainText('اختر نباتًا')
+  await expect(documented(widget)).toHaveCount(0)
+  await expect(widget.locator('.scientific')).toBeEmpty()
+  expect(plantRequests).toEqual([])
+})
+
+test('an unknown UUID does not fall back to a different plant', async ({ page }) => {
+  const unknown = '00000000-0000-4000-8000-000000000000'
+  await page.route(`**/plants/${unknown}.json`, route => route.fulfill({ status: 404, body: 'not found' }))
+  await page.goto('/?uuid=' + unknown)
+  const widget = page.locator('#plant-map')
+  await expect(widget.locator('.empty-state')).toContainText('لم نعثر على نبات بهذا المعرّف')
+  await expect(documented(widget)).toHaveCount(0)
+  await expect(widget.locator('.scientific')).toBeEmpty()
+  await expect(widget.locator('.retry')).toBeHidden()
+})
+
+for (const query of [
+  'uuid=not-a-uuid',
+  `uuid=${ARAK_UUID}&uuid=${ARAK_UUID}`,
+  `uuid=${ARAK_UUID}&entryId=${JUNIPER_UUID}`,
+  `uuid=${ARAK_UUID}&senseId=one&senseId=two`,
+]) {
+  test('invalid or duplicated identity context is rejected: ' + query, async ({ page }) => {
+    await page.goto('/?' + query)
+    const widget = page.locator('#plant-map')
+    await expect(widget.locator('.empty-state')).toContainText('لم نعثر على نبات بهذا المعرّف')
+    await expect(documented(widget)).toHaveCount(0)
+    await expect(widget.locator('.scientific')).toBeEmpty()
   })
 }
 
-test('WCAG A/AA automated checks cover the explorer and both dialogs',async ({page}) => {
-  await page.goto('/'); await expect(page.locator('#plant-name')).toBeVisible()
-  for (const trigger of [null,'#choose','#import-open']) {
-    if (trigger) await page.locator(trigger).click()
-    const result = await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze()
-    expect(result.violations.map(v => [v.id,v.nodes.map(n => n.target)])).toEqual([])
-    if (trigger) await page.keyboard.press('Escape')
-  }
+test('a mismatched sense identifier cannot borrow a valid UUID distribution', async ({ page }) => {
+  await page.goto(`/?uuid=${ARAK_UUID}&senseId=wrong-sense`)
+  const widget = page.locator('#plant-map')
+  await expect(widget.locator('.empty-state')).toContainText('معرّف المعنى لا يطابق')
+  await expect(documented(widget)).toHaveCount(0)
 })
 
-test('all compact callouts point into the matching province and select it by touch',async ({browser}) => {
-  const context = await browser.newContext({viewport:{width:320,height:720},hasTouch:true})
-  const page = await context.newPage()
-  await page.goto('http://127.0.0.1:4181/')
-  await expect(page.locator('.province')).toHaveCount(13)
-  for (const button of await page.locator('.province').all()) {
-    const id = await button.getAttribute('data-region')
-    await expect(button).toHaveClass(/compact/)
-    const inside = await button.evaluate(element => {
-      const line = element.querySelector('.leader')
-      const endpoint = line.getPointAtLength(line.getTotalLength())
-      return document.querySelector('[data-geometry="' + element.dataset.region + '"]').isPointInFill(endpoint)
-    })
-    expect(inside,id).toBe(true)
-    await button.locator('rect').tap()
-    await expect(page.locator('#region')).toHaveValue(id)
-  }
-  await expect(page.locator('.province')).toHaveCount(13)
-  await context.close()
+test('the held Athl identity stays uncolored and explains why', async ({ page }) => {
+  await page.goto('/?uuid=' + ATHL_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, 'الأثل')
+  await expect(documented(widget)).toHaveCount(0)
+  await expect(widget.locator('.empty-state')).toContainText('مراجعة')
+  await expect(widget.locator('.region-shortcuts button')).toHaveCount(0)
 })
 
-test('the atlas runs in an iframe on another origin with only the public URL contract',async ({page}) => {
-  const host = createServer((_req,res) => {
-    res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'})
-    res.end('<iframe title="Botanical atlas" src="http://127.0.0.1:4181/?embed=1&amp;entryId=demo-juniper&amp;senseId=botanical"></iframe>')
+test('Najd remains a cited textual place without guessing Riyadh or Qassim regions', async ({ page }) => {
+  await page.goto('/?uuid=' + TALH_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, 'طلح')
+  await expect(documented(widget)).toHaveCount(0)
+  await expect(widget.locator('.empty-state')).toContainText('لا تحدد منطقة إدارية')
+  await widget.getByRole('button', { name: 'مواضع غير محددة إداريًا', exact: true }).click()
+  const card = sourceCard(widget)
+  await expect(card).toContainText('نجد')
+  await expect(card.locator('a[href="https://plantdiversityofsaudiarabia.info/najd/"]')).toBeVisible()
+  await expect(documented(widget)).toHaveCount(0)
+})
+
+test('a delayed previous UUID cannot overwrite the newly selected plant', async ({ page }) => {
+  let release, intercepted
+  const gate = new Promise(resolve => { release = resolve })
+  const requestStarted = new Promise(resolve => { intercepted = resolve })
+  await page.route(`**/plants/${ARAK_UUID}.json`, async route => {
+    intercepted()
+    await gate
+    await route.fulfill({ json: arak })
   })
-  host.listen(0,'127.0.0.1')
-  await once(host,'listening')
+  await page.goto('/?uuid=' + ARAK_UUID, { waitUntil: 'domcontentloaded' })
+  await requestStarted
+  const widget = page.locator('#plant-map')
+  const response = page.waitForResponse(response => response.url().endsWith(`/plants/${ARAK_UUID}.json`))
   try {
-    await page.goto('http://127.0.0.1:' + host.address().port)
-    const frame = page.frameLocator('iframe')
-    await expect(frame.locator('#latin')).toHaveText('Juniperus procera')
-    await frame.locator('#region').selectOption('SA-11')
-    await expect(frame.locator('#records li')).toHaveCount(1)
+    await widget.evaluate((element, uuid) => element.setPlant(uuid), JUNIPER_UUID)
+    await ready(widget, juniper.name)
   } finally {
-    host.closeAllConnections()
-    host.close()
+    release()
+  }
+  await response
+  await page.evaluate(() => new Promise(requestAnimationFrame))
+  await ready(widget, juniper.name)
+  await expect(widget.locator('.scientific')).toHaveText(juniper.scientificName)
+  expect(await documented(widget).evaluateAll(nodes => nodes.map(node => node.dataset.region).sort())).toEqual(
+    [...new Set(juniper.records.filter(record => record.status === 'verified').map(record => record.regionId).filter(Boolean))].sort())
+})
+
+test('hover sources remain reachable and Escape dismisses them without changing the plant', async ({ page }) => {
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, arak.name)
+  await hoverRegion(page, widget, 'SA-02')
+  const card = sourceCard(widget)
+  await expect(card).toBeVisible()
+  await card.getByRole('heading', { name: 'مكة المكرمة', exact: true }).hover()
+  // This is deliberately longer than the delayed hover-dismiss grace period.
+  await page.waitForTimeout(600)
+  await expect(card).toBeVisible()
+  await expect(card.locator(`a[href="${NCVC_ARAK}"]`)).toBeVisible()
+  await card.getByRole('button', { name: 'إغلاق بطاقة المصادر' }).focus()
+  await page.keyboard.press('Escape')
+  await expect(card).toBeHidden()
+  await ready(widget, arak.name)
+})
+
+test('keyboard selection, pinning and focus restoration work on a map region', async ({ page }) => {
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, arak.name)
+  const region = widget.locator('path[data-region="SA-02"]')
+  await region.focus()
+  await page.keyboard.press('Enter')
+  await expect(sourceCard(widget)).toBeVisible()
+  await expect(widget.getByRole('button', { name: 'إغلاق بطاقة المصادر' })).toBeFocused()
+  await page.keyboard.press('Escape')
+  await expect(sourceCard(widget)).toBeHidden()
+  await expect(region).toBeFocused()
+  await page.keyboard.press('Space')
+  await expect(sourceCard(widget)).toBeVisible()
+  await widget.getByRole('button', { name: 'إغلاق بطاقة المصادر' }).click()
+  await expect(sourceCard(widget)).toBeHidden()
+})
+
+test.describe('touch interaction', () => {
+  test.use({ hasTouch: true, viewport: { width: 390, height: 844 } })
+  test('region alternatives are finger sized and open citations by tapping', async ({ page }) => {
+    await page.goto('/?uuid=' + ARAK_UUID)
+    const widget = page.locator('#plant-map')
+    await ready(widget, arak.name)
+    for (const button of await widget.locator('.region-shortcuts button').all()) {
+      const box = await button.boundingBox()
+      expect(box.width).toBeGreaterThanOrEqual(44)
+      expect(box.height).toBeGreaterThanOrEqual(44)
+    }
+    await shortcut(widget, 'مكة المكرمة').tap()
+    const card = sourceCard(widget)
+    await expect(card.getByRole('heading', { name: 'مكة المكرمة', exact: true })).toBeInViewport()
+    await expect(card.locator(`a[href="${NCVC_ARAK}"]`)).toBeVisible()
+    await card.getByRole('button', { name: 'إغلاق بطاقة المصادر' }).tap()
+    await expect(card).toBeHidden()
+  })
+})
+
+test('two map instances keep independent UUIDs and reconnect with a single drawing', async ({ page }) => {
+  const [first, second] = await mountHost(page, [{ id: 'map-one', uuid: ARAK_UUID }, { id: 'map-two', uuid: JUNIPER_UUID }])
+  await ready(first, arak.name)
+  await ready(second, juniper.name)
+  await shortcut(first, 'مكة المكرمة').click()
+  await second.evaluate((element, uuid) => element.setPlant(uuid), TALH_UUID)
+  await ready(second, 'طلح')
+  await expect(documented(first)).toHaveCount(8)
+  await expect(documented(second)).toHaveCount(0)
+  await expect(sourceCard(first)).toBeVisible()
+  await first.evaluate(element => { window.detachedMapForTest = element; element.remove() })
+  await expect(page.locator('#map-one')).toHaveCount(0)
+  await page.evaluate(() => document.querySelector('main').append(window.detachedMapForTest))
+  await ready(first, arak.name)
+  await expect(first.locator('svg.flora-regions-map')).toHaveCount(1)
+  await expect(documented(first)).toHaveCount(8)
+  await expect(sourceCard(first)).toBeHidden()
+  await ready(second, 'طلح')
+})
+
+test('local patches require opt-in, stay isolated and recover honestly after a malformed patch', async ({ page }) => {
+  await page.addInitScript(key => localStorage.setItem(key, '{broken'), STORAGE_KEY)
+  const [published, local] = await mountHost(page, [{ id: 'published-map', uuid: ARAK_UUID }, { id: 'local-map', uuid: ARAK_UUID, local: true }])
+  await ready(published, arak.name)
+  await ready(local, arak.name)
+  await expect(documented(published)).toHaveCount(8)
+  await expect(local.locator('.local-notice')).toContainText('تعذر تطبيق')
+  await page.evaluate(({ key, eventName, patch }) => {
+    localStorage.setItem(key, JSON.stringify(patch))
+    window.dispatchEvent(new CustomEvent(eventName, { detail: { uuids: [patch.changes[0].uuid] } }))
+  }, { key: STORAGE_KEY, eventName: UPDATE_EVENT, patch: deletionPatch() })
+  await expect(documented(local)).toHaveCount(7)
+  await expect(documented(published)).toHaveCount(8)
+  await expect(local.locator('.local-notice')).toContainText('تُعرض تعديلات محفوظة')
+  await expect(local.locator('.local-notice')).not.toContainText('تعذر')
+  await expect(published.locator('.local-notice')).toBeHidden()
+})
+
+test('a failed plant request exposes a retry that loads the same UUID', async ({ page }) => {
+  const pattern = `**/plants/${ARAK_UUID}.json`
+  await page.route(pattern, route => route.fulfill({ status: 503, body: 'unavailable' }))
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await expect(widget.getByRole('button', { name: 'إعادة المحاولة', exact: true })).toBeVisible()
+  await page.unroute(pattern)
+  await widget.getByRole('button', { name: 'إعادة المحاولة', exact: true }).click()
+  await ready(widget, arak.name)
+  await expect(documented(widget)).toHaveCount(8)
+})
+
+test('missing map geometry is retryable and is not reported as an unknown plant', async ({ page }) => {
+  const pattern = '**/regions.v1.json'
+  await page.route(pattern, route => route.fulfill({ status: 404, body: 'missing geometry' }))
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await expect(widget.locator('.empty-state')).not.toContainText('لم نعثر على نبات')
+  await expect(widget.getByRole('button', { name: 'إعادة المحاولة', exact: true })).toBeVisible()
+  await page.unroute(pattern)
+  await widget.getByRole('button', { name: 'إعادة المحاولة', exact: true }).click()
+  await ready(widget, arak.name)
+})
+
+test('observation years stay with their own locality rather than borrowing the first source year', async ({ page }) => {
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, arak.name)
+  await shortcut(widget, 'تبوك').click()
+  const observations = sourceCard(widget).locator('details').filter({ hasText: 'iNaturalist Research-grade Observations' })
+  if (await observations.getAttribute('open') === null) await observations.locator('summary').click()
+  await expect(observations.locator('.evidence-list > li').filter({ hasText: 'Al Wajh Saudi Arabia' })).toContainText('2024')
+  await expect(observations.locator('.evidence-list > li').filter({ hasText: 'Tabuk, SA' })).toContainText('2025')
+})
+
+for (const width of [320, 390, 768, 1440]) {
+  test(`the embedded map and source card reflow at ${width}px`, async ({ page }, info) => {
+    await page.setViewportSize({ width, height: 900 })
+    await page.goto('/?embed=1&uuid=' + ARAK_UUID)
+    const widget = page.locator('#plant-map')
+    await ready(widget, arak.name)
+    await page.evaluate(() => document.fonts.ready)
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    await shortcut(widget, 'مكة المكرمة').click()
+    const card = sourceCard(widget)
+    await expect(card.getByRole('heading', { name: 'مكة المكرمة', exact: true })).toBeInViewport()
+    const box = await card.boundingBox()
+    expect(box.x).toBeGreaterThanOrEqual(0)
+    expect(box.x + box.width).toBeLessThanOrEqual(width + 1)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    if ([390, 1440].includes(width)) await page.screenshot({ path: info.outputPath('map-and-sources.png'), fullPage: true })
+  })
+}
+
+test('the source card remains reachable after the document scrolls past the top of the map', async ({ page }) => {
+  await page.setViewportSize({ width: 1024, height: 600 })
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, arak.name)
+  await widget.locator('.map-stage').evaluate(element => window.scrollTo(0, element.getBoundingClientRect().top + scrollY + 160))
+  await hoverRegion(page, widget, 'SA-14')
+  await expect(sourceCard(widget).getByRole('heading', { name: 'عسير', exact: true })).toBeInViewport()
+  await expect(sourceCard(widget).getByRole('button', { name: 'إغلاق بطاقة المصادر' })).toBeInViewport()
+})
+
+test('reduced-motion preference removes map and card animation', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, arak.name)
+  await shortcut(widget, 'مكة المكرمة').click()
+  await expect(widget.locator('path[data-region="SA-02"]')).toHaveCSS('transition-duration', '0s')
+  await expect(sourceCard(widget)).toHaveCSS('animation-name', 'none')
+})
+
+test('search shows the scientific identity before selecting its UUID', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: 'اختيار نبات', exact: true }).click()
+  await page.getByRole('searchbox').fill(ARAK_UUID)
+  const result = page.locator('#matches button')
+  await expect(result).toHaveCount(1)
+  await expect(result).toContainText(arak.scientificName)
+  await result.click()
+  await expect(page.locator('#picker')).not.toBeVisible()
+  await ready(page.locator('#plant-map'), arak.name)
+  expect(new URL(page.url()).searchParams.get('uuid')).toBe(ARAK_UUID)
+})
+
+test('Excel errors never apply, while reviewed local updates preserve pending gates and export provenance', async ({ page }) => {
+  await page.goto('/manage.html?uuid=' + ARAK_UUID)
+  const widget = page.locator('#managed-map')
+  await ready(widget, arak.name)
+  await expect(page.locator('#workbook')).toBeEnabled()
+  await page.locator('#workbook').setInputFiles({ name: 'broken.xlsx', mimeType: 'application/octet-stream', buffer: Buffer.from('broken') })
+  await expect(page.locator('#workbook')).toHaveAttribute('aria-invalid', 'true')
+  await expect(page.locator('#apply')).toBeDisabled()
+  await expect(documented(widget)).toHaveCount(8)
+  await page.locator('#workbook').setInputFiles(template)
+  await expect(page.locator('#workbook')).toHaveAttribute('aria-invalid', 'true')
+  await expect(page.locator('#apply')).toBeDisabled()
+  await page.locator('#workbook').setInputFiles({ name: 'reviewed-local-update.xlsx', mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', buffer: updateWorkbook })
+  await expect(page.locator('#diff')).toBeVisible()
+  await expect(page.locator('#diff-list')).toContainText('بانتظار المراجعة')
+  await expect(page.locator('#apply')).toBeEnabled()
+  await expect(documented(widget)).toHaveCount(8)
+  await page.locator('#apply').click()
+  await expect(documented(widget)).toHaveCount(7)
+  await expect(widget.locator('path[data-region="SA-05"]')).not.toHaveAttribute('role', 'button')
+  const downloading = page.waitForEvent('download')
+  await page.locator('#download-patch').click()
+  const download = await downloading
+  expect(download.suggestedFilename()).toMatch(/^flora-map-updates-\d{4}-\d{2}-\d{2}\.json$/)
+  const patch = JSON.parse(await readFile(await download.path(), 'utf8'))
+  expect(patch.changes).toHaveLength(2)
+  expect(patch.changes.every(change => change.uuid === ARAK_UUID)).toBe(true)
+  const pending = patch.changes.find(change => change.action === 'upsert')
+  expect(pending.record.status).toBe('pending')
+  expect(pending.provenance).toEqual(expect.objectContaining({ file: 'reviewed-local-update.xlsx', sheet: 'Records', row: 3 }))
+  await page.locator('#restore').click()
+  await expect(documented(widget)).toHaveCount(8)
+  await expect(widget.locator('.local-notice')).toBeHidden()
+})
+
+test('automated accessibility checks cover the isolated map and an open source card', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  const [widget] = await mountHost(page)
+  await ready(widget, arak.name)
+  for (const open of [false, true]) {
+    if (open) await shortcut(widget, 'مكة المكرمة').click()
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze()
+    expect(results.violations.map(violation => ({ id: violation.id, targets: violation.nodes.map(node => node.target) }))).toEqual([])
   }
 })

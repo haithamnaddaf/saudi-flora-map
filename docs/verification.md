@@ -1,12 +1,93 @@
-# Prototype verification
+# تقرير التحقق — مكوّن UUID والمصادر
 
-- The versioned release contains 13 distinct Saudi region codes, two species, six cited locality records and two demonstration bindings. Source checks used the specific study sites and locators in the release. The boundary metadata represents 2017.
-- The production build and Node validation suite check the catalog, release references, duplicate detection, URL schemes, unknown IDs, unsupported versions, invalid headers, row limits, atomic imports and verified-only highlights. The included Excel workbook is parsed as a real file.
-- Chromium tests cover the species picker, keyboard selection, modal focus restoration, selected and empty regions, a source link, retry after a failed load, the XLSX import and JSON download, unmatched ID pairs and embedding from a separate HTTP origin.
-- Runtime checks cover 320, 390, 768, 1024 and 1440 CSS pixels, including landscape. At each width the document reflows without horizontal overflow. Region callout hit areas and primary form controls measure at least 44 × 44 CSS pixels. Each compact callout endpoint was tested against the actual region polygon and each target was tapped.
-- Desktop and mobile screenshots were inspected for Arabic reading order, legibility, geographic callout placement, photo cropping, region borders, filter grouping and evidence links. The live macOS Chrome accessibility tree was inspected during keyboard use. Opening the picker focused its search field, excluded background content from the tree, and Escape restored focus to the trigger.
-- axe-core checked the main explorer and both open dialogs against WCAG 2.0/2.1 A and AA tags. UDS static results are in `uds-report.json`. The single UDS-A11Y-003 warning concerns the declaration-only token stylesheet. The application stylesheet defines the global visible focus outline, plus a focus treatment for interactive SVG geometry.
-- The map and file importer have text equivalents for status, default and error states. Region and search selections are also announced by polite live regions. The interface introduces no animation.
-- Pending manual sign-off covers an Arabic screen-reader listening session, real-browser zoom at 200% and 400%, real-device touch and a human comparison with the official component visuals. The static checker enumerates 144 registry rules for manual or semi-automated consideration, including components the prototype does not use.
+تاريخ الفحص: 2026-11-23، بتوقيت الرياض. إصدار التطبيق 0.2.0، وإصدار البيانات 2.0.0. هذا التقرير يخص التعديل الحالي، ويستبدل تقرير النموذج السابق. صورة `preview.webp` قديمة ولا تثبت شكل هذه النسخة.
 
-Overall UDS assessment: PARTIALLY COMPLIANT. Native semantic patterns and the custom geographic chart are documented in the design plan. The live DGA template and chart pages were unavailable for comparison during this review.
+## النتيجة
+
+نجحت اختبارات البيانات والمنطق وبناء الإنتاج واختبارات DOM على الملف الناتج. **لم تنجح محاولة تشغيل متصفح فعلي في هذه البيئة، لذلك لم تُعتمد الواجهة بصريًا ولم تُختبر داخل سوار.** الفرع قابل للمراجعة والتشغيل؛ اعتماد النشر يتطلب فحوص المتصفح المتبقية.
+
+| الفحص المنفّذ | النتيجة |
+| --- | --- |
+| `npm test` | 57 ناجحًا، 0 فشل، 0 تجاوز. |
+| `npm run test:dom` | بناء الإنتاج ناجح، ثم 7 اختبارات DOM ناجحة على `dist/assets/flora-map.js`. |
+| فحص إصدار البيانات ضمن البناء | 1482 UUID أصلية، 13 منطقة، 8303 علاقات دليل؛ لا JSON بحث خام في الملفات العامة. |
+| `npm run check:uds` | PASS 25 / FAIL 0 / WARNING 1 / MANUAL 144، على 7 ملفات قابلة للفحص الساكن. |
+| `npx playwright test --list` | اكتشاف 29 اختبارًا؛ ليس نتيجة اجتياز لهذه الاختبارات. |
+| `git diff --check` | ناجح. |
+
+تفصيل الاختبارات الوحدوية: 7 اختبارات مرجعية للنموذج القديم، و11 لعميل البيانات، و10 لبناء بيانات البحث، و24 لتحديثات Excel، و5 لأداة تجهيز إصدار البيانات.
+
+## ما تحقق منه آليًا
+
+- حفظ UUID الأصلي ومعرّف المعنى، ورفض ملف نبات يرجع لهوية مختلفة أو حالة نشر غير مسموحة.
+- عدم الربط بالأسماء العربية، وعدم تلوين المداخل ذات تعارض الهوية أو التصنيف أو الجغرافيا.
+- بقاء نجد نصًا مع مصدرها عند غياب إسناد إداري، وحفظ احتواء فرسان في جازان حين يكون موثقًا في حزمة البحث.
+- وجود المرجع والإحالة والاسم العلمي في كل علاقة معروضة، ومنع الروابط غير الآمنة وتكرار سجل الرصد داخل النبات.
+- تحميل ملف UUID وحده مع الحدود دون فهرس البحث، ومشاركة الطلبات والحدود بين نسختين مستقلتين.
+- عدم استبدال النبات الحالي بنتيجة طلب قديم متأخر، وإزالة الرسم والمستمعين عند الفصل وإعادة رسم نسخة واحدة عند الوصل.
+- مثال الأراكة الفعلي: 8 مناطق، وإتاحة رابط NCVC الداعم لمكة في بطاقة المصدر.
+- بقاء سنوات الرصد مع سجلاتها، وعدم عرض أول سنة في المجموعة على أنها سنة جميع الشواهد.
+- تمييز فشل ملف الحدود عن UUID غير موجود، وإتاحة إعادة المحاولة.
+- صحة UUID والاسم العلمي والأعمدة والصفوف والمراجع عند استيراد Excel. الكتب بلا رابط تحتاج مؤلفًا وسنة وإحالة.
+- حذف علاقة بعينها دون حذف بقية النباتات، واحتفاظ `pending` بالمراجعة دون تظليل، والحفاظ على الروابط الأصلية عند تعديل موضع الدليل.
+- إضافة علاقة محليًا ثم حذفها تلغي التغيير الصافي، بينما حذف علاقة كانت موجودة في الإصدار يبقى صريحًا.
+- تحضير إصدار جديد في مجلد جديد، ومنع الكتابة على المصدر أو مجلد قائم، والتحقق من الإصدار والبصمات قبل إخراج مجلد الإصدار النهائي.
+
+هذه الفحوص تختبر الاتساق مع قواعد حزمة البحث. لم تُعد قراءة جميع المراجع النباتية في هذا التعديل، ولا يُفهم `verified` هنا على أنه اعتماد نباتي مستقل جديد.
+
+## Excel الحقيقي
+
+النموذج الجديد `public/templates/distribution-v2.xlsx` يحتوي أربع أوراق: `Records` فارغة مع 15 عمودًا، ودليل عربي، و1482 UUID، ورموز المناطق الثلاث عشرة. تم فتحه بقارئ Excel المستخدم في المشروع، ومراجعة صور أوراقه عند إنشائه.
+
+اختبار المتصفح يتضمن أيضًا مصنفًا فعليًا صغيرًا: حذف علاقة وإضافة علاقة `pending`. تم التحقق من قراءة المصنف وفحص صفوفه خارج المتصفح؛ تظل حركة الرفع والمعاينة والضغط والتنزيل ضمن اختبارات المتصفح غير المنفّذة.
+
+## أحجام التحميل
+
+الأرقام قياسات ملفات محلية؛ gzip تقدير لحجم النقل عند تفعيل الضغط في الاستضافة، ولا يشمل رؤوس HTTP أو أثر الشبكة. لم يُقَس زمن أول رسم أو معدل الإطارات:
+
+| الأصل | الحجم غير المضغوط | الحجم بعد gzip حيث قيس |
+| --- | ---: | ---: |
+| ملف المكوّن الناتج، متضمنًا أنماطه | نحو 51.9 kB | نحو 16.4 kB |
+| هندسة المناطق المشتركة | 183,684 بايت | نحو 47.8 kB |
+| ملف UUID الأراكة | 23,552 بايت | نحو 3.1 kB |
+| وسيط حجم ملفات UUID | 1,420 بايت | — |
+| أكبر ملف UUID | 88,895 بايت | — |
+| خطا العربية 400 و600 | نحو 42.8 و45.7 kB | WOFF2 مضغوط أصلًا |
+| فهرس البحث والإدارة | 435,498 بايت | لا يحمّل لعرض UUID وحده |
+
+إجمالي ملفات UUID هو 5,731,132 بايت، لكن المكوّن لا يجلبها مجتمعة. حجم حزمة البحث الخام 67,572,964 بايت؛ لا تدخل في نشر الواجهة. قارئ Excel يُحمّل عند الحاجة في صفحة الإدارة.
+
+## سبب عدم اكتمال فحص المتصفح
+
+- Chromium المحلي توقف قبل إنشاء الصفحة بسبب `socket() failed: Operation not permitted`.
+- المتصفح المتصل والمتصفح السحابي لم يصلا إلى `127.0.0.1:4181` الخاص ببيئة الكود؛ ظهرت `ERR_CONNECTION_REFUSED`.
+- لم يُغيّر إعداد أمان النظام أو تُتجاوز قيود الاتصال لإمرار الفحص.
+- jsdom ينفّذ دورة حياة المكوّن وDOM والطلبات، لكنه لا يقيس الرسم، CSS الفعلي، مواضع المؤشر، اللمس، أو نطق قارئ الشاشة.
+
+تغطي مجموعة Playwright الجاهزة UUID، السباق بين الطلبات، البطاقة، لوحة المفاتيح واللمس، عزل المكوّن، التحديث المحلي، Excel، وتقليل الحركة وAxe وإعادة التدفق عند 320 و390 و768 و1440px. لا توجد ادعاءات بأنها اجتازت التشغيل الفعلي هنا.
+
+## فحص UDS والاستثناءات
+
+التقرير الآلي: [uds-report.json](uds-report.json). التحذير الوحيد `UDS-A11Y-003` يخص ملف تعريف tokens الذي لا يحتوي قواعد تركيز. توجد قواعد `focus-visible` صريحة في أنماط المكوّن والمعاينة والإدارة؛ لم يُعدّل ملف tokens المدقق فقط لإخفاء التحذير. يلزم فحص ظهور التركيز فعليًا في المتصفح.
+
+الفاحص الساكن لا ينفّذ HTML المنشأ من JavaScript داخل Shadow DOM. النجاح الساكن لا يثبت مطابقة كل قواعد الإتاحة أو المظهر. قائمة 144 مراجعة يدوية هي قائمة السجل العام، وتتضمن مكونات غير مستخدمة يجب تحديد انطباقها عند القبول.
+
+المكوّن الجغرافي مخصص لأن `Charts` المسجل لا يوفر مضلعات إدارية. تمت دراسة أنماط Button وLink وCard وList وLoading وSearch Box وModal وFile Uploader؛ نُفذت بعناصر أصلية لأن المشروع ES modules ولا توجد واجهة حزمة رسمية موثقة مناسبة جرى اعتمادها هنا. لم تُستورد حزمة مكونات UDS ولم تُختلق خصائص React.
+
+البطاقة غير مشروطة بالنقر بالفأرة: توجد مسارات hover وفوكس وEnter وSpace وEscape وأزرار HTML مكافئة. تمت برمجة أهداف لمس 44px وحركات قصيرة مع reduced-motion؛ صحة القياسات والتفاعل الفعلي تحتاج المتصفح.
+
+### Unified Platform Compliance
+
+**Template:** المكوّن الجغرافي `NEEDS-VERIFICATION`؛ المعاينة `UDS-TPL-SEARCH`، والإدارة `UDS-TPL-FORM`. هو مكوّن مضمن، لا صفحة بوابة حكومية كاملة.
+
+**Official Components Used:** أنماط Button، Link، Card، List، Loading، Search Box، Modal، File Uploader؛ تنفيذ HTML/SVG أصلي موثق كاستثناء، لا استيراد مكتبة رسمية.
+
+**Applicable Rules:** القائمة الكاملة في [خطة UUID](uuid-map-plan.md) و[خطة الرسم](map-interaction-plan.md). تشمل `UDS-GOV-006`، `UDS-COMP-CHART-001`، `UDS-COMP-BUTTON-001–003`، `UDS-COMP-CARD-001`، `UDS-RTL-001–002,005`، `UDS-LAYOUT-014`، `UDS-A11Y-001–015,022,024–025`، وقواعد اللون والطباعة والمحتوى المذكورة في الخطة.
+
+**Automated Checks:** PASS 25 / FAIL 0 / WARNING 1؛ اختبارات المنطق 57/57 وDOM 7/7 والبناء ناجحة. هذه نتائج آلية محدودة بنطاقها.
+
+**Manual Checks:** مراجعة بنية البيانات ومصدر الحالة ومسارات التفاعل على مستوى الكود، ومراجعة صور نموذج Excel مكتملة. فحص الواجهة والجوال واللمس الحقيقي والتباين الفعلي والتكبير وقارئ الشاشة العربي والمقارنة بالمرجع الرسمي غير مكتمل.
+
+**Known Exceptions:** SVG جغرافي مخصص؛ أنماط أصلية بدل حزمة رسمية؛ مدد الحركة قرار مشروع وليست token رسمية؛ تعذر التحقق الحي من صفحة قالب DGA؛ تحذير التركيز في ملف tokens موضح أعلاه. لا يوجد دمج أو قياس أداء فعلي داخل سوار.
+
+**Overall:** **PARTIALLY COMPLIANT**.

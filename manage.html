@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="تحديث مواضع النباتات ومصادرها من Excel في معاينة محلية قبل اعتماد إصدار مشترك.">
+  <meta name="theme-color" content="#104631">
+  <title>تحديث بيانات خريطة النباتات</title>
+  <link rel="icon" href="./favicon.svg">
+  <script type="module" src="./src/manage.js"></script>
+</head>
+<body>
+  <a class="skip" href="#editor">انتقل إلى تحديث البيانات</a>
+  <header class="manage-header" data-uds-component="navigation-header">
+    <div class="manage-wrap"><a href="./" class="return-link">العودة إلى الخريطة</a><span>بيانات خريطة النباتات</span></div>
+  </header>
+  <main id="editor" class="manage-wrap">
+    <div class="manage-intro">
+      <p class="eyebrow">تحديث البيانات</p>
+      <h1>صحّح المواضع وأبقِ مصادرها واضحة</h1>
+      <p>ارفع ملف Excel، راجع التغييرات، ثم طبّقها في هذه المعاينة. تبقى معرّفات النباتات وهوّياتها العلمية هي أساس الربط.</p>
+    </div>
+    <p id="catalog-status" role="status">جارٍ تحميل دليل النباتات…</p>
+    <div class="manage-grid">
+      <section class="editor-panel" aria-labelledby="upload-title">
+        <h2 id="upload-title">ملف التحديث</h2>
+        <p>استخدم ورقة <bdi>Records</bdi>. للإضافة أو التعديل اكتب <bdi>upsert</bdi>، ولحذف علاقة بعينها اكتب <bdi>delete</bdi>. الصفوف الغائبة تبقى كما هي.</p>
+        <a class="download-link" href="./templates/distribution-v2.xlsx" download>تنزيل نموذج التحديث (Excel)</a>
+        <form id="updates-form" novalidate>
+          <div id="dropzone" class="dropzone" data-uds-component="file-uploader">
+            <label for="workbook">اختر الملف أو اسحبه إلى هنا</label>
+            <p id="file-help">ملف <bdi>.xlsx</bdi> واحد، حتى ٥ م.ب و٥٠٠ صف. يذكر كل صف UUID والاسم العلمي والمكان والمصدر. لا تُعرض الصفوف ذات الحالة <bdi>pending</bdi> على الخريطة.</p>
+            <input id="workbook" type="file" accept=".xlsx" aria-describedby="file-help import-status" disabled>
+          </div>
+          <p id="import-status" role="status"></p>
+          <ul id="import-errors" class="errors" aria-label="أخطاء الملف"></ul>
+          <section id="diff" hidden aria-labelledby="diff-title">
+            <h3 id="diff-title">التغييرات المقترحة</h3>
+            <p id="diff-summary"></p>
+            <ul id="diff-list" class="diff-list" data-uds-component="list"></ul>
+          </section>
+          <div class="actions"><button id="apply" type="submit" class="primary" disabled>تطبيق التغييرات في المعاينة</button><button id="download-patch" type="button" disabled>تنزيل ملف التغييرات (JSON)</button></div>
+        </form>
+        <details class="field-help"><summary>كيف أوثّق المصدر وأمنع خلط النباتات؟</summary>
+          <p>انسخ UUID والاسم العلمي من دليل النبتة. لا تغير الاسم العلمي لنفس UUID من هنا؛ يحتاج هذا إلى مراجعة الهوية وأدلتها.</p>
+          <p>ضع اسم المصدر، والرابط، والصفحة أو القسم، وخلاصة المعلومة. للكتاب أو المعجم أو الموسوعة بلا رابط: اذكر المؤلف أو الجهة والسنة والطبعة إن توفرت والصفحة. رقم صف Excel يُحفظ تلقائيًا ولا يحل محل المرجع.</p>
+          <p>الحالة <bdi>verified</bdi> تعني أنك راجعت هوية النبات والمكان والإحالة. صلاحية تنسيق الملف وحدها لا تثبت صحة المعلومة النباتية.</p>
+        </details>
+        <div class="storage-note" data-uds-component="notification">
+          <h3>التطبيق في هذا المتصفح</h3>
+          <p>الملف يُقرأ على جهازك. التغييرات المحفوظة تخص هذه المعاينة على هذا المتصفح، ولا تُنشر تلقائيًا في سوار أو GitHub. نزّل ملف التغييرات للاحتفاظ به واعتماده في إصدار مشترك لاحقًا.</p>
+          <p id="saved-status" role="status"></p>
+          <button id="restore" type="button" disabled>استعادة بيانات الإصدار في المعاينة</button>
+        </div>
+      </section>
+      <section class="preview-panel" aria-labelledby="preview-title">
+        <h2 id="preview-title">معاينة نبتة</h2>
+        <div class="field"><label for="plant-search">ابحث بالاسم العربي أو العلمي أو UUID</label><input id="plant-search" type="search" autocomplete="off" aria-describedby="matches-status" disabled></div>
+        <p id="matches-status" class="secondary-text" role="status"></p>
+        <div class="field"><label for="plant-select">اختر النبتة</label><select id="plant-select" disabled></select></div>
+        <div id="plant-identity" class="identity"></div>
+        <saudi-flora-map id="managed-map" local-preview></saudi-flora-map>
+        <div class="current-records" data-uds-component="card">
+          <h3>تعديل السجلات الحالية</h3>
+          <p>انسخ السجلات ثم الصقها في الخلية <bdi>A1</bdi> من ورقة <bdi>Records</bdi> في النموذج. احفظ التغييرات وارفع المصنف. احتفظ بمعرّف العلاقة لتعديلها، أو اكتب معرّفًا جديدًا لإضافة علاقة مستقلة.</p>
+          <button id="copy-records" type="button" disabled>نسخ سجلات النبتة إلى Excel</button>
+          <label for="records-copy">السجلات الجاهزة للنسخ</label>
+          <textarea id="records-copy" readonly dir="ltr" rows="4" aria-describedby="copy-status"></textarea>
+          <p id="copy-status" role="status"></p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="manage-wrap" data-uds-component="footer"><span id="release-label"></span><a href="./">عرض الخريطة</a></footer>
+</body>
+</html>
