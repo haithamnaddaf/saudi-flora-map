@@ -2,6 +2,8 @@
 
 An independent Arabic RTL botanical atlas of Saudi Arabia. Select a species, tap a region or choose a locality, and open the field evidence behind the highlight. The prototype includes 13 administrative regions, two species and six verified locality records. Green regions have at least one documented occurrence in this release. Other regions have no record in the current sample.
 
+![Arabic atlas showing juniper evidence in Makkah, Al-Bahah and Asir](docs/preview.webp)
+
 ## Run locally
 
 Use Node.js 22.12 or newer and npm. The application and its assets live on `feature/saudi-flora-map`. The initial `main` branch is an empty baseline.
