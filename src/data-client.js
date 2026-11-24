@@ -131,6 +131,20 @@ export function validateRegions(regions) {
   return regions
 }
 
+export function validateGovernorates(governorates) {
+  requireData(Array.isArray(governorates) && governorates.length > 0 && governorates.length <= 400, 'ملف حدود المحافظات غير صالح.')
+  const ids = new Set()
+  for (const item of governorates) {
+    requireData(object(item) && text(item.id) && !ids.has(item.id) && !REGION_IDS.has(item.id) && REGION_IDS.has(item.regionId), 'معرّف المحافظة أو منطقتها غير صالح.')
+    requireData(text(item.name) && text(item.nameEn) && text(item.path, 1_000_000) && /^(?:M[-0-9., ]+Z)+$/.test(item.path), 'اسم المحافظة أو حدودها غير صالحة.')
+    requireData(Array.isArray(item.label) && item.label.length === 2 && item.label.every(Number.isFinite), 'موضع تسمية المحافظة غير صالح.')
+    requireData(Array.isArray(item.aliases) && item.aliases.every(value => text(value)), 'أسماء المحافظة البديلة غير صالحة.')
+    requireData(item.isRegionalCapital === undefined || typeof item.isRegionalCapital === 'boolean', 'نوع النطاق الإداري غير صالح.')
+    ids.add(item.id)
+  }
+  return governorates
+}
+
 export function allowedRecords(plant) {
   if (!plant || plant.status !== DISPLAY_STATUS || !Array.isArray(plant.records)) return []
   return plant.records.filter(record => record && record.status === 'verified')
@@ -173,6 +187,10 @@ function loadJSON(url, validate, cache, limit) {
 
 export function loadRegions(base = DEFAULT_DATA_URL) {
   return loadJSON(new URL('regions.v1.json', getDataBase(base)).href, validateRegions, indexCache, INDEX_CACHE_LIMIT)
+}
+
+export function loadGovernorates(base = DEFAULT_DATA_URL) {
+  return loadJSON(new URL('governorates.v1.json', getDataBase(base)).href, validateGovernorates, indexCache, INDEX_CACHE_LIMIT)
 }
 
 export function loadCatalog(base = DEFAULT_DATA_URL) {

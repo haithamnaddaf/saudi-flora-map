@@ -1,0 +1,44 @@
+Saudi administrative-area display layer (governorates and regional capitals)
+
+Source: geoBoundaries gbOpen SAU ADM2, boundary ID SAU-ADM2-3984122.
+Upstream contributors: geoBoundaries and OpenStreetMap contributors.
+Reference year: 2021. Publisher build: 12 December 2023.
+Pinned release commit: 9469f09. Retrieved: 24 November 2026.
+147 source units, including 12 regional-capital areas. This is not a claim
+that 147 is the current official number of Saudi governorates.
+
+Metadata:
+https://www.geoboundaries.org/api/current/gbOpen/SAU/ADM2/
+Pinned source GeoJSON:
+https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/SAU/ADM2/geoBoundaries-SAU-ADM2_simplified.geojson
+Source SHA-256:
+1a336a495dfcf3c369c5b5d05c205d7509610e0ab27ef1539140f8a8c763e335
+
+Underlying map data: Copyright OpenStreetMap contributors, ODbL 1.0.
+https://www.openstreetmap.org/copyright
+https://opendatacommons.org/licenses/odbl/1-0/
+The derived governorates.v1.json database is provided under ODbL 1.0.
+https://creativecommons.org/licenses/by-sa/2.0/
+Licensing metadata note: the geoBoundaries API states CC BY-SA 2.0 and links
+to OpenStreetMap's copyright page. That page assigns ODbL to the database
+and CC BY-SA 2.0 to documentation. Both declarations are retained here;
+we do not describe the underlying map database as public domain.
+
+Changes: display projection matching regions.v1.json; simplification of shared
+boundary chains once for both neighbors; finer detail for small areas;
+0.01 drawing-unit coordinate rounding; Arabic display labels; reviewed English
+name aliases; explicit parent-region labels; interior cartographic label anchors.
+These label anchors are not plant observation coordinates.
+
+Geometry is used only to display a named administrative area. Botanical evidence
+is assigned from its source's place names, never from observation coordinates.
+Shading indicates a place named by the evidence, not occupancy of its whole area.
+
+Limits: generalized community-source boundaries representing 2021, not an
+authoritative current Saudi boundary decision. The source has no distinct unit
+for Dammam or Al Muwayh; records naming these can fall back to their documented
+region. No replacement boundary is invented. Regional-capital areas are marked
+isRegionalCapital rather than being silently described as ordinary governorates.
+
+Reproduction: run scripts/prepare-governorates.py with the pinned GeoJSON above.
+Detailed review and validation: docs/governorate-boundaries.md in the project source.

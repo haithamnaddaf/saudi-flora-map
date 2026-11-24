@@ -32,6 +32,10 @@ function sourceErrors(record) {
     errors.push('استخدم رمز منطقة من الدليل، أو اتركه فارغًا إذا لم يُحسم الإسناد الإداري.')
   }
   if (!['verified', 'pending'].includes(record.status)) errors.push('استخدم verified أو pending في reviewStatus.')
+  const nameReview = record.provenance?.placeNameReviewed
+  if (nameReview !== undefined && (typeof nameReview !== 'boolean' || (nameReview && record.status !== 'verified'))) {
+    errors.push('مراجعة اسم المكان يجب أن تكون قيمة منطقية ولا تعتمد إلا لسجل verified.')
+  }
   if (record.sourceUrl) {
     if (!isSafeUrl(record.sourceUrl)) errors.push('أدخل رابط HTTPS صالحًا للمصدر دون اسم مستخدم أو كلمة مرور.')
   } else {
@@ -75,6 +79,14 @@ function assertPatch(patch, baseVersion) {
     if (c.provenance.importedAt !== undefined && (typeof c.provenance.importedAt !== 'string' ||
         !Number.isFinite(Date.parse(c.provenance.importedAt)))) {
       throw Error('تاريخ استيراد صف Excel غير صالح.')
+    }
+    const nameReview = c.provenance.placeNameReviewed
+    if (nameReview !== undefined && (typeof nameReview !== 'boolean' ||
+        (nameReview && (c.action !== 'upsert' || c.record?.status !== 'verified')))) {
+      throw Error('إسناد مراجعة اسم المكان غير صالح.')
+    }
+    if (c.action === 'upsert' && nameReview !== c.record.provenance?.placeNameReviewed) {
+      throw Error('إسناد مراجعة اسم المكان لا يطابق سجل المصدر.')
     }
   }
   return patch
@@ -147,6 +159,15 @@ export function validateUpdateRows(rows, catalog, plantsByUuid, { fileName = 'im
         record.accessedOn = previous.accessedOn
         record.sourceScientificName = previous.sourceScientificName
         if (previous.recordUrls) record.recordUrls = [...previous.recordUrls]
+      }
+      // Import provenance alone is not a review of geography. Grant this marker
+      // only for an explicitly verified addition/name correction. A prior review
+      // survives unrelated wording edits, but not a changed citation or pending row.
+      const sameCitation = previous && ['sourceTitle', 'sourceUrl', 'sourceKind', 'sourceAuthor', 'year', 'sourceEdition', 'locator']
+        .every(key => String(previous[key] ?? '') === String(record[key] ?? ''))
+      if (record.status === 'verified' && (!previous || normalizedName(record.place) !== normalizedName(previous.place) ||
+          (previous.status === 'verified' && previous.provenance?.placeNameReviewed === true && sameCitation))) {
+        provenance.placeNameReviewed = true
       }
       problems.push(...sourceErrors(record))
       change.record = record

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>اختبار مقاسات مكوّن الخريطة</title>
+<link rel="stylesheet" href="../../.design-system/uds-tokens.css">
+<style>
+  body { margin:0; padding:var(--uds-space-2xl); background:var(--uds-color-neutral-50); color:var(--uds-color-primary-950); font-family:var(--uds-font-family); }
+  h1 { font-size:var(--uds-text-xl-size); }
+  nav { display:flex; flex-wrap:wrap; gap:var(--uds-space-lg); margin-block:var(--uds-space-xl); }
+  button { min-block-size:var(--uds-touch-target); min-inline-size:var(--uds-touch-target); padding:var(--uds-space-lg); background:var(--uds-color-white); color:var(--uds-color-primary-950); border:1px solid var(--uds-color-primary-200); border-radius:var(--uds-radius-lg); font:inherit; cursor:pointer; }
+  button:focus-visible { outline:var(--uds-space-xs) solid var(--uds-color-info-600); outline-offset:var(--uds-space-xxs); }
+  button[aria-pressed="true"] { border-color:var(--uds-color-primary-700); background:var(--uds-color-primary-50); }
+  #frame { inline-size:390px; max-inline-size:100%; margin-inline:auto; }
+</style>
+<h1>اختبار مقاسات مكوّن الخريطة</h1>
+<p>هذه صفحة تحقق محلية لحجم حاوية المكوّن. ليست محاكاة لجهاز فعلي، ولا تدخل في حزمة النشر.</p>
+<nav aria-label="عرض حاوية الاختبار">
+  <button data-width="320" aria-pressed="false">٣٢٠ بكسل</button>
+  <button data-width="390" aria-pressed="true">٣٩٠ بكسل</button>
+  <button data-width="430" aria-pressed="false">٤٣٠ بكسل</button>
+  <button data-width="768" aria-pressed="false">٧٦٨ بكسل</button>
+  <button data-width="1024" aria-pressed="false">١٠٢٤ بكسل</button>
+  <button data-width="1280" aria-pressed="false">١٢٨٠ بكسل</button>
+</nav>
+<p id="size" role="status">عرض الحاوية: ٣٩٠ بكسل</p>
+<main id="frame">
+  <saudi-flora-map uuid="f009a176-94e3-4387-b682-0f416bf31afd" data-base-url="/data/"></saudi-flora-map>
+</main>
+<script type="module">
+  import '/dist/assets/flora-map.js'
+  for (const button of document.querySelectorAll('[data-width]')) button.addEventListener('click', () => {
+    document.getElementById('frame').style.inlineSize = button.dataset.width + 'px'
+    for (const item of document.querySelectorAll('[data-width]')) item.setAttribute('aria-pressed', String(item === button))
+    document.getElementById('size').textContent = 'عرض الحاوية: ' + button.textContent
+  })
+</script>
+</html>

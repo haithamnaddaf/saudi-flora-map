@@ -1,119 +1,30 @@
-/* The host includes these styles inside its shadow root, after UDS aliases. */
-.flora-regions-map {
-  display: block;
-  inline-size: 100%;
-  block-size: auto;
-  overflow: visible;
-  font-family: var(--uds-font-family);
-  color: var(--uds-color-primary-950);
-  background: radial-gradient(ellipse at center, var(--uds-color-primary-25), var(--uds-color-white));
-  border-radius: var(--uds-radius-3xl);
-  isolation: isolate;
-}
-
-.flora-map-region {
-  fill: var(--uds-color-primary-50);
-  stroke: var(--uds-color-primary-700);
-  stroke-width: var(--uds-space-xxs);
-  vector-effect: non-scaling-stroke;
-  stroke-linejoin: round;
-  paint-order: fill stroke;
-  /* Motion timing is a project decision, not an official UDS token. */
-  transition: fill 180ms ease, opacity 180ms ease;
-}
-
-.flora-map-region.is-documented {
-  fill: var(--uds-color-primary-700);
-  stroke: var(--uds-color-primary-50);
-  cursor: pointer;
-}
-
-.flora-map-region.is-documented:is(.is-hovered, .is-focused, .is-selected) {
-  fill: var(--uds-color-primary-900);
-}
-
-.flora-map-region:focus {
-  outline: none;
-}
-
-.flora-map-outline {
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 180ms ease;
-}
-
-.flora-map-outline.is-visible {
-  opacity: 1;
-}
-
-.flora-map-outline path {
-  fill: none;
-  vector-effect: non-scaling-stroke;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.flora-map-outline-halo {
-  stroke: var(--uds-color-white);
-  stroke-width: var(--uds-space-md);
-}
-
-.flora-map-outline-stroke {
-  stroke: var(--uds-color-primary-950);
-  stroke-width: var(--uds-space-xs);
-}
-
-.flora-map-labels {
-  pointer-events: none;
-}
-
-.flora-map-label {
-  fill: var(--uds-color-primary-950);
-  font-size: var(--flora-map-label-size, var(--uds-text-xs-size));
-  font-weight: 600;
-  direction: rtl;
-  user-select: none;
-}
-
-.flora-map-label.is-documented {
-  fill: var(--uds-color-white);
-}
-
-.flora-regions-map.is-compact .flora-map-labels {
-  visibility: hidden;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .flora-map-region,
-  .flora-map-outline {
-    transition: none;
-  }
-}
-
-@media (forced-colors: active) {
-  .flora-map-region {
-    fill: Canvas;
-    stroke: CanvasText;
-  }
-
-  .flora-map-region.is-documented {
-    fill: Highlight;
-    stroke: CanvasText;
-  }
-
-  .flora-map-label {
-    fill: CanvasText;
-  }
-
-  .flora-map-label.is-documented {
-    fill: HighlightText;
-  }
-
-  .flora-map-outline-halo {
-    stroke: Canvas;
-  }
-
-  .flora-map-outline-stroke {
-    stroke: CanvasText;
-  }
+/* Administrative geometry shares the host's audited design tokens. */
+.flora-regions-map { display:block; inline-size:100%; block-size:auto; overflow:hidden; font-family:var(--uds-font-family); color:var(--uds-color-primary-950); background:var(--uds-color-neutral-25); border-radius:var(--uds-radius-3xl); isolation:isolate; }
+.flora-map-area { stroke-linejoin:round; vector-effect:non-scaling-stroke; paint-order:fill stroke; transition:fill 180ms ease,stroke 180ms ease; }
+.flora-map-region { fill:var(--uds-color-white); stroke:var(--uds-color-neutral-500); stroke-width:calc(var(--uds-space-xxs) / 2); }
+.flora-map-governorate { fill:none; stroke:var(--uds-color-neutral-300); stroke-width:calc(var(--uds-space-xxs) / 4); pointer-events:none; }
+.flora-map-area.is-documented { cursor:pointer; pointer-events:auto; stroke:var(--uds-color-primary-800); stroke-width:calc(var(--uds-space-xxs) / 2); }
+.flora-map-governorate.is-documented { fill:var(--uds-color-primary-700); }
+.flora-map-governorate.is-documented:is(.is-hovered,.is-focused,.is-selected) { fill:var(--uds-color-primary-800); }
+.flora-pattern-background { fill:var(--uds-color-primary-50); }
+.flora-pattern-line { stroke:var(--uds-color-primary-500); stroke-width:calc(var(--uds-space-xxs) / 2); }
+.flora-map-area:focus { outline:none; }
+.flora-map-outline { pointer-events:none; opacity:0; transition:opacity 180ms ease; }
+.flora-map-outline.is-visible { opacity:1; }
+.flora-map-outline path { fill:none; vector-effect:non-scaling-stroke; stroke-linecap:round; stroke-linejoin:round; }
+.flora-map-outline-halo { stroke:var(--uds-color-white); stroke-width:var(--uds-space-sm); }
+.flora-map-outline-stroke { stroke:var(--uds-color-primary-950); stroke-width:var(--uds-space-xxs); }
+.flora-map-labels { pointer-events:none; }
+.flora-map-label { fill:var(--uds-color-neutral-700); font-weight:500; direction:rtl; user-select:none; paint-order:stroke fill; stroke:var(--uds-color-white); stroke-width:var(--uds-space-xxs); stroke-linejoin:round; vector-effect:non-scaling-stroke; }
+.flora-map-label.is-documented { fill:var(--uds-color-primary-950); font-weight:600; }
+.flora-map-label.is-governorate.is-documented { fill:var(--uds-color-white); stroke:var(--uds-color-primary-800); }
+@media(prefers-reduced-motion:reduce) { .flora-map-area,.flora-map-outline { transition:none; } }
+@media(forced-colors:active) {
+  .flora-map-region { fill:Canvas; stroke:CanvasText; }
+  .flora-map-governorate { stroke:GrayText; }
+  .flora-map-governorate.is-documented { fill:Highlight; stroke:CanvasText; }
+  .flora-pattern-background { fill:Canvas; } .flora-pattern-line { stroke:CanvasText; }
+  .flora-map-label { fill:CanvasText; stroke:Canvas; }
+  .flora-map-label.is-governorate.is-documented { fill:HighlightText; stroke:Highlight; }
+  .flora-map-outline-halo { stroke:Canvas; } .flora-map-outline-stroke { stroke:CanvasText; }
 }

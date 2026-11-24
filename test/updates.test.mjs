@@ -29,7 +29,7 @@ test('an imported relation preserves UUID and row provenance and updates only th
   const result = validate(input())
   assert.deepEqual(result.errors, [])
   assert.equal(result.summary.added, 1)
-  assert.deepEqual(result.changes[0].provenance, { file: 'تصحيح.xlsx', sheet: 'Records', row: 2, importedAt: now })
+  assert.deepEqual(result.changes[0].provenance, { file: 'تصحيح.xlsx', sheet: 'Records', row: 2, importedAt: now, placeNameReviewed: true })
   const patch = mergePatch(null, result.changes, '2.0.0', now)
   const updated = applyOverrides(plant, patch)
   assert.equal(updated.uuid, uuid)
@@ -110,6 +110,63 @@ test('a new or replaced source records its import time without inventing a refer
     assert.equal(updated.sourceScientificName, plant.scientificName)
     assert.doesNotThrow(() => validateRecord(updated))
   }
+})
+
+test('only verified additions or changed place names gain an explicit name review', () => {
+  const corrected = validate(input({ ...record, recordId: record.id, place: 'الوجه', reviewStatus: 'verified' }))
+  assert.deepEqual(corrected.errors, [])
+  assert.equal(corrected.changes[0].record.provenance.placeNameReviewed, true)
+  assert.equal(corrected.changes[0].provenance.placeNameReviewed, true)
+  assert.equal(validate(input()).changes[0].record.provenance.placeNameReviewed, true)
+  for (const row of [
+    input({ reviewStatus: 'pending' }),
+    input({ ...record, recordId: record.id, place: 'الوجه', reviewStatus: 'pending' }),
+    input({ ...record, recordId: record.id, evidence: 'تصحيح النص فقط.', reviewStatus: 'verified' }),
+    input({ ...record, recordId: record.id, sourceYear: '2024', reviewStatus: 'verified' }),
+    input({ ...record, recordId: record.id, place: '  الليث  ', evidence: 'تغيير المسافات فقط.', reviewStatus: 'verified' }),
+  ]) {
+    const result = validate(row)
+    assert.deepEqual(result.errors, [])
+    assert.equal(result.changes[0].record.provenance.placeNameReviewed, undefined)
+  }
+})
+
+test('an earlier name review survives wording edits but not suspension or a different citation', () => {
+  const prior = { ...record, provenance: { file: 'reviewed.xlsx', sheet: 'Records', row: 2, importedAt: now, placeNameReviewed: true } }
+  const current = { ...plant, records: [prior] }
+  const revise = overrides => validateUpdateRows(rows(input({ ...prior, recordId: prior.id, reviewStatus: 'verified',
+    evidence: 'صياغة أوضح للدليل.', ...overrides })), catalog, new Map([[uuid, current]]), { fileName: 'wording.xlsx', now })
+  assert.equal(revise({}).changes[0].record.provenance.placeNameReviewed, true)
+  for (const change of [
+    { reviewStatus: 'pending' }, { sourceUrl: 'https://example.org/replacement' },
+    { sourceTitle: 'مرجع مختلف' }, { sourceAuthor: 'مؤلف مختلف' }, { sourceYear: '2024' },
+    { sourceEdition: 'الطبعة الثانية' }, { locator: 'صفحة مختلفة' }, { sourceKind: 'research' },
+  ]) {
+    const result = revise(change)
+    assert.deepEqual(result.errors, [])
+    assert.equal(result.changes[0].record.provenance.placeNameReviewed, undefined)
+  }
+})
+
+test('name review remains explicit through patch application and rejects invalid or mismatched metadata', () => {
+  const reviewed = patchOf(input())
+  assert.equal(applyOverrides(plant, reviewed).records.find(item => item.id === 'NEW-1').provenance.placeNameReviewed, true)
+  for (const mutation of [
+    change => { change.provenance.placeNameReviewed = 'true' },
+    change => { change.record.provenance.placeNameReviewed = 1 },
+    change => { delete change.record.provenance.placeNameReviewed },
+    change => { change.record.status = 'pending' },
+    change => { change.action = 'delete'; delete change.record },
+  ]) {
+    const invalid = JSON.parse(JSON.stringify(reviewed))
+    mutation(invalid.changes[0])
+    assert.throws(() => applyOverrides(plant, invalid), /مراجعة اسم المكان|غير مكتملة/)
+  }
+  const legacy = JSON.parse(JSON.stringify(reviewed))
+  delete legacy.changes[0].provenance.placeNameReviewed
+  delete legacy.changes[0].record.provenance.placeNameReviewed
+  assert.doesNotThrow(() => applyOverrides(plant, legacy))
+  assert.equal(applyOverrides(plant, legacy).records.find(item => item.id === 'NEW-1').provenance.placeNameReviewed, undefined)
 })
 
 test('stored patches cannot omit fields required by the public record contract', () => {

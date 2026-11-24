@@ -1,0 +1,16 @@
+{
+  "baselineVersion": "2.0.0",
+  "version": "2.0.1",
+  "checkedPlantFiles": 1482,
+  "checkedSpatialFiles": 763,
+  "addedRecords": 3,
+  "changedPlantIds": [
+    "03b6a1de-6eb1-4aa2-866b-2561d4a743bb",
+    "6aba5cd6-2daf-462e-80dc-1e21e0d64d48",
+    "f009a176-94e3-4387-b682-0f416bf31afd"
+  ],
+  "existingRecordsUnchanged": true,
+  "spatialUnchangedExceptVersion": true,
+  "issues": [],
+  "patchSha256": "bb7d7324968a9a8482fd7057288bed6806202764615a6943663fa445378e6f7a"
+}

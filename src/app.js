@@ -50,7 +50,7 @@ function showMatches() {
     latin.dir = 'ltr'
     const status = document.createElement('span')
     status.className = 'match-status'
-    status.textContent = plant.regionIds.length ? number(plant.regionIds.length) + ' مناطق لها مصادر' : plant.statusLabel
+    status.textContent = plant.status === 'documented_for_supplied_taxon' ? 'عرض الأماكن المتاحة ومصادرها' : 'الانتشار غير متوفر'
     button.append(name, latin, status)
     button.addEventListener('click', () => selectPlant(plant.uuid))
     li.append(button)

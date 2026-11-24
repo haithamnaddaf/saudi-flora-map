@@ -4,6 +4,8 @@ import { readFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import { STORAGE_KEY, UPDATE_EVENT } from '../../src/updates.js'
 
+// Reader-map redesign acceptance suite. Prepared for a normal Playwright browser;
+// not executed in the restricted local environment (Chromium startup is blocked).
 const ORIGIN = 'http://127.0.0.1:4181'
 const ARAK_UUID = 'f009a176-94e3-4387-b682-0f416bf31afd'
 const ATHL_UUID = '6574cd14-d824-4862-8a29-2ae880461085'
@@ -13,6 +15,9 @@ const NCVC_ARAK = 'https://ncvc.gov.sa/ar/digitalKnowledge/PlantDiversity/Pages/
 const ARAK_REGIONS = ['SA-01', 'SA-02', 'SA-03', 'SA-04', 'SA-07', 'SA-09', 'SA-11', 'SA-14']
 const arak = JSON.parse(await readFile(new URL(`../../public/data/plants/${ARAK_UUID}.json`, import.meta.url), 'utf8'))
 const juniper = JSON.parse(await readFile(new URL(`../../public/data/plants/${JUNIPER_UUID}.json`, import.meta.url), 'utf8'))
+const arakSpatial = JSON.parse(await readFile(new URL(`../../public/data/spatial/${ARAK_UUID}.json`, import.meta.url), 'utf8'))
+const arakPointIds = arakSpatial.observations.filter(item => item.pointEligible).map(item => item.id).sort()
+const dhahran = arakSpatial.observations.find(item => item.id === '5908868424')
 const template = fileURLToPath(new URL('../../public/templates/distribution-v2.xlsx', import.meta.url))
 
 // A deterministic, minimal XLSX fixture: delete one existing Asir relation and
@@ -22,6 +27,8 @@ const updateWorkbook = Buffer.from('UEsDBBQAAAAIAAAAd10cdPw42AAAAPYBAAATAAAAW0Nv
 function documented(widget) { return widget.locator('svg path[role="button"]') }
 function sourceCard(widget) { return widget.locator('.source-card') }
 function shortcut(widget, name) { return widget.getByRole('button', { name: 'عرض مصادر ' + name, exact: true }) }
+function primarySource(widget) { return sourceCard(widget).locator('.primary-source-link').first() }
+function siteMarkers(widget) { return widget.locator('[data-point]') }
 
 async function ready(widget, name) {
   await expect(widget.getByRole('heading', { name, exact: true, level: 2 })).toBeVisible()
@@ -39,25 +46,57 @@ async function mountHost(page, maps = [{ id: 'host-map', uuid: ARAK_UUID }]) {
   return maps.map(({ id }) => page.locator('#' + id))
 }
 
-async function hoverRegion(page, widget, id) {
+async function regionPoint(widget, id) {
   const target = widget.locator(`path[data-region="${id}"]`)
   await target.scrollIntoViewIfNeeded()
-  const point = await target.evaluate(path => {
+  return target.evaluate(path => {
     const box = path.getBBox()
     const transform = path.getScreenCTM()
-    for (let row = 1; row < 12; row++) {
-      for (let column = 1; column < 12; column++) {
-        const candidate = new DOMPoint(box.x + box.width * column / 12, box.y + box.height * row / 12)
-        if (path.isPointInFill(candidate)) {
-          const screen = candidate.matrixTransform(transform)
-          return { x: screen.x, y: screen.y }
-        }
+    const candidates = []
+    for (let row = 1; row < 16; row++) for (let column = 1; column < 16; column++) {
+      candidates.push(new DOMPoint(box.x + box.width * column / 16, box.y + box.height * row / 16))
+    }
+    // A central interior hit is less sensitive to coastline simplification and
+    // hidden labels than a bounding-box centre or the first edge pixel.
+    candidates.sort((a, b) => Math.hypot(a.x - box.x - box.width / 2, a.y - box.y - box.height / 2)
+      - Math.hypot(b.x - box.x - box.width / 2, b.y - box.y - box.height / 2))
+    for (const candidate of candidates) {
+      if (!path.isPointInFill(candidate)) continue
+      const screen = candidate.matrixTransform(transform)
+      if (screen.x < 8 || screen.x > innerWidth - 8 || screen.y < 8 || screen.y > innerHeight - 8) continue
+      const hit = path.getRootNode().elementFromPoint?.(screen.x, screen.y)
+      if (!hit || hit === path || path.contains(hit)) {
+        return { x: screen.x, y: screen.y }
       }
     }
     throw Error('No interior hit target found for ' + path.dataset.region)
   })
-  await page.mouse.move(point.x, point.y)
-  return target
+}
+
+async function hoverRegion(page, widget, id) {
+  const point = await regionPoint(widget, id)
+  await page.mouse.move(point.x, point.y, { steps: 8 })
+  return point
+}
+
+async function slowlyReachSource(page, widget, start, regionName) {
+  const card = sourceCard(widget)
+  const link = primarySource(widget)
+  await expect(link).toBeInViewport()
+  const expectedHref = await link.getAttribute('href')
+  const box = await link.boundingBox()
+  const destination = { x: box.x + box.width / 2, y: box.y + box.height / 2 }
+  // A real, straight pointer journey, including intermediate SVG hit targets.
+  // 20×45ms exceeds both the former 420ms close delay and the 150ms hover intent.
+  // No locator.hover(), focus(), forced dispatch, or jump to the card is used.
+  for (let step = 1; step <= 20; step++) {
+    await page.mouse.move(start.x + (destination.x - start.x) * step / 20,
+      start.y + (destination.y - start.y) * step / 20, { steps: 2 })
+    await page.waitForTimeout(45)
+    await expect(card.getByRole('heading', { name: regionName, exact: true })).toBeVisible()
+    await expect(primarySource(widget)).toHaveAttribute('href', expectedHref)
+  }
+  return { destination, expectedHref }
 }
 
 function deletionPatch() {
@@ -68,21 +107,24 @@ function deletionPatch() {
   }
 }
 
-test('a real UUID displays eight Arak regions and the matching NCVC citation', async ({ page }) => {
+test('a real UUID exposes eight Arak regions, published sites and the matching NCVC citation', async ({ page }) => {
   await page.goto('/?uuid=' + ARAK_UUID)
   const widget = page.locator('#plant-map')
   await ready(widget, arak.name)
   expect(await documented(widget).evaluateAll(nodes => nodes.map(node => node.dataset.region).sort())).toEqual(ARAK_REGIONS)
+  expect(await siteMarkers(widget).evaluateAll(nodes => nodes.map(node => node.dataset.point).sort())).toEqual(arakPointIds)
+  await expect(widget.getByRole('button', { name: 'مواقع الرصد', exact: true })).toHaveAttribute('aria-pressed', 'true')
   await expect(widget.locator('.scientific')).toHaveText(arak.scientificName)
   await shortcut(widget, 'مكة المكرمة').click()
   const card = sourceCard(widget)
   await expect(card.getByRole('heading', { name: 'مكة المكرمة', exact: true })).toBeVisible()
-  await expect(card.getByText('المركز الوطني لتنمية الغطاء النباتي — الأراك', { exact: true })).toBeVisible()
-  const reference = card.locator(`a[href="${NCVC_ARAK}"]`)
+  await expect(card.getByText('بطاقة الأراك — مركز الغطاء النباتي', { exact: true })).toBeVisible()
+  const reference = card.locator(`.primary-source-link[href="${NCVC_ARAK}"]`)
   await expect(reference).toBeVisible()
   await expect(reference).toHaveAttribute('target', '_blank')
   await expect(reference).toHaveAttribute('rel', /noopener/)
-  await expect(card).toContainText('منطقة مكة المكرمة')
+  await expect(card.locator('.location-level')).toHaveText('منطقة إدارية')
+  await expect(card.locator('.precision-note')).toContainText('لا يعني انتشاره في كامل مساحتها')
 })
 
 test('the published module embeds without an iframe, catalog, raw research payload, or host style leakage', async ({ page }) => {
@@ -93,20 +135,21 @@ test('the published module embeds without an iframe, catalog, raw research paylo
   await expect(page.locator('iframe')).toHaveCount(0)
   expect(requests).toContain('/assets/flora-map.js')
   expect(requests.filter(path => path.endsWith('.json')).sort()).toEqual([
-    `/data/plants/${ARAK_UUID}.json`, '/data/regions.v1.json',
+    `/data/plants/${ARAK_UUID}.json`, `/data/spatial/${ARAK_UUID}.json`, '/data/regions.v1.json',
   ].sort())
   expect(requests.some(path => /catalog|siwar_plant_distribution|distribution\.v1/.test(path))).toBe(false)
   await expect(page.locator('#host-button')).toHaveCSS('color', 'rgb(90, 30, 110)')
   await expect(widget.getByRole('heading', { name: arak.name, exact: true })).not.toHaveCSS('color', 'rgb(90, 30, 110)')
 })
 
-test('no UUID leaves an explicit empty map and never selects a sample automatically', async ({ page }) => {
+test('no UUID hides the map and never selects a sample automatically', async ({ page }) => {
   const plantRequests = []
   page.on('request', request => { if (request.url().includes('/data/plants/')) plantRequests.push(request.url()) })
   await page.goto('/')
   const widget = page.locator('#plant-map')
   await expect(widget.locator('.empty-state')).toContainText('اختر نباتًا')
   await expect(documented(widget)).toHaveCount(0)
+  await expect(siteMarkers(widget)).toHaveCount(0)
   await expect(widget.locator('.scientific')).toBeEmpty()
   expect(plantRequests).toEqual([])
 })
@@ -116,8 +159,9 @@ test('an unknown UUID does not fall back to a different plant', async ({ page })
   await page.route(`**/plants/${unknown}.json`, route => route.fulfill({ status: 404, body: 'not found' }))
   await page.goto('/?uuid=' + unknown)
   const widget = page.locator('#plant-map')
-  await expect(widget.locator('.empty-state')).toContainText('لم نعثر على نبات بهذا المعرّف')
+  await expect(widget.locator('.empty-state')).toContainText('غير متوفر')
   await expect(documented(widget)).toHaveCount(0)
+  await expect(siteMarkers(widget)).toHaveCount(0)
   await expect(widget.locator('.scientific')).toBeEmpty()
   await expect(widget.locator('.retry')).toBeHidden()
 })
@@ -131,7 +175,7 @@ for (const query of [
   test('invalid or duplicated identity context is rejected: ' + query, async ({ page }) => {
     await page.goto('/?' + query)
     const widget = page.locator('#plant-map')
-    await expect(widget.locator('.empty-state')).toContainText('لم نعثر على نبات بهذا المعرّف')
+    await expect(widget.locator('.empty-state')).toContainText('غير متوفر')
     await expect(documented(widget)).toHaveCount(0)
     await expect(widget.locator('.scientific')).toBeEmpty()
   })
@@ -140,29 +184,30 @@ for (const query of [
 test('a mismatched sense identifier cannot borrow a valid UUID distribution', async ({ page }) => {
   await page.goto(`/?uuid=${ARAK_UUID}&senseId=wrong-sense`)
   const widget = page.locator('#plant-map')
-  await expect(widget.locator('.empty-state')).toContainText('معرّف المعنى لا يطابق')
+  await expect(widget.locator('.empty-state')).toContainText('غير متوفر')
   await expect(documented(widget)).toHaveCount(0)
 })
 
-test('the held Athl identity stays uncolored and explains why', async ({ page }) => {
+test('the held Athl identity hides its map and uses simple availability copy', async ({ page }) => {
   await page.goto('/?uuid=' + ATHL_UUID)
   const widget = page.locator('#plant-map')
   await ready(widget, 'الأثل')
   await expect(documented(widget)).toHaveCount(0)
-  await expect(widget.locator('.empty-state')).toContainText('مراجعة')
+  await expect(siteMarkers(widget)).toHaveCount(0)
+  await expect(widget.locator('.empty-state')).toContainText('غير متوفر')
   await expect(widget.locator('.region-shortcuts button')).toHaveCount(0)
 })
 
-test('Najd remains a cited textual place without guessing Riyadh or Qassim regions', async ({ page }) => {
+test('text-only Najd evidence does not display an empty map or guessed regions', async ({ page }) => {
   await page.goto('/?uuid=' + TALH_UUID)
   const widget = page.locator('#plant-map')
   await ready(widget, 'طلح')
   await expect(documented(widget)).toHaveCount(0)
-  await expect(widget.locator('.empty-state')).toContainText('لا تحدد منطقة إدارية')
-  await widget.getByRole('button', { name: 'مواضع غير محددة إداريًا', exact: true }).click()
-  const card = sourceCard(widget)
-  await expect(card).toContainText('نجد')
-  await expect(card.locator('a[href="https://plantdiversityofsaudiarabia.info/najd/"]')).toBeVisible()
+  await expect(widget.locator('.empty-state')).toContainText('غير متوفر')
+  await expect(widget.locator('.map-stage')).toBeHidden()
+  await expect(widget.locator('.map-bottom')).toBeHidden()
+  await expect(widget).toHaveAttribute('data-map-available', 'false')
+  await expect(siteMarkers(widget)).toHaveCount(0)
   await expect(documented(widget)).toHaveCount(0)
 })
 
@@ -193,22 +238,145 @@ test('a delayed previous UUID cannot overwrite the newly selected plant', async 
     [...new Set(juniper.records.filter(record => record.status === 'verified').map(record => record.regionId).filter(Boolean))].sort())
 })
 
-test('hover sources remain reachable and Escape dismisses them without changing the plant', async ({ page }) => {
+test('a delayed spatial response cannot add the previous plant sites to the current UUID', async ({ page }) => {
+  let release, started
+  const gate = new Promise(resolve => { release = resolve })
+  const requested = new Promise(resolve => { started = resolve })
+  await page.route(`**/spatial/${ARAK_UUID}.json`, async route => {
+    started(); await gate; await route.fulfill({ json: arakSpatial })
+  })
+  await page.goto('/?uuid=' + ARAK_UUID, { waitUntil: 'domcontentloaded' })
+  await requested
+  const widget = page.locator('#plant-map')
+  const response = page.waitForResponse(response => response.url().endsWith(`/spatial/${ARAK_UUID}.json`))
+  try {
+    await widget.evaluate((element, uuid) => element.setPlant(uuid), TALH_UUID)
+    await ready(widget, 'طلح')
+  } finally { release() }
+  await response
+  await page.evaluate(() => new Promise(requestAnimationFrame))
+  await ready(widget, 'طلح')
+  await expect(siteMarkers(widget)).toHaveCount(0)
+  await expect(documented(widget)).toHaveCount(0)
+})
+
+test('a slow real pointer journey from Eastern Province reaches and opens its unchanged source', async ({ page }) => {
   await page.goto('/?uuid=' + ARAK_UUID)
   const widget = page.locator('#plant-map')
   await ready(widget, arak.name)
-  await hoverRegion(page, widget, 'SA-02')
+  await widget.getByRole('button', { name: 'المناطق المذكورة', exact: true }).click()
+  await page.evaluate(() => document.fonts.ready)
+  const start = await hoverRegion(page, widget, 'SA-04')
   const card = sourceCard(widget)
-  await expect(card).toBeVisible()
-  await card.getByRole('heading', { name: 'مكة المكرمة', exact: true }).hover()
-  // This is deliberately longer than the delayed hover-dismiss grace period.
-  await page.waitForTimeout(600)
-  await expect(card).toBeVisible()
-  await expect(card.locator(`a[href="${NCVC_ARAK}"]`)).toBeVisible()
-  await card.getByRole('button', { name: 'إغلاق بطاقة المصادر' }).focus()
+  await expect(card.getByRole('heading', { name: 'الشرقية', exact: true })).toBeVisible()
+  await expect(card.getByRole('button', { name: 'تثبيت البطاقة', exact: true })).toBeEnabled()
+  const { destination, expectedHref } = await slowlyReachSource(page, widget, start, 'الشرقية')
+  await expect(card.getByRole('button', { name: 'تثبيت البطاقة', exact: true })).toBeEnabled()
+  // Keep the test independent of the external site's uptime; the actual link is clicked.
+  await page.context().route(expectedHref, route => route.fulfill({ contentType: 'text/html', body: '<title>Source opened</title>' }))
+  const opened = page.waitForEvent('popup')
+  await page.mouse.click(destination.x, destination.y)
+  const popup = await opened
+  await popup.waitForLoadState('domcontentloaded')
+  expect(popup.url()).toBe(expectedHref)
+  await popup.close()
+  await expect(card.getByRole('heading', { name: 'الشرقية', exact: true })).toBeVisible()
+})
+
+test('Escape outside the component dismisses hover and small pointer movement cannot reopen it', async ({ page }) => {
+  const [widget] = await mountHost(page)
+  await ready(widget, arak.name)
+  await widget.getByRole('button', { name: 'المناطق المذكورة', exact: true }).click()
+  await page.locator('#host-button').focus()
+  const start = await hoverRegion(page, widget, 'SA-04')
+  const card = sourceCard(widget)
+  await expect(card.getByRole('heading', { name: 'الشرقية', exact: true })).toBeVisible()
+  await expect(page.locator('#host-button')).toBeFocused()
   await page.keyboard.press('Escape')
   await expect(card).toBeHidden()
+  await page.mouse.move(start.x + 1, start.y + 1, { steps: 3 })
+  await page.waitForTimeout(250)
+  await expect(card).toBeHidden()
+  await page.mouse.move(4, 4, { steps: 8 })
+  await page.mouse.move(start.x, start.y, { steps: 8 })
+  await expect(card.getByRole('heading', { name: 'الشرقية', exact: true })).toBeVisible()
   await ready(widget, arak.name)
+})
+
+test('a focused source link survives hovering another region, and explicit pinning survives mouse travel', async ({ page }) => {
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, arak.name)
+  await widget.getByRole('button', { name: 'المناطق المذكورة', exact: true }).click()
+  await hoverRegion(page, widget, 'SA-02')
+  const card = sourceCard(widget), link = primarySource(widget)
+  await expect(card.getByRole('heading', { name: 'مكة المكرمة', exact: true })).toBeVisible()
+  await link.focus()
+  await hoverRegion(page, widget, 'SA-04')
+  await page.waitForTimeout(250)
+  await expect(link).toBeFocused()
+  await expect(link).toHaveAttribute('href', NCVC_ARAK)
+  await card.getByRole('button', { name: 'تثبيت البطاقة', exact: true }).click()
+  await hoverRegion(page, widget, 'SA-01')
+  await page.waitForTimeout(250)
+  await expect(card.getByRole('heading', { name: 'مكة المكرمة', exact: true })).toBeVisible()
+  await expect(card.getByRole('button', { name: 'البطاقة مثبتة', exact: true })).toBeDisabled()
+  await page.mouse.click(4, 4)
+  await expect(card).toBeHidden()
+})
+
+test('the Dhahran site opens its own occurrence source, uncertainty and license with keyboard controls', async ({ page }) => {
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, arak.name)
+  const marker = widget.locator(`[data-point="${dhahran.id}"]`)
+  await marker.focus()
+  await page.keyboard.press('Enter')
+  const card = sourceCard(widget)
+  await expect(card.getByRole('heading', { name: 'الظهران', exact: true })).toBeVisible()
+  await expect(primarySource(widget)).toHaveAttribute('href', dhahran.referenceUrl)
+  await expect(card.locator('.precision-note')).toContainText('٥ م')
+  await expect(card.locator('.evidence-summary')).not.toContainText('Salvadora')
+  await card.getByText('تفاصيل المرجع', { exact: true }).click()
+  await expect(card.getByRole('link', { name: /ترخيص السجل/ })).toHaveAttribute('href', 'https://creativecommons.org/licenses/by-nc/4.0/legalcode')
+  await page.keyboard.press('Escape')
+  await expect(card).toBeHidden()
+  await expect(marker).toBeFocused()
+})
+
+test('zooming a listed site from regions reveals that real point and reset restores Saudi overview', async ({ page }) => {
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, arak.name)
+  const drawing = widget.locator('svg.flora-regions-map')
+  const overview = await drawing.getAttribute('viewBox')
+  await widget.getByRole('button', { name: 'المناطق المذكورة', exact: true }).click()
+  await shortcut(widget, 'الشرقية').click()
+  const card = sourceCard(widget)
+  await card.getByText('المواقع المذكورة في هذه المنطقة', { exact: true }).click()
+  await card.getByLabel('اختر مكانًا لقراءة دليله').selectOption(dhahran.id)
+  await expect(card.getByRole('heading', { name: 'الظهران', exact: true })).toBeVisible()
+  await card.getByRole('button', { name: 'تكبير الموقع', exact: true }).click()
+  await expect(widget.getByRole('button', { name: 'مواقع الرصد', exact: true })).toHaveAttribute('aria-pressed', 'true')
+  await expect(widget.locator(`[data-point="${dhahran.id}"]`)).toBeVisible()
+  await expect(drawing).not.toHaveAttribute('viewBox', overview)
+  await expect(primarySource(widget)).toHaveAttribute('href', dhahran.referenceUrl)
+  await widget.getByRole('button', { name: 'عرض المملكة كاملة', exact: true }).click()
+  await expect(drawing).toHaveAttribute('viewBox', overview)
+  await expect(sourceCard(widget)).toBeHidden()
+  await expect(widget.getByRole('button', { name: 'عرض المملكة كاملة', exact: true })).toBeDisabled()
+})
+
+test('missing spatial detail keeps regional citations available without fabricated site markers', async ({ page }) => {
+  await page.route(`**/spatial/${ARAK_UUID}.json`, route => route.fulfill({ status: 404, body: 'missing spatial detail' }))
+  await page.goto('/?uuid=' + ARAK_UUID)
+  const widget = page.locator('#plant-map')
+  await ready(widget, arak.name)
+  await expect(siteMarkers(widget)).toHaveCount(0)
+  await expect(documented(widget)).toHaveCount(8)
+  await expect(widget.getByRole('button', { name: 'مواقع الرصد', exact: true })).toBeDisabled()
+  await shortcut(widget, 'مكة المكرمة').click()
+  await expect(primarySource(widget)).toHaveAttribute('href', NCVC_ARAK)
 })
 
 test('keyboard selection, pinning and focus restoration work on a map region', async ({ page }) => {
@@ -235,6 +403,10 @@ test.describe('touch interaction', () => {
     await page.goto('/?uuid=' + ARAK_UUID)
     const widget = page.locator('#plant-map')
     await ready(widget, arak.name)
+    const visibleNames = await widget.locator('.flora-map-label:not(.flora-map-point-label)').evaluateAll(nodes =>
+      nodes.filter(node => getComputedStyle(node).visibility === 'visible').map(node => node.textContent))
+    expect(visibleNames.length).toBeGreaterThanOrEqual(4)
+    expect(visibleNames).toContain('الرياض')
     for (const button of await widget.locator('.region-shortcuts button').all()) {
       const box = await button.boundingBox()
       expect(box.width).toBeGreaterThanOrEqual(44)
@@ -243,8 +415,39 @@ test.describe('touch interaction', () => {
     await shortcut(widget, 'مكة المكرمة').tap()
     const card = sourceCard(widget)
     await expect(card.getByRole('heading', { name: 'مكة المكرمة', exact: true })).toBeInViewport()
-    await expect(card.locator(`a[href="${NCVC_ARAK}"]`)).toBeVisible()
+    await expect(card).toHaveCSS('position', 'relative')
+    const link = card.locator(`.primary-source-link[href="${NCVC_ARAK}"]`)
+    await expect(link).toBeVisible()
+    await page.context().route(NCVC_ARAK, route => route.fulfill({ contentType: 'text/html', body: '<title>Source opened</title>' }))
+    const opened = page.waitForEvent('popup')
+    await link.tap()
+    const popup = await opened
+    await popup.waitForLoadState('domcontentloaded')
+    expect(popup.url()).toBe(NCVC_ARAK)
+    await popup.close()
     await card.getByRole('button', { name: 'إغلاق بطاقة المصادر' }).tap()
+    await expect(card).toBeHidden()
+  })
+
+  test('a phone can choose a listed site, zoom to its original position and return to the Kingdom', async ({ page }) => {
+    await page.goto('/?uuid=' + ARAK_UUID)
+    const widget = page.locator('#plant-map')
+    await ready(widget, arak.name)
+    const drawing = widget.locator('svg.flora-regions-map')
+    const overview = await drawing.getAttribute('viewBox')
+    await widget.getByRole('button', { name: 'المناطق المذكورة', exact: true }).tap()
+    await shortcut(widget, 'الشرقية').tap()
+    const card = sourceCard(widget)
+    await card.getByText('المواقع المذكورة في هذه المنطقة', { exact: true }).tap()
+    await card.getByLabel('اختر مكانًا لقراءة دليله').selectOption(dhahran.id)
+    await card.getByRole('button', { name: 'تكبير الموقع', exact: true }).tap()
+    await expect(widget.getByRole('button', { name: 'مواقع الرصد', exact: true })).toHaveAttribute('aria-pressed', 'true')
+    await expect(card.getByRole('heading', { name: 'الظهران', exact: true })).toBeVisible()
+    await expect(primarySource(widget)).toHaveAttribute('href', dhahran.referenceUrl)
+    await expect(drawing).not.toHaveAttribute('viewBox', overview)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    await widget.getByRole('button', { name: 'عرض المملكة كاملة', exact: true }).tap()
+    await expect(drawing).toHaveAttribute('viewBox', overview)
     await expect(card).toBeHidden()
   })
 })
@@ -265,6 +468,7 @@ test('two map instances keep independent UUIDs and reconnect with a single drawi
   await ready(first, arak.name)
   await expect(first.locator('svg.flora-regions-map')).toHaveCount(1)
   await expect(documented(first)).toHaveCount(8)
+  await expect(siteMarkers(first)).toHaveCount(arakPointIds.length)
   await expect(sourceCard(first)).toBeHidden()
   await ready(second, 'طلح')
 })
@@ -285,6 +489,17 @@ test('local patches require opt-in, stay isolated and recover honestly after a m
   await expect(local.locator('.local-notice')).toContainText('تُعرض تعديلات محفوظة')
   await expect(local.locator('.local-notice')).not.toContainText('تعذر')
   await expect(published.locator('.local-notice')).toBeHidden()
+  // Deleting an occurrence relation must invalidate its cached spatial detail.
+  const pointPatch = deletionPatch()
+  pointPatch.changes[0].recordId = dhahran.recordId
+  await page.evaluate(({ key, eventName, patch }) => {
+    localStorage.setItem(key, JSON.stringify(patch))
+    window.dispatchEvent(new CustomEvent(eventName, { detail: { uuids: [patch.changes[0].uuid] } }))
+  }, { key: STORAGE_KEY, eventName: UPDATE_EVENT, patch: pointPatch })
+  const remaining = arakSpatial.observations.filter(item => item.pointEligible && item.recordId !== dhahran.recordId).length
+  await expect(siteMarkers(local)).toHaveCount(remaining)
+  await expect(local.locator(`[data-point="${dhahran.id}"]`)).toHaveCount(0)
+  await expect(siteMarkers(published)).toHaveCount(arakPointIds.length)
 })
 
 test('a failed plant request exposes a retry that loads the same UUID', async ({ page }) => {
@@ -316,10 +531,16 @@ test('observation years stay with their own locality rather than borrowing the f
   const widget = page.locator('#plant-map')
   await ready(widget, arak.name)
   await shortcut(widget, 'تبوك').click()
-  const observations = sourceCard(widget).locator('details').filter({ hasText: 'iNaturalist Research-grade Observations' })
-  if (await observations.getAttribute('open') === null) await observations.locator('summary').click()
-  await expect(observations.locator('.evidence-list > li').filter({ hasText: 'Al Wajh Saudi Arabia' })).toContainText('2024')
-  await expect(observations.locator('.evidence-list > li').filter({ hasText: 'Tabuk, SA' })).toContainText('2025')
+  const card = sourceCard(widget)
+  await card.getByRole('button', { name: /عرض بقية المصادر/ }).click()
+  const observations = card.locator('.source-entry').filter({ has: page.getByText('مشاهدات iNaturalist', { exact: true }) })
+  await observations.getByText('تفاصيل المرجع', { exact: true }).click()
+  const wajh = observations.locator('.reference-record').filter({ has: page.locator('a[href="https://www.gbif.org/occurrence/5062783847"]') })
+  const tabuk = observations.locator('.reference-record').filter({ has: page.locator('a[href="https://www.gbif.org/occurrence/5844154136"]') })
+  await expect(wajh).toContainText('2024')
+  await expect(wajh).not.toContainText('2025')
+  await expect(tabuk).toContainText('2025')
+  await expect(tabuk).not.toContainText('2024')
 })
 
 for (const width of [320, 390, 768, 1440]) {
@@ -337,10 +558,29 @@ for (const width of [320, 390, 768, 1440]) {
     const box = await card.boundingBox()
     expect(box.x).toBeGreaterThanOrEqual(0)
     expect(box.x + box.width).toBeLessThanOrEqual(width + 1)
+    await expect(primarySource(widget)).toHaveAttribute('href', NCVC_ARAK)
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
     if ([390, 1440].includes(width)) await page.screenshot({ path: info.outputPath('map-and-sources.png'), fullPage: true })
   })
 }
+
+test('a narrow embedded component reflows its open source card inside a wide host window', async ({ page }) => {
+  const [widget] = await mountHost(page)
+  await ready(widget, arak.name)
+  await shortcut(widget, 'مكة المكرمة').click()
+  const card = sourceCard(widget)
+  await expect(card).toHaveCSS('position', 'absolute')
+  const windowWidth = await page.evaluate(() => innerWidth)
+  await widget.evaluate(element => { element.style.width = '390px' })
+  await expect(card).toHaveCSS('position', 'relative')
+  await expect(card.getByRole('heading', { name: 'مكة المكرمة', exact: true })).toBeVisible()
+  await expect.poll(async () => {
+    const [cardBox, hostBox] = await Promise.all([card.boundingBox(), widget.boundingBox()])
+    return cardBox.x >= hostBox.x && cardBox.x + cardBox.width <= hostBox.x + hostBox.width + 1
+  }).toBe(true)
+  expect(await page.evaluate(() => innerWidth)).toBe(windowWidth)
+  await expect(primarySource(widget)).toHaveAttribute('href', NCVC_ARAK)
+})
 
 test('the source card remains reachable after the document scrolls past the top of the map', async ({ page }) => {
   await page.setViewportSize({ width: 1024, height: 600 })

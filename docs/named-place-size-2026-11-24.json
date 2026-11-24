@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "measuredAt": "2026-11-24T08:09:45.331629+00:00",
+  "applicationVersion": "0.5.0",
+  "datasetVersion": "2.0.1",
+  "method": {
+    "kind": "local-file-size",
+    "compression": "gzip.compress(data, compresslevel=9, mtime=0)",
+    "pythonVersion": "3.12.14",
+    "zlibVersion": "1.3.2",
+    "networkMeasurement": false,
+    "includesHttpHeaders": false,
+    "includesBrowserCacheEffects": false,
+    "note": "Measured with Python gzip to match the recorded baseline; Node or other gzip implementations may produce different compressed byte counts."
+  },
+  "baseline": {
+    "applicationVersion": "0.4.0",
+    "source": "docs/named-place-qa-2026-11-24.md — pre-change dist measurements",
+    "totals": {
+      "resources": 6,
+      "rawBytes": 428976,
+      "gzip9Bytes": 173968
+    }
+  },
+  "assets": [
+    {
+      "id": "widget",
+      "path": "dist/assets/flora-map.js",
+      "rawBytes": 99124,
+      "gzip9Bytes": 30433,
+      "sha256": "3da4932f5b31e5287eda0f38dab0baa28a6e242e6a32f0d5e27468863652f754",
+      "modifiedAt": "2026-11-24T08:09:05.649892+00:00"
+    },
+    {
+      "id": "regions",
+      "path": "dist/data/regions.v1.json",
+      "rawBytes": 183684,
+      "gzip9Bytes": 47839,
+      "sha256": "6b1834aa2a7ab2bf34c49ff8865a2696aac942df6f16255ca4afc00e98e95fe1",
+      "modifiedAt": "2026-11-24T08:09:05.355785+00:00"
+    },
+    {
+      "id": "governorates",
+      "path": "dist/data/governorates.v1.json",
+      "rawBytes": 225903,
+      "gzip9Bytes": 71012,
+      "sha256": "7ae7d1d770615bb97f3888d8d0cc0e33c923e963f5979da778e96f73bf7db262",
+      "modifiedAt": "2026-11-24T08:09:05.174886+00:00"
+    },
+    {
+      "id": "arakPlant",
+      "path": "dist/data/plants/f009a176-94e3-4387-b682-0f416bf31afd.json",
+      "rawBytes": 24557,
+      "gzip9Bytes": 3569,
+      "sha256": "181dc50b5bebeae890fd3e718e9e21534a770aa3bd944ed69b3e0ab816318e15",
+      "modifiedAt": "2026-11-24T08:09:05.336813+00:00"
+    },
+    {
+      "id": "arakSpatial",
+      "path": "dist/data/spatial/f009a176-94e3-4387-b682-0f416bf31afd.json",
+      "rawBytes": 32478,
+      "gzip9Bytes": 3501,
+      "sha256": "e1445edefe107213a88a8c6b2888c14318f70bac0744f1d1f88066892bb3a674",
+      "modifiedAt": "2026-11-24T08:09:05.546762+00:00"
+    },
+    {
+      "id": "arabicRegular",
+      "path": "dist/assets/ibm-plex-sans-arabic-arabic-400-normal-CyU-ddYS.woff2",
+      "rawBytes": 42848,
+      "gzip9Bytes": 42879,
+      "sha256": "6010e7fd0dce5d527583951750728cbe3c895efbd16aa0f809ab8c824878c9d8",
+      "modifiedAt": "2026-11-24T08:09:05.655668+00:00"
+    },
+    {
+      "id": "arabicSemibold",
+      "path": "dist/assets/ibm-plex-sans-arabic-arabic-600-normal-0pRdybE_.woff2",
+      "rawBytes": 45688,
+      "gzip9Bytes": 45721,
+      "sha256": "16734a5adb27b0f363e566cbbeacec480da0dc0baa19c8f0053251c2e2bc0eac",
+      "modifiedAt": "2026-11-24T08:09:05.655800+00:00"
+    }
+  ],
+  "comparison": [
+    {
+      "group": "widget",
+      "before": {
+        "rawBytes": 100895,
+        "gzip9Bytes": 30541
+      },
+      "after": {
+        "rawBytes": 99124,
+        "gzip9Bytes": 30433
+      },
+      "delta": {
+        "rawBytes": -1771,
+        "gzip9Bytes": -108
+      }
+    },
+    {
+      "group": "regions",
+      "before": {
+        "rawBytes": 183684,
+        "gzip9Bytes": 47839
+      },
+      "after": {
+        "rawBytes": 183684,
+        "gzip9Bytes": 47839
+      },
+      "delta": {
+        "rawBytes": 0,
+        "gzip9Bytes": 0
+      }
+    },
+    {
+      "group": "governorates",
+      "before": {
+        "rawBytes": 0,
+        "gzip9Bytes": 0,
+        "present": false
+      },
+      "after": {
+        "rawBytes": 225903,
+        "gzip9Bytes": 71012
+      },
+      "delta": {
+        "rawBytes": 225903,
+        "gzip9Bytes": 71012
+      }
+    },
+    {
+      "group": "arakPlant",
+      "before": {
+        "rawBytes": 24557,
+        "gzip9Bytes": 3569
+      },
+      "after": {
+        "rawBytes": 24557,
+        "gzip9Bytes": 3569
+      },
+      "delta": {
+        "rawBytes": 0,
+        "gzip9Bytes": 0
+      }
+    },
+    {
+      "group": "arakSpatial",
+      "before": {
+        "rawBytes": 31304,
+        "gzip9Bytes": 3419
+      },
+      "after": {
+        "rawBytes": 32478,
+        "gzip9Bytes": 3501
+      },
+      "delta": {
+        "rawBytes": 1174,
+        "gzip9Bytes": 82
+      }
+    },
+    {
+      "group": "arabicFontsCombined",
+      "before": {
+        "rawBytes": 88536,
+        "gzip9Bytes": 88600
+      },
+      "after": {
+        "rawBytes": 88536,
+        "gzip9Bytes": 88600
+      },
+      "delta": {
+        "rawBytes": 0,
+        "gzip9Bytes": 0
+      }
+    }
+  ],
+  "totals": {
+    "before": {
+      "resources": 6,
+      "rawBytes": 428976,
+      "gzip9Bytes": 173968
+    },
+    "after": {
+      "resources": 7,
+      "rawBytes": 654282,
+      "gzip9Bytes": 244954
+    },
+    "delta": {
+      "resources": 1,
+      "rawBytes": 225306,
+      "gzip9Bytes": 70986
+    },
+    "rawChangePercent": 52.5218,
+    "gzip9ChangePercent": 40.8041
+  },
+  "advisoryBudget": {
+    "scope": "net gzip9 increase of widget plus region and governorate boundaries",
+    "targetAdditionalBytes": 50000,
+    "actualAdditionalBytes": 70904,
+    "aboveTargetBytes": 20904,
+    "mandatoryReleaseGate": false
+  },
+  "scopeNotes": [
+    "One embedded Arak map: widget, both boundary files, plant and spatial files, two Arabic WOFF2 fonts.",
+    "Governorate geometry adds one shared static resource. Existing region geometry and plant data are unchanged in bytes.",
+    "This total excludes the explorer catalog, administration and Excel parser, page HTML and unrelated preview assets.",
+    "This measurement is neither a browser compatibility result nor a time-to-load measurement."
+  ]
+}

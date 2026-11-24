@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 2,
+  "baseVersion": "2.0.0",
+  "updatedAt": "2026-11-24T05:48:46.120Z",
+  "changes": [
+    {
+      "uuid": "f009a176-94e3-4387-b682-0f416bf31afd",
+      "scientificName": "salvadora persica",
+      "recordId": "BOOK-RCU-ALULA-P022-SALVADORA-PERSICA",
+      "action": "upsert",
+      "provenance": {
+        "file": "reviewed-book-evidence.xlsx",
+        "sheet": "Records",
+        "row": 2,
+        "importedAt": "2026-11-24T05:48:46.120Z"
+      },
+      "record": {
+        "id": "BOOK-RCU-ALULA-P022-SALVADORA-PERSICA",
+        "regionId": "SA-03",
+        "place": "العلا",
+        "sourceKind": "book",
+        "sourceTitle": "نباتات العلا واستخداماتها عبر التاريخ",
+        "sourceUrl": "https://www.rcu.gov.sa/getContentAsset/ef0b6523-f3f5-44e9-97b0-c9fc00e4656d/c251bdf4-01ab-406a-bb85-93e966a2691d/AlUla-plants.pdf?language=en",
+        "sourceAuthor": "شارلين بوشو؛ منصور سليمان السعيد؛ لطفي إبراهيم الجهني؛ محمد أحمد ودعان؛ سعود ليلي الرويلي",
+        "year": "",
+        "sourceEdition": "",
+        "locator": "ص 22 (الصفحة 22 من ملف PDF)",
+        "evidence": "يوثق الكتاب الأراك في العلا ويصف وجوده فيها بأنه نادر، دون تحديد موقع رصد بعينه.",
+        "sourceScientificName": "salvadora persica",
+        "accessedOn": "",
+        "status": "verified",
+        "provenance": {
+          "file": "reviewed-book-evidence.xlsx",
+          "sheet": "Records",
+          "row": 2,
+          "importedAt": "2026-11-24T05:48:46.120Z"
+        },
+        "sourceId": "EXCEL-SOURCE-47362a66"
+      }
+    },
+    {
+      "uuid": "6aba5cd6-2daf-462e-80dc-1e21e0d64d48",
+      "scientificName": "Haloxylon salicornicum",
+      "recordId": "BOOK-MANDAVILLE-T6.2-HALOXYLON-SALICORNICUM",
+      "action": "upsert",
+      "provenance": {
+        "file": "reviewed-book-evidence.xlsx",
+        "sheet": "Records",
+        "row": 3,
+        "importedAt": "2026-11-24T05:48:46.120Z"
+      },
+      "record": {
+        "id": "BOOK-MANDAVILLE-T6.2-HALOXYLON-SALICORNICUM",
+        "regionId": "SA-04",
+        "place": "على بعد 18 كم جنوب غرب السفانية (مسح فبراير 1970)",
+        "sourceKind": "book",
+        "sourceTitle": "Flora of Eastern Saudi Arabia",
+        "sourceUrl": "https://api.pageplace.de/preview/DT0400.9781136151620_A23813412/preview-9781136151620_A23813412.pdf",
+        "sourceAuthor": "James P. Mandaville",
+        "year": "2011",
+        "sourceEdition": "طبعة Routledge 2011؛ الأصل Kegan Paul International 1990",
+        "locator": "الجدول 6.2، ص 28 المطبوعة (الصفحة 41 من ملف المعاينة)",
+        "evidence": "أدرج مسح ميداني في فبراير 1970 هذا النوع ضمن الغطاء النباتي في موقع يبعد 18 كم جنوب غرب السفانية؛ شاهد تاريخي لا يثبت استمرار وجوده اليوم.",
+        "sourceScientificName": "Haloxylon salicornicum",
+        "accessedOn": "",
+        "status": "verified",
+        "provenance": {
+          "file": "reviewed-book-evidence.xlsx",
+          "sheet": "Records",
+          "row": 3,
+          "importedAt": "2026-11-24T05:48:46.120Z"
+        },
+        "sourceId": "EXCEL-SOURCE-e2e0d402"
+      }
+    },
+    {
+      "uuid": "03b6a1de-6eb1-4aa2-866b-2561d4a743bb",
+      "scientificName": "Lycium shawii",
+      "recordId": "BOOK-MANDAVILLE-T6.2-LYCIUM-SHAWII",
+      "action": "upsert",
+      "provenance": {
+        "file": "reviewed-book-evidence.xlsx",
+        "sheet": "Records",
+        "row": 4,
+        "importedAt": "2026-11-24T05:48:46.120Z"
+      },
+      "record": {
+        "id": "BOOK-MANDAVILLE-T6.2-LYCIUM-SHAWII",
+        "regionId": "SA-04",
+        "place": "على بعد 18 كم جنوب غرب السفانية (مسح فبراير 1970)",
+        "sourceKind": "book",
+        "sourceTitle": "Flora of Eastern Saudi Arabia",
+        "sourceUrl": "https://api.pageplace.de/preview/DT0400.9781136151620_A23813412/preview-9781136151620_A23813412.pdf",
+        "sourceAuthor": "James P. Mandaville",
+        "year": "2011",
+        "sourceEdition": "طبعة Routledge 2011؛ الأصل Kegan Paul International 1990",
+        "locator": "الجدول 6.2، ص 28 المطبوعة (الصفحة 41 من ملف المعاينة)",
+        "evidence": "يوثق الكتاب العوسج في موقع يبعد 18 كم جنوب غرب السفانية ضمن مسح فبراير 1970؛ وهو دليل على وجود تاريخي في موقع المسح.",
+        "sourceScientificName": "Lycium shawii",
+        "accessedOn": "",
+        "status": "verified",
+        "provenance": {
+          "file": "reviewed-book-evidence.xlsx",
+          "sheet": "Records",
+          "row": 4,
+          "importedAt": "2026-11-24T05:48:46.120Z"
+        },
+        "sourceId": "EXCEL-SOURCE-e2e0d402"
+      }
+    }
+  ]
+}

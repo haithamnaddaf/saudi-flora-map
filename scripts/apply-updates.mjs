@@ -3,8 +3,9 @@ import { createHash } from 'node:crypto'
 import { lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, rm, writeFile } from 'node:fs/promises'
 import { basename, dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { allowedRecords, validateCatalog, validatePlant, validateRegions } from '../src/data-client.js'
+import { allowedRecords, validateCatalog, validateGovernorates, validatePlant, validateRegions } from '../src/data-client.js'
 import { applyOverrides, readStoredPatch } from '../src/updates.js'
+import { spatialForPlant, validateSpatial } from '../src/spatial-client.js'
 
 const usage = `Prepare a standalone data release from a reviewed Excel JSON patch.
 
@@ -83,14 +84,17 @@ export async function prepareRelease({patchPath, dataPath, outputPath, version})
   await doesNotExist(output)
 
   // All input validation and transformations finish before any output is written.
-  const [catalogBytes, geometryBytes, boundariesBytes, patchBytes] = await Promise.all([
+  const [catalogBytes, geometryBytes, boundariesBytes, governoratesBytes, governorateBoundariesBytes, patchBytes] = await Promise.all([
     readFile(join(source, 'catalog.v2.json')),
     readFile(join(source, 'regions.v1.json')),
     readFile(join(source, 'BOUNDARIES.txt')),
+    readFile(join(source, 'governorates.v1.json')),
+    readFile(join(source, 'GOVERNORATE-BOUNDARIES.txt')),
     readFile(resolve(patchPath)),
   ])
   const catalog = validateCatalog(JSON.parse(catalogBytes))
   validateRegions(JSON.parse(geometryBytes))
+  validateGovernorates(JSON.parse(governoratesBytes))
   assert(catalog.plants.length > 0, 'The source catalog has no plants.')
   assertNewerVersion(version, catalog.version)
   // Reuse the exact same patch validator as the Excel/browser workflow.
@@ -141,8 +145,41 @@ export async function prepareRelease({patchPath, dataPath, outputPath, version})
     ['catalog.v2.json', encode(nextCatalog)],
     ['regions.v1.json', geometryBytes],
     ['BOUNDARIES.txt', boundariesBytes],
+    ['governorates.v1.json', governoratesBytes],
+    ['GOVERNORATE-BOUNDARIES.txt', governorateBoundariesBytes],
     ...nextPlants.map(plant => ['plants/' + plant.uuid + '.json', encode(plant)]),
   ])
+  // Spatial companions are optional for older releases. Preserve their provenance
+  // while discarding observations whose source/place binding the patch changed.
+  // This requires no raw research package, geocoder, or new botanical analysis.
+  let spatialNames
+  try { spatialNames = await readdir(join(source, 'spatial')) } catch (error) {
+    if (error.code !== 'ENOENT') throw error
+    spatialNames = []
+  }
+  const previousByUuid = new Map(previousPlants.map(plant => [plant.uuid, plant]))
+  const nextByUuid = new Map(nextPlants.map(plant => [plant.uuid, plant]))
+  const spatialCounts = {files: 0, beforeObservations: 0, afterObservations: 0, beforePoints: 0, afterPoints: 0}
+  for (const filename of spatialNames.filter(name => name.endsWith('.json')).sort()) {
+    const uuid = filename.slice(0, -5)
+    assert(known.has(uuid), 'Spatial companion has an unknown plant UUID: ' + uuid)
+    const original = validateSpatial(JSON.parse(await readFile(join(source, 'spatial', filename))), uuid)
+    assert(original.baseVersion === catalog.version && original.scientificName === previousByUuid.get(uuid).scientificName,
+      'Spatial companion has a different source version or identity: ' + uuid)
+    const previousActive = spatialForPlant(previousByUuid.get(uuid), original)
+    assert(previousActive.length === original.observations.length, 'Spatial companion has stale source/place bindings: ' + uuid)
+    const observations = spatialForPlant(nextByUuid.get(uuid), {...original, baseVersion: version})
+    const boundIds = new Set(observations.map(item => item.recordId))
+    const nextSpatial = validateSpatial({...original, baseVersion: version, observations,
+      bindings: Object.fromEntries([...boundIds].map(id => [id, original.bindings[id]])),
+    }, uuid)
+    files.set('spatial/' + filename, encode(nextSpatial))
+    spatialCounts.files++
+    spatialCounts.beforeObservations += original.observations.length
+    spatialCounts.afterObservations += observations.length
+    spatialCounts.beforePoints += original.observations.filter(item => item.pointEligible).length
+    spatialCounts.afterPoints += observations.filter(item => item.pointEligible).length
+  }
   const manifest = {
     schemaVersion: 2,
     baseVersion: catalog.version,
@@ -156,11 +193,14 @@ export async function prepareRelease({patchPath, dataPath, outputPath, version})
     changes: {...counts, rows: patch.changes.length},
     before: totals(previousPlants),
     after: totals(nextPlants),
+    spatial: {...spatialCounts, removedByRecordChanges: spatialCounts.beforeObservations - spatialCounts.afterObservations},
     notes: [
       'Prepared data release only; no deployment or changes to the source directory.',
       'Original plant UUIDs, scientific identities and review statuses are preserved.',
       'Pending records are retained but excluded from mapped regionIds.',
       'No botanical re-analysis or geographic inference is performed.',
+      'Region and governorate boundaries and their attribution files are retained byte-for-byte and included in the file hashes.',
+      'Spatial companions retain only observations bound to unchanged verified source/place records; their baseVersion follows this release.',
     ],
     files: Object.fromEntries([...files].map(([name, content]) => [name, {bytes: content.length, sha256: sha256(content)}])),
   }
@@ -175,6 +215,7 @@ export async function prepareRelease({patchPath, dataPath, outputPath, version})
     await doesNotExist(output)
     staging = await mkdtemp(join(parent, '.' + basename(output) + '.stage-'))
     await mkdir(join(staging, 'plants'))
+    if (spatialCounts.files) await mkdir(join(staging, 'spatial'))
     for (const [name, content] of files) await writeFile(join(staging, name), content, {flag: 'wx'})
     await doesNotExist(output)
     await rename(staging, output)

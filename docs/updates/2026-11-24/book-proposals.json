@@ -1,0 +1,300 @@
+{
+  "format": "siwar-reviewed-book-proposals",
+  "schemaVersion": 1,
+  "preparedOn": "2026-11-24",
+  "baseVersion": "2.0.0",
+  "proposalOnly": true,
+  "applied": false,
+  "safeRecordCount": 3,
+  "affectedPlantCount": 3,
+  "safeBookCount": 2,
+  "heldCandidateGroups": 2,
+  "notes": [
+    "الشواهد المقترحة لا تعدل ملفات النباتات أو spatial ولا تفتح أي هوية محجوبة.",
+    "كل record مطابق لعقد schemaVersion 2؛ excelRow يحوي أعمدة الاستيراد الخمسة عشر.",
+    "sourceScientificName المطبوع وتاريخ الاطلاع محفوظان هنا؛ مسار Excel الحالي يملأ الاسم العلمي من هوية UUID ويترك تاريخ الاطلاع فارغًا. المصدر والصفحة والملخص محفوظة في الاستيراد.",
+    "لا ينقل إحداثيات نقاط إلى Excel أو spatial. يتوثق إسناد المنطقة منفصلًا عن دليل وجود النبات.",
+    "السجلات الثلاثة تضيف مصادر إلى ثلاث هويات صالحة أصلًا؛ لا تزيد عدد النباتات المؤهلة للعرض."
+  ],
+  "sources": {
+    "BOOK-RCU-ALULA": {
+      "title": "نباتات العلا واستخداماتها عبر التاريخ",
+      "author": "شارلين بوشو؛ منصور سليمان السعيد؛ لطفي إبراهيم الجهني؛ محمد أحمد ودعان؛ سعود ليلي الرويلي",
+      "publisher": "الهيئة الملكية لمحافظة العلا",
+      "year": "",
+      "edition": "",
+      "url": "https://www.rcu.gov.sa/getContentAsset/ef0b6523-f3f5-44e9-97b0-c9fc00e4656d/c251bdf4-01ab-406a-bb85-93e966a2691d/AlUla-plants.pdf?language=en",
+      "pdfSha256": "fd467a6b94cf77546ce24b4ff303c6bbefb327e63d234c04fd13deec766ebc47",
+      "publicationNote": "لم تثبت سنة النشر من الصفحات المقروءة؛ تاريخ تحديث بيانات الملف أكتوبر 2024 ليس سنة نشر معتمدة.",
+      "rightsNote": "استخدمت إحالة إلى الملف الرسمي وملخصًا أصليًا قصيرًا؛ لم تنقل الصور أو صفحات الكتاب إلى بيانات الموقع."
+    },
+    "BOOK-MANDAVILLE-EASTERN-2011": {
+      "title": "Flora of Eastern Saudi Arabia",
+      "author": "James P. Mandaville",
+      "publisher": "Routledge",
+      "year": "2011",
+      "edition": "طبعة Routledge 2011؛ الأصل Kegan Paul International 1990",
+      "url": "https://api.pageplace.de/preview/DT0400.9781136151620_A23813412/preview-9781136151620_A23813412.pdf",
+      "pdfSha256": "7f73b53810c0f8610730b364fb321454346ca5c40101815a7f123e3cb547ae34",
+      "publicationNote": "صفحة الحقوق 5 من ملف المعاينة تثبت إصدار 2011 والأصل 1990؛ تاريخ المسح فبراير 1970 منفصل عن تاريخ النشر.",
+      "rightsNote": "جميع الحقوق محفوظة وفق صفحة الحقوق؛ المقترح إحالة وملخص قصير للواقعة الجغرافية، دون إعادة نشر الجدول أو الصور."
+    }
+  },
+  "proposedRecords": [
+    {
+      "uuid": "f009a176-94e3-4387-b682-0f416bf31afd",
+      "senseId": "68fa181e1bb5ac220afcfd5e",
+      "name": "أراكة",
+      "scientificName": "salvadora persica",
+      "currentStatus": "documented_for_supplied_taxon",
+      "record": {
+        "id": "BOOK-RCU-ALULA-P022-SALVADORA-PERSICA",
+        "regionId": "SA-03",
+        "place": "العلا",
+        "sourceId": "BOOK-RCU-ALULA",
+        "sourceTitle": "نباتات العلا واستخداماتها عبر التاريخ",
+        "sourceUrl": "https://www.rcu.gov.sa/getContentAsset/ef0b6523-f3f5-44e9-97b0-c9fc00e4656d/c251bdf4-01ab-406a-bb85-93e966a2691d/AlUla-plants.pdf?language=en",
+        "sourceKind": "book",
+        "sourceAuthor": "شارلين بوشو؛ منصور سليمان السعيد؛ لطفي إبراهيم الجهني؛ محمد أحمد ودعان؛ سعود ليلي الرويلي",
+        "year": "",
+        "sourceEdition": "",
+        "locator": "ص 22 (الصفحة 22 من ملف PDF)",
+        "evidence": "يوثق الكتاب الأراك في العلا ويصف وجوده فيها بأنه نادر، دون تحديد موقع رصد بعينه.",
+        "sourceScientificName": "Salvadora persica",
+        "accessedOn": "2026-11-24",
+        "status": "verified"
+      },
+      "excelRow": {
+        "uuid": "f009a176-94e3-4387-b682-0f416bf31afd",
+        "scientificName": "salvadora persica",
+        "recordId": "BOOK-RCU-ALULA-P022-SALVADORA-PERSICA",
+        "action": "upsert",
+        "regionId": "SA-03",
+        "place": "العلا",
+        "sourceKind": "book",
+        "sourceTitle": "نباتات العلا واستخداماتها عبر التاريخ",
+        "sourceUrl": "https://www.rcu.gov.sa/getContentAsset/ef0b6523-f3f5-44e9-97b0-c9fc00e4656d/c251bdf4-01ab-406a-bb85-93e966a2691d/AlUla-plants.pdf?language=en",
+        "sourceAuthor": "شارلين بوشو؛ منصور سليمان السعيد؛ لطفي إبراهيم الجهني؛ محمد أحمد ودعان؛ سعود ليلي الرويلي",
+        "sourceYear": "",
+        "sourceEdition": "",
+        "locator": "ص 22 (الصفحة 22 من ملف PDF)",
+        "evidence": "يوثق الكتاب الأراك في العلا ويصف وجوده فيها بأنه نادر، دون تحديد موقع رصد بعينه.",
+        "reviewStatus": "verified"
+      },
+      "review": {
+        "identityDecision": "exact_same_species; original UUID and identity retained",
+        "originalName": "salvadora persica",
+        "sourcePrintedScientificName": "Salvadora persica",
+        "acceptedName": "Salvadora persica L.",
+        "taxonReferenceUrl": "https://www.gbif.org/species/5580727",
+        "taxonomySnapshotDate": "2026-11-23",
+        "rank": "SPECIES",
+        "sourceReadVisually": true,
+        "printedPage": 22,
+        "pdfPage": 22,
+        "previewPath": "/workspace/scratch/1d32108afa7b/research/books-2026-11-24/previews/RCU_alula_plants_p022.png",
+        "evidenceIsParaphrase": true,
+        "geography": {
+          "placeScope": "العلا كما وردت في الكتاب؛ لا تحدد الصفحة مدينة أو نقطة رصد بعينها",
+          "regionId": "SA-03",
+          "regionAssignment": "named_location_containment_verified_from_official_table",
+          "containmentSourceUrl": "https://istitlaa.scbc.gov.sa/ar/Municipality/gcs/0/Pages/default.aspx",
+          "containmentLocator": "جدول المحافظات والأسماء الجغرافية، الصف 43: العلا ضمن منطقة المدينة المنورة",
+          "pointSuppressionReason": "no_survey_coordinates_in_source_page"
+        },
+        "pointCreated": false,
+        "publicationDecision": "proposed_only_not_applied"
+      }
+    },
+    {
+      "uuid": "6aba5cd6-2daf-462e-80dc-1e21e0d64d48",
+      "senseId": "68fa18151bb5ac220afcc51e",
+      "name": "رويثة",
+      "scientificName": "Haloxylon salicornicum",
+      "currentStatus": "documented_for_supplied_taxon",
+      "record": {
+        "id": "BOOK-MANDAVILLE-T6.2-HALOXYLON-SALICORNICUM",
+        "regionId": "SA-04",
+        "place": "على بعد 18 كم جنوب غرب السفانية (مسح فبراير 1970)",
+        "sourceId": "BOOK-MANDAVILLE-EASTERN-2011",
+        "sourceTitle": "Flora of Eastern Saudi Arabia",
+        "sourceUrl": "https://api.pageplace.de/preview/DT0400.9781136151620_A23813412/preview-9781136151620_A23813412.pdf",
+        "sourceKind": "book",
+        "sourceAuthor": "James P. Mandaville",
+        "year": "2011",
+        "sourceEdition": "طبعة Routledge 2011؛ الأصل Kegan Paul International 1990",
+        "locator": "الجدول 6.2، ص 28 المطبوعة (الصفحة 41 من ملف المعاينة)",
+        "evidence": "أدرج مسح ميداني في فبراير 1970 هذا النوع ضمن الغطاء النباتي في موقع يبعد 18 كم جنوب غرب السفانية؛ شاهد تاريخي لا يثبت استمرار وجوده اليوم.",
+        "sourceScientificName": "Haloxylon salicornicum",
+        "accessedOn": "2026-11-24",
+        "status": "verified"
+      },
+      "excelRow": {
+        "uuid": "6aba5cd6-2daf-462e-80dc-1e21e0d64d48",
+        "scientificName": "Haloxylon salicornicum",
+        "recordId": "BOOK-MANDAVILLE-T6.2-HALOXYLON-SALICORNICUM",
+        "action": "upsert",
+        "regionId": "SA-04",
+        "place": "على بعد 18 كم جنوب غرب السفانية (مسح فبراير 1970)",
+        "sourceKind": "book",
+        "sourceTitle": "Flora of Eastern Saudi Arabia",
+        "sourceUrl": "https://api.pageplace.de/preview/DT0400.9781136151620_A23813412/preview-9781136151620_A23813412.pdf",
+        "sourceAuthor": "James P. Mandaville",
+        "sourceYear": "2011",
+        "sourceEdition": "طبعة Routledge 2011؛ الأصل Kegan Paul International 1990",
+        "locator": "الجدول 6.2، ص 28 المطبوعة (الصفحة 41 من ملف المعاينة)",
+        "evidence": "أدرج مسح ميداني في فبراير 1970 هذا النوع ضمن الغطاء النباتي في موقع يبعد 18 كم جنوب غرب السفانية؛ شاهد تاريخي لا يثبت استمرار وجوده اليوم.",
+        "reviewStatus": "verified"
+      },
+      "review": {
+        "identityDecision": "exact_same_species; original UUID and identity retained",
+        "originalName": "Haloxylon salicornicum",
+        "sourcePrintedScientificName": "Haloxylon salicornicum",
+        "acceptedName": "Haloxylon salicornicum (Moq.) Bunge ex Boiss.",
+        "taxonReferenceUrl": "https://www.gbif.org/species/3758958",
+        "taxonomySnapshotDate": "2026-11-23",
+        "rank": "SPECIES",
+        "sourceReadVisually": true,
+        "printedPage": 28,
+        "pdfPage": 41,
+        "previewPath": "/workspace/scratch/1d32108afa7b/research/books-2026-11-24/previews/Mandaville_preview_p041.png",
+        "evidenceIsParaphrase": true,
+        "geography": {
+          "placeScope": "موقع المسح الموصوف بأنه 18 كم جنوب غرب السفانية، وليس مركز السفانية ذاته",
+          "regionId": "SA-04",
+          "regionAssignment": "source_survey_coordinate_intersects_existing_ADM1_only",
+          "sourcePrintedCoordinates": "27°53.4′N, 48°37.8′E",
+          "coordinateUsedOnlyForRegionalCheck": [
+            48.63,
+            27.89
+          ],
+          "coordinateUncertaintyMeters": null,
+          "existingGeometryFile": "public/data/regions.v1.json",
+          "existingGeometrySha256": "6b1834aa2a7ab2bf34c49ff8865a2696aac942df6f16255ca4afc00e98e95fe1",
+          "regionalIntersectionResult": [
+            "SA-04"
+          ],
+          "administrativeReferenceUrl": "https://www.sharqiah.gov.sa/governorates/khafji",
+          "administrativeReferenceScope": "تؤكد الصفحة الرسمية موضع السفانية في الشرقية؛ لا تستخدم لتعيين محافظة موقع المسح خارج المركز",
+          "eventDate": "1970-02",
+          "pointSuppressionReason": "historical_survey_coordinate_without_reported_uncertainty; no point imported",
+          "governorateAssigned": false
+        },
+        "pointCreated": false,
+        "publicationDecision": "proposed_only_not_applied"
+      }
+    },
+    {
+      "uuid": "03b6a1de-6eb1-4aa2-866b-2561d4a743bb",
+      "senseId": "68fa181f1bb5ac220afd0246",
+      "name": "العوسج",
+      "scientificName": "Lycium shawii",
+      "currentStatus": "documented_for_supplied_taxon",
+      "record": {
+        "id": "BOOK-MANDAVILLE-T6.2-LYCIUM-SHAWII",
+        "regionId": "SA-04",
+        "place": "على بعد 18 كم جنوب غرب السفانية (مسح فبراير 1970)",
+        "sourceId": "BOOK-MANDAVILLE-EASTERN-2011",
+        "sourceTitle": "Flora of Eastern Saudi Arabia",
+        "sourceUrl": "https://api.pageplace.de/preview/DT0400.9781136151620_A23813412/preview-9781136151620_A23813412.pdf",
+        "sourceKind": "book",
+        "sourceAuthor": "James P. Mandaville",
+        "year": "2011",
+        "sourceEdition": "طبعة Routledge 2011؛ الأصل Kegan Paul International 1990",
+        "locator": "الجدول 6.2، ص 28 المطبوعة (الصفحة 41 من ملف المعاينة)",
+        "evidence": "يوثق الكتاب العوسج في موقع يبعد 18 كم جنوب غرب السفانية ضمن مسح فبراير 1970؛ وهو دليل على وجود تاريخي في موقع المسح.",
+        "sourceScientificName": "Lycium shawii",
+        "accessedOn": "2026-11-24",
+        "status": "verified"
+      },
+      "excelRow": {
+        "uuid": "03b6a1de-6eb1-4aa2-866b-2561d4a743bb",
+        "scientificName": "Lycium shawii",
+        "recordId": "BOOK-MANDAVILLE-T6.2-LYCIUM-SHAWII",
+        "action": "upsert",
+        "regionId": "SA-04",
+        "place": "على بعد 18 كم جنوب غرب السفانية (مسح فبراير 1970)",
+        "sourceKind": "book",
+        "sourceTitle": "Flora of Eastern Saudi Arabia",
+        "sourceUrl": "https://api.pageplace.de/preview/DT0400.9781136151620_A23813412/preview-9781136151620_A23813412.pdf",
+        "sourceAuthor": "James P. Mandaville",
+        "sourceYear": "2011",
+        "sourceEdition": "طبعة Routledge 2011؛ الأصل Kegan Paul International 1990",
+        "locator": "الجدول 6.2، ص 28 المطبوعة (الصفحة 41 من ملف المعاينة)",
+        "evidence": "يوثق الكتاب العوسج في موقع يبعد 18 كم جنوب غرب السفانية ضمن مسح فبراير 1970؛ وهو دليل على وجود تاريخي في موقع المسح.",
+        "reviewStatus": "verified"
+      },
+      "review": {
+        "identityDecision": "exact_same_species; original UUID and identity retained",
+        "originalName": "Lycium shawii",
+        "sourcePrintedScientificName": "Lycium shawii",
+        "acceptedName": "Lycium shawii Roem. & Schult.",
+        "taxonReferenceUrl": "https://www.gbif.org/species/7300058",
+        "taxonomySnapshotDate": "2026-11-23",
+        "rank": "SPECIES",
+        "sourceReadVisually": true,
+        "printedPage": 28,
+        "pdfPage": 41,
+        "previewPath": "/workspace/scratch/1d32108afa7b/research/books-2026-11-24/previews/Mandaville_preview_p041.png",
+        "evidenceIsParaphrase": true,
+        "geography": {
+          "placeScope": "موقع المسح الموصوف بأنه 18 كم جنوب غرب السفانية، وليس مركز السفانية ذاته",
+          "regionId": "SA-04",
+          "regionAssignment": "source_survey_coordinate_intersects_existing_ADM1_only",
+          "sourcePrintedCoordinates": "27°53.4′N, 48°37.8′E",
+          "coordinateUsedOnlyForRegionalCheck": [
+            48.63,
+            27.89
+          ],
+          "coordinateUncertaintyMeters": null,
+          "existingGeometryFile": "public/data/regions.v1.json",
+          "existingGeometrySha256": "6b1834aa2a7ab2bf34c49ff8865a2696aac942df6f16255ca4afc00e98e95fe1",
+          "regionalIntersectionResult": [
+            "SA-04"
+          ],
+          "administrativeReferenceUrl": "https://www.sharqiah.gov.sa/governorates/khafji",
+          "administrativeReferenceScope": "تؤكد الصفحة الرسمية موضع السفانية في الشرقية؛ لا تستخدم لتعيين محافظة موقع المسح خارج المركز",
+          "eventDate": "1970-02",
+          "pointSuppressionReason": "historical_survey_coordinate_without_reported_uncertainty; no point imported",
+          "governorateAssigned": false
+        },
+        "pointCreated": false,
+        "publicationDecision": "proposed_only_not_applied"
+      }
+    }
+  ],
+  "heldCandidates": [
+    {
+      "sourceTitle": "دليل النباتات بمنطقة الرياض: كتاب مرجعي",
+      "sourceUrl": "https://www.rcrc.gov.sa/static/app/uploads/2023/05/006792-2.pdf",
+      "sourceAuthor": "الهيئة العليا لتطوير مدينة الرياض",
+      "year": "1435هـ",
+      "sourceEdition": "الطبعة الأولى",
+      "sourcePrintedScientificName": "Acacia gerrardii",
+      "sourceRank": "SPECIES",
+      "locator": "ص 25 المطبوعة (الصفحة 26 من ملف PDF)",
+      "candidateUuids": [
+        "c120f1d4-0878-4d01-9757-07422c6b9459",
+        "8ff1267d-8d96-4db0-8c1e-a49a00a41849"
+      ],
+      "candidateScientificNames": [
+        "Vachellia gerrardii var. gerrardii",
+        "Vachellia gerrardii var. najdensis"
+      ],
+      "decision": "withheld_no_executable_change",
+      "reason": "المصدر على رتبة النوع، والمعرفان المتاحان على رتبة التنويعة. حتى لو ثبت الترادف بين Acacia وVachellia، لا يثبت شاهد النوع وجود إحدى التنويعتين. لم يغير أي UUID أو حالة مراجعة."
+    },
+    {
+      "sourceTitle": "Flora of Eastern Saudi Arabia",
+      "sourceUrl": "https://api.pageplace.de/preview/DT0400.9781136151620_A23813412/preview-9781136151620_A23813412.pdf",
+      "sourcePrintedScientificName": "Panicum turgidum",
+      "locator": "الجدول 6.2، ص 28 المطبوعة (الصفحة 41 من المعاينة)",
+      "candidateUuids": [
+        "999817e7-ad5e-44e5-b637-68502bc81314"
+      ],
+      "currentStatus": "taxonomic_review_required",
+      "decision": "withheld_no_executable_change",
+      "reason": "هذا UUID محجوب أصلًا لمراجعة الأسماء العلمية المتجانسة؛ وجود الاسم في الجدول لا يرفع الحجب ولا يحسم مؤلف الاسم تلقائيًا."
+    }
+  ]
+}

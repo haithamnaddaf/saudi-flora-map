@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "baseVersion": "2.0.1",
+  "researchInputSha256": "c5141f59aef16eccd6475c0bb99fca0fb5e425986cf165a79bc3f44eb6b3a7f1",
+  "catalogInputSha256": "2e093bd70bae8a026f95e3b00119bd0170c3ef6be976170778891f3c276884cb",
+  "geometryInputSha256": "6b1834aa2a7ab2bf34c49ff8865a2696aac942df6f16255ca4afc00e98e95fe1",
+  "counts": {
+    "plantCompanions": 763,
+    "plantOccurrenceRelationships": 10366,
+    "uniqueOccurrenceIds": 9560,
+    "eligiblePointRelationships": 1892,
+    "uniqueEligibleOccurrenceIds": 1799,
+    "plantsWithEligiblePoints": 319,
+    "textOnlyRelationships": 8474
+  },
+  "pointSuppressionReasonCountsPerPlantOccurrence": {
+    "coordinates_missing_or_invalid": 2995,
+    "uncertainty_missing_or_invalid": 8161,
+    "source_point_policy_not_eligible": 8161,
+    "outside_current_saudi_geometry": 133,
+    "outside_record_region_geometry": 79,
+    "uncertainty_exceeds_1000m": 204,
+    "geographic_issue:GEODETIC_DATUM_INVALID": 26,
+    "geographic_issue:COUNTRY_MISMATCH": 1
+  },
+  "licenseCountsPerPlantOccurrence": {
+    "http://creativecommons.org/licenses/by/4.0/legalcode": 3722,
+    "http://creativecommons.org/licenses/by-nc/4.0/legalcode": 1408,
+    "http://creativecommons.org/publicdomain/zero/1.0/legalcode": 5236
+  },
+  "sizesBytes": {
+    "allCompanions": 9187019,
+    "largestCompanion": 233053,
+    "largestCompanionUuid": "9875528c-360c-4948-bca3-7bbfeb0418d1"
+  },
+  "policy": {
+    "namedCoverage": "The reader uses localityOriginal and publisherRegionOriginal as published names, never coordinates or GADM, to select a governorate or a region fallback. Archived point fields remain unchanged.",
+    "uncertaintyMeters": "Publisher-reported positive uncertainty at most 1000 m; not independently verified accuracy.",
+    "qualityScope": "Checks use the geographic issues, information_withheld, data_generalizations and point policy retained in the audited research snapshot. Publisher pages are not re-fetched or re-certified by this compiler.",
+    "geometry": "Must fall inside the existing generalized Saudi polygons and its existing assigned region when present. Boundary-near valid records may conservatively remain text-only.",
+    "administrativeNames": "governorateOriginal and governorateId retain GBIF/GADM level2 assignment. governorateDerived is explicit; no city or modern official status is inferred.",
+    "binding": "UUID, scientific identity and baseVersion must match. The referenced verified record must retain all bound location/source fields and occurrence URLs.",
+    "license": "Individual occurrence license retained verbatim, separately from any dataset-level license.",
+    "nonPoints": "Textual source details remain available; coordinates are null when pointEligible is false.",
+    "privacy": "No observer names, emails, publisher identifiers, or private enrichment fields are exported."
+  },
+  "initialBuild": {
+    "schemaVersion": 1,
+    "baseVersion": "2.0.0",
+    "researchInputSha256": "c5141f59aef16eccd6475c0bb99fca0fb5e425986cf165a79bc3f44eb6b3a7f1",
+    "catalogInputSha256": "5636cbcc033e885fa57939244406c536777c1c33201a82cff23cf8fbc38ba155",
+    "geometryInputSha256": "6b1834aa2a7ab2bf34c49ff8865a2696aac942df6f16255ca4afc00e98e95fe1",
+    "counts": {
+      "plantCompanions": 763,
+      "plantOccurrenceRelationships": 10366,
+      "uniqueOccurrenceIds": 9560,
+      "eligiblePointRelationships": 1892,
+      "uniqueEligibleOccurrenceIds": 1799,
+      "plantsWithEligiblePoints": 319,
+      "textOnlyRelationships": 8474
+    },
+    "pointSuppressionReasonCountsPerPlantOccurrence": {
+      "coordinates_missing_or_invalid": 2995,
+      "uncertainty_missing_or_invalid": 8161,
+      "source_point_policy_not_eligible": 8161,
+      "outside_current_saudi_geometry": 133,
+      "outside_record_region_geometry": 79,
+      "uncertainty_exceeds_1000m": 204,
+      "geographic_issue:GEODETIC_DATUM_INVALID": 26,
+      "geographic_issue:COUNTRY_MISMATCH": 1
+    },
+    "licenseCountsPerPlantOccurrence": {
+      "http://creativecommons.org/licenses/by/4.0/legalcode": 3722,
+      "http://creativecommons.org/licenses/by-nc/4.0/legalcode": 1408,
+      "http://creativecommons.org/publicdomain/zero/1.0/legalcode": 5236
+    },
+    "sizesBytes": {
+      "allCompanions": 8865352,
+      "largestCompanion": 223885,
+      "largestCompanionUuid": "9875528c-360c-4948-bca3-7bbfeb0418d1"
+    },
+    "policy": {
+      "uncertaintyMeters": "Publisher-reported positive uncertainty at most 1000 m; not independently verified accuracy.",
+      "qualityScope": "Checks use the geographic issues, information_withheld, data_generalizations and point policy retained in the audited research snapshot. Publisher pages are not re-fetched or re-certified by this compiler.",
+      "geometry": "Must fall inside the existing generalized Saudi polygons and its existing assigned region when present. Boundary-near valid records may conservatively remain text-only.",
+      "administrativeNames": "governorateOriginal and governorateId retain GBIF/GADM level2 assignment. governorateDerived is explicit; no city or modern official status is inferred.",
+      "binding": "UUID, scientific identity and baseVersion must match. The referenced verified record must retain all bound location/source fields and occurrence URLs.",
+      "license": "Individual occurrence license retained verbatim, separately from any dataset-level license.",
+      "nonPoints": "Textual source details remain available; coordinates are null when pointEligible is false.",
+      "privacy": "No observer names, emails, publisher identifiers, or private enrichment fields are exported."
+    }
+  },
+  "releaseUpdates": [
+    {
+      "method": "reviewed Excel Records -> validated patch -> scripts/apply-updates.mjs",
+      "baseVersion": "2.0.0",
+      "version": "2.0.1",
+      "released": "2026-11-24",
+      "manifestPath": "public/data/release-manifest.json",
+      "manifestSha256": "1aa29d674e2261d2ba3895b731b92befa6fa3fd89a202a69fffba92ebefb9dc1",
+      "patchPath": "docs/updates/2026-11-24/book-changes.json",
+      "patchSha256": "bb7d7324968a9a8482fd7057288bed6806202764615a6943663fa445378e6f7a",
+      "sourceWorkbook": "reviewed-book-evidence.xlsx",
+      "sourceWorkbookSha256": "e8c30d2ad2899534b0106a3355db94201926b3c2b01a3e0740aca2bb51714b1f",
+      "changes": {
+        "added": 3,
+        "updated": 0,
+        "deleted": 0,
+        "affectedPlants": 3,
+        "unaffectedPlants": 1479,
+        "rows": 3
+      },
+      "spatial": {
+        "files": 763,
+        "beforeObservations": 10366,
+        "afterObservations": 10366,
+        "beforePoints": 1892,
+        "afterPoints": 1892,
+        "removedByRecordChanges": 0
+      },
+      "note": "No raw-research rebuild: original UUIDs, identities, review statuses and existing evidence are preserved. Added three reviewed book records; no added spatial observations."
+    }
+  ],
+  "reportScope": "Measured snapshot after adding the publisher original region-name field. Historical initialBuild and reviewed-Excel releaseUpdates are retained; the current manifest validates the enriched bytes.",
+  "namedPlaceEnrichment": {
+    "date": "2026-11-24",
+    "sourceField": "state_province_verbatim",
+    "destinationField": "publisherRegionOriginal",
+    "populatedRelationships": 2669,
+    "priorFieldsPreserved": true,
+    "beforeManifestSha256": "1aa29d674e2261d2ba3895b731b92befa6fa3fd89a202a69fffba92ebefb9dc1",
+    "afterManifestSha256": "d4ec9e5eb801936eaa9c4de08ef67129be94d273f50d3b81debdb8c5026f3b4b"
+  }
+}
